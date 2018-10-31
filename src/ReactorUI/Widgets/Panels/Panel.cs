@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ReactorUI.Widgets
+namespace ReactorUI.Widgets.Panels
 {
     public abstract class Panel<T> : Widget<T> where T : class
     {

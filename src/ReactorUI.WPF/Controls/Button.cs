@@ -24,12 +24,12 @@ namespace ReactorUI.WPF.Controls
                 _nativeControl.Content = widget.Text;
             }
 
-            if (widget.OnClick != null && _actionToFireOnClick == null)
+            if (widget.Click != null && _actionToFireOnClick == null)
                 _nativeControl.Click += _nativeButton_Click;
-            else if (widget.OnClick == null && _actionToFireOnClick != null)
+            else if (widget.Click == null && _actionToFireOnClick != null)
                 _nativeControl.Click -= _nativeButton_Click;
 
-            _actionToFireOnClick = widget.OnClick;
+            _actionToFireOnClick = widget.Click;
 
             base.Update(widget);
         }

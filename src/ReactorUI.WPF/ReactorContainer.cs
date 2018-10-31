@@ -27,9 +27,10 @@ namespace ReactorUI.WPF
 
         protected abstract VisualNode Render();
 
-        public void Run()
+        public ReactorContainer<T> Run()
         {
             CompositionTarget.Rendering += CompositionTarget_Rendering;
+            return this;
         }
 
         private void CompositionTarget_Rendering(object sender, EventArgs e)
@@ -37,9 +38,10 @@ namespace ReactorUI.WPF
             new VisualTree(this).Layout();
         }
 
-        public void Stop()
+        public ReactorContainer<T> Stop()
         {
             CompositionTarget.Rendering -= CompositionTarget_Rendering;
+            return this;
         }
 
         public void AddChild(FrameworkElement child)

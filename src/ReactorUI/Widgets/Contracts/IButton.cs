@@ -8,6 +8,6 @@ namespace ReactorUI.Widgets.Contracts
     {
         string Text { get; set; }
 
-        Action OnClick { get; set; }
+        Action Click { get; set; }
     }
 }

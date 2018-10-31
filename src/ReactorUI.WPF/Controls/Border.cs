@@ -1,6 +1,7 @@
 ﻿using ReactorUI.Widgets;
 using ReactorUI.Widgets.Contracts;
 using ReactorUI.Widgets.Primitives;
+using ReactorUI.WPF.Controls.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,6 @@ namespace ReactorUI.WPF.Controls
         }
 
         private System.Windows.Controls.Border _nativeBorder = null;
-
-        public Brush Background { get => _nativeBorder.Background.ToBrush(); set => _nativeBorder.Background = value.FromBrush(); }
 
         private readonly VisualNode _child;
 
@@ -52,7 +51,7 @@ namespace ReactorUI.WPF.Controls
 
         public void Update(IBorder widget)
         {
-            Background = widget.Background;
+            _nativeBorder.Background = widget.Background?.ToNativeBrush();
         }
     }
 }

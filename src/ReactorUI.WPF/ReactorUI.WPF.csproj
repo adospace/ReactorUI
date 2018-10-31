@@ -54,8 +54,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BrushExtensions.cs" />
-    <Compile Include="ColorExtensions.cs" />
+    <Compile Include="Controls\Primitives\BrushExtensions.cs" />
+    <Compile Include="Controls\Primitives\ColorExtensions.cs" />
     <Compile Include="Controls\Button.cs" />
     <Compile Include="Controls\ContentControl.cs" />
     <Compile Include="Controls\Control.cs" />
@@ -63,6 +63,13 @@
     <Compile Include="Controls\Border.cs" />
     <Compile Include="Controls\Panels\Panel.cs" />
     <Compile Include="Controls\Panels\StackPanel.cs" />
+    <Compile Include="Controls\Primitives\FontStretchExtensions.cs" />
+    <Compile Include="Controls\Primitives\FontWeightExtensions.cs" />
+    <Compile Include="Controls\Primitives\FontStyleExtensions.cs" />
+    <Compile Include="Controls\Primitives\TextWrappingExtensions.cs" />
+    <Compile Include="Controls\Primitives\TextTrimmingExtensions.cs" />
+    <Compile Include="Controls\Primitives\TextAlignmentExtensions.cs" />
+    <Compile Include="Controls\Primitives\ThicknessExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

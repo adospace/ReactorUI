@@ -19,7 +19,7 @@ namespace ReactorUI.Widgets
 
         public string Text { get; set; }
 
-        public Action OnClick { get; set; }
+        public Action Click { get; set; }
     }
 
     public static class ButtonExtensions
@@ -42,7 +42,7 @@ namespace ReactorUI.Widgets
 
         public static Button OnClick(this Button button, Action onClick)
         {
-            button.OnClick = onClick;
+            button.Click = onClick;
             return button;
         }
     }

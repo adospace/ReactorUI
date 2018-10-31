@@ -21,10 +21,7 @@ namespace ReactorUI.WPF.TestApp
 
         protected override VisualNode Render()
         {
-            return new Button(new TextBlock(DateTime.Now.ToString()))
-            {
-                OnClick = OnButtonClicked
-            };
+            return this.TextBlock("test");
         }
     }
 }

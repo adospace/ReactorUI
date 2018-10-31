@@ -1,5 +1,6 @@
 ﻿using ReactorUI.Widgets;
 using ReactorUI.Widgets.Contracts;
+using ReactorUI.WPF.Controls.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,14 +21,29 @@ namespace ReactorUI.WPF.Controls
             widget.ParentAsNativeControlContainer().AddChild(_nativeTextBlock);
         }
 
-        public void Update(ITextBlock widget)
-        {
-            _nativeTextBlock.Text = widget.Text;
-        }
-
         public void WillUnmount(IWidget widget)
         {
             widget.ParentAsNativeControlContainer().RemoveChild(_nativeTextBlock);
+        }
+
+        public void Update(ITextBlock widget)
+        {
+            _nativeTextBlock.Background = widget.Background?.ToNativeBrush();
+            _nativeTextBlock.BaselineOffset = widget.BaselineOffset;
+            _nativeTextBlock.Text = widget.FontFamily;
+            _nativeTextBlock.FontSize = widget.FontSize;
+            _nativeTextBlock.FontStretch = widget.FontStretch.ToNativeFontStyle();
+            _nativeTextBlock.FontStyle = widget.FontStyle.ToNativeFontStyle();
+            _nativeTextBlock.FontWeight = widget.FontWeight.ToNativeFontWeight();
+            _nativeTextBlock.Foreground = widget.Foreground?.ToNativeBrush();
+            _nativeTextBlock.LineHeight = widget.LineHeight;
+            _nativeTextBlock.Padding = widget.Padding.ToNativeThickness();
+            _nativeTextBlock.Text = widget.Text;
+            _nativeTextBlock.TextAlignment = widget.TextAlignment.ToNativeTextAlignment();
+            _nativeTextBlock.TextTrimming = widget.TextTrimming.ToNativeTextTrimming();
+            _nativeTextBlock.TextWrapping = widget.TextWrapping.ToNativeTextWrapping();
+
+
         }
 
 

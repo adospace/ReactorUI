@@ -26,5 +26,7 @@ namespace ReactorUI.Widgets.Primitives
         public double Right { get; set; }
 
         public double Bottom { get; set; }
+
+
     }
 }

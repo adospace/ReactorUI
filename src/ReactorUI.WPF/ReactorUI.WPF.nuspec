@@ -14,7 +14,7 @@
     <copyright>Copyright 2018</copyright>
     <tags>UI react reactive desktop .net WPF</tags>
     <dependencies>
-      <dependency id="ReactorUI" version="0.0.1" />
+      <dependency id="ReactorUI" version="$version$-beta" />
     </dependencies>
   </metadata>
 </package>
