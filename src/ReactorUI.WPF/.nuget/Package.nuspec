@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Package</id>
+    <version>0.0.1</version>
+    <authors>Adolfo Marinucci</authors>
+    <owners>Adolfo Marinucci</owners>
+    <licenseUrl>https://github.com/adospace/ReactorUI/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/adospace/ReactorUI</projectUrl>
+    <iconUrl>https://github.com/adospace/ReactorUI/ReactorUI.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>ReactorUI is .NET UI framework for building cross-platform desktop application heavily inspired to Reactjs. This package contains the WPF bindings to ReactorUI.</description>
+    <releaseNotes>Initial version</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>UI react reactive desktop .net WPF</tags>
+    <dependencies>
+      <dependency id="ReactorUI" version="0.0.1" />
+    </dependencies>
+  </metadata>
+</package>
