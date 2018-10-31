@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>ReactorUI.WPF</id>
-    <version>0.0.1</version>
+    <version>$version$-beta</version>
     <authors>Adolfo Marinucci</authors>
     <owners>Adolfo Marinucci</owners>
     <licenseUrl>https://github.com/adospace/ReactorUI/blob/master/LICENSE</licenseUrl>
