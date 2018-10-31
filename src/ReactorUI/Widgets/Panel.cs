@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace ReactorUI.Widgets
+{
+    public abstract class Panel<T> : Widget<T> where T : class
+    {
+        internal List<VisualNode> InternalChildren { get; } = new List<VisualNode>();
+
+        protected override IEnumerable<VisualNode> RenderChildren()
+        {
+            return InternalChildren;
+        }
+    }
+
+    public static class PanelExtensions
+    {
+
+    }
+}
