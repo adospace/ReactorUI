@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Package</id>
+    <id>ReactorUI.WPF</id>
     <version>0.0.1</version>
     <authors>Adolfo Marinucci</authors>
     <owners>Adolfo Marinucci</owners>
