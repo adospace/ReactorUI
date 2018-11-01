@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace ReactorUI.WPF
 {
-    public abstract class ReactorContainer<T> : Widget, INativeControl, INativeControlContainer where T : System.Windows.Controls.ContentControl
+    public abstract class ReactorContainer<T> : Widget, INativeControl, INativeControlContainer, IWidgetContainer where T : System.Windows.Controls.ContentControl
     {
         public ReactorContainer(T container)
         {
@@ -44,17 +44,17 @@ namespace ReactorUI.WPF
             return this;
         }
 
-        public void AddChild(FrameworkElement child)
+        public void AddChild(System.Windows.UIElement child)
         {
             Container.Content = child;
         }
 
-        public void InsertChild(FrameworkElement child, int index)
+        public void InsertChild(System.Windows.UIElement child, int index)
         {
             Container.Content = child;
         }
 
-        public void RemoveChild(FrameworkElement child)
+        public void RemoveChild(System.Windows.UIElement child)
         {
             Container.Content = null;
         }

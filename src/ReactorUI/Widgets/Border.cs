@@ -22,4 +22,13 @@ namespace ReactorUI.Widgets
         }
     }
 
+    public static class BorderExtensions
+    {
+        public static Button Button(this IWidgetContainer parent, VisualNode child = null)
+        {
+            return new Button();
+        }
+
+
+    }
 }

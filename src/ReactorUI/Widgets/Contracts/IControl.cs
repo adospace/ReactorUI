@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ReactorUI.Widgets.Contracts
 {
-    public interface IControl
+    public interface IControl : IFrameworkElement
     {
         bool IsEnabled { get; set; }
 

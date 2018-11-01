@@ -18,17 +18,17 @@ namespace ReactorUI.WPF.Controls.Panels
         }
 
 
-        public void AddChild(FrameworkElement child)
+        public void AddChild(System.Windows.UIElement child)
         {
             NativePanel.Children.Add(child);
         }
 
-        public void InsertChild(FrameworkElement child, int index)
+        public void InsertChild(System.Windows.UIElement child, int index)
         {
             NativePanel.Children.Insert(index, child);
         }
 
-        public void RemoveChild(FrameworkElement child)
+        public void RemoveChild(System.Windows.UIElement child)
         {
             NativePanel.Children.Remove(child);
         }

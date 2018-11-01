@@ -54,6 +54,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\FrameworkElement.cs" />
     <Compile Include="Controls\Primitives\BrushExtensions.cs" />
     <Compile Include="Controls\Primitives\ColorExtensions.cs" />
     <Compile Include="Controls\Button.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Controls\Primitives\TextTrimmingExtensions.cs" />
     <Compile Include="Controls\Primitives\TextAlignmentExtensions.cs" />
     <Compile Include="Controls\Primitives\ThicknessExtensions.cs" />
+    <Compile Include="Controls\UIElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -102,9 +104,6 @@
       <Project>{50650cfc-4468-4203-a5ee-fe23267921a6}</Project>
       <Name>ReactorUI</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include=".nuget\nuget.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

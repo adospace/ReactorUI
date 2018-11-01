@@ -8,11 +8,11 @@ namespace ReactorUI.WPF.Controls
 {
     public interface INativeControlContainer
     {
-        void AddChild(System.Windows.FrameworkElement child);
+        void AddChild(System.Windows.UIElement child);
 
-        void InsertChild(System.Windows.FrameworkElement child, int index);
+        void InsertChild(System.Windows.UIElement child, int index);
 
-        void RemoveChild(System.Windows.FrameworkElement child);
+        void RemoveChild(System.Windows.UIElement child);
 
     }
 }

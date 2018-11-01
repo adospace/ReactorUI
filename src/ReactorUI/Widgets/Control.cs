@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ReactorUI.Widgets
 {
-    public class Control<T> : Widget<T>, IControl where T : class, IControl
+    public class Control<T> : FrameworkElement<T>, IControl where T : class, IControl
     {
         public bool IsEnabled { get; set; } = true;
 
@@ -29,10 +29,7 @@ namespace ReactorUI.Widgets
         public HorizontalAlignment HorizontalContentAlignment { get; set; } = HorizontalAlignment.Stretch;
         public VerticalAlignment VerticalContentAlignment { get; set; } = VerticalAlignment.Stretch;
 
-        protected override IEnumerable<VisualNode> RenderChildren()
-        {
-            yield break;
-        }
+
     }
 
 

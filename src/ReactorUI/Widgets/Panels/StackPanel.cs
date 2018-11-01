@@ -18,7 +18,7 @@ namespace ReactorUI.Widgets.Panels
 
     public static class StackPanelExtensions
     {
-        public static StackPanel StackPanel(this VisualNode parent, params VisualNode[] children)
+        public static StackPanel StackPanel(this IWidgetContainer parent, params VisualNode[] children)
         {
             return new StackPanel(children);
         }

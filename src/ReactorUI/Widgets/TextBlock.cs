@@ -41,7 +41,7 @@ namespace ReactorUI.Widgets
 
     public static class TextBlockExtensions
     {
-        public static TextBlock TextBlock(this VisualNode parent, string text)
+        public static TextBlock TextBlock(this IWidgetContainer parent, string text)
         {
             return new TextBlock(text);
         }
@@ -49,6 +49,84 @@ namespace ReactorUI.Widgets
         public static TextBlock Text(this TextBlock textBlock, string text)
         {
             textBlock.Text = text;
+            return textBlock;
+        }
+
+        public static TextBlock FontWeight(this TextBlock textBlock, FontWeight fontWeight)
+        {
+            textBlock.FontWeight = fontWeight;
+            return textBlock;
+        }
+
+        public static TextBlock FontStyle(this TextBlock textBlock, FontStyle fontStyle)
+        {
+            textBlock.FontStyle = fontStyle;
+            return textBlock;
+        }
+
+        public static TextBlock FontFamily(this TextBlock textBlock, string fontFamily)
+        {
+            textBlock.FontFamily = fontFamily;
+            return textBlock;
+        }
+
+        public static TextBlock FontFamily(this TextBlock textBlock, FontStretch fontStretch)
+        {
+            textBlock.FontStretch = fontStretch;
+            return textBlock;
+        }
+
+        public static TextBlock BaselineOffset(this TextBlock textBlock, double baselineOffset)
+        {
+            textBlock.BaselineOffset = baselineOffset;
+            return textBlock;
+        }
+
+        public static TextBlock FontSize(this TextBlock textBlock, double fontSize)
+        {
+            textBlock.FontSize = fontSize;
+            return textBlock;
+        }
+
+        public static TextBlock TextWrapping(this TextBlock textBlock, TextWrapping textWrapping)
+        {
+            textBlock.TextWrapping = textWrapping;
+            return textBlock;
+        }
+
+        public static TextBlock Background(this TextBlock textBlock, Brush background)
+        {
+            textBlock.Background = background;
+            return textBlock;
+        }
+
+        public static TextBlock LineHeight(this TextBlock textBlock, double lineHeight)
+        {
+            textBlock.LineHeight = lineHeight;
+            return textBlock;
+        }
+
+        public static TextBlock Padding(this TextBlock textBlock, Thickness thickness)
+        {
+            textBlock.Padding = thickness;
+            return textBlock;
+        }
+
+        public static TextBlock Padding(this TextBlock textBlock, TextAlignment textAlignment)
+        {
+            textBlock.TextAlignment = textAlignment;
+            return textBlock;
+        }
+
+        public static TextBlock TextTrimming(this TextBlock textBlock, TextTrimming textTrimming)
+        {
+            textBlock.TextTrimming = textTrimming;
+            return textBlock;
+        }
+
+        public static TextBlock Foreground(this TextBlock textBlock, Brush foreground)
+        {
+            textBlock.Foreground = foreground;
             return textBlock;
         }
     }

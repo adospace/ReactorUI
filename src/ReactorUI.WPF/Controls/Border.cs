@@ -22,14 +22,20 @@ namespace ReactorUI.WPF.Controls
 
         private readonly VisualNode _child;
 
-        public void AddChild(FrameworkElement child)
+        public void AddChild(System.Windows.UIElement child)
         {
             _nativeBorder.Child = child;
         }
 
-        public void InsertChild(FrameworkElement child, int index)
+        public void InsertChild(System.Windows.UIElement child, int index)
         {
             _nativeBorder.Child = child;
+        }
+
+
+        public void RemoveChild(System.Windows.UIElement child)
+        {
+            _nativeBorder.Child = null;
         }
 
         public void DidMount(IWidget widget)
@@ -37,11 +43,6 @@ namespace ReactorUI.WPF.Controls
             _nativeBorder = _nativeBorder ?? new System.Windows.Controls.Border();
 
             widget.ParentAsNativeControlContainer().AddChild(_nativeBorder);
-        }
-
-        public void RemoveChild(FrameworkElement child)
-        {
-            _nativeBorder.Child = null;
         }
 
         public void WillUnmount(IWidget widget)
