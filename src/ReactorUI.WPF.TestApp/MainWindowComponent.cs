@@ -1,7 +1,6 @@
 ﻿using ReactorUI.Widgets;
 using ReactorUI.Widgets.Primitives;
 using System;
-using System.Windows;
 
 namespace ReactorUI.WPF.TestApp
 {
@@ -16,12 +15,18 @@ namespace ReactorUI.WPF.TestApp
 
         private void OnButtonClicked()
         {
-            MessageBox.Show("Clicked!");
+            System.Windows.MessageBox.Show("Clicked!");
         }
 
         protected override VisualNode Render()
         {
-            return this.TextBlock("test");
+            return this.TreeView(
+                new TreeViewNode("Node1", DateTime.Now.Second % 2 == 0 ? new TreeViewNode("Node1_1") : null, new TreeViewNode("Node1_2")).IsExpanded(true),
+                new TreeViewNode("Node2"),
+                new TreeViewNode("Node3", "pack://application:,,/Images/FieldPrivate_16x.png")
+
+                );
+            
         }
     }
 }

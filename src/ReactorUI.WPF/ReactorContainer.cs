@@ -44,17 +44,12 @@ namespace ReactorUI.WPF
             return this;
         }
 
-        public void AddChild(System.Windows.UIElement child)
+        public void AddChild(object child)
         {
             Container.Content = child;
         }
 
-        public void InsertChild(System.Windows.UIElement child, int index)
-        {
-            Container.Content = child;
-        }
-
-        public void RemoveChild(System.Windows.UIElement child)
+        public void RemoveChild(object child)
         {
             Container.Content = null;
         }

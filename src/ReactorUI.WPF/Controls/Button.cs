@@ -16,7 +16,6 @@ namespace ReactorUI.WPF.Controls
         {
         }
 
-
         public override void Update(IButton widget)
         {
             if (!HasContent)

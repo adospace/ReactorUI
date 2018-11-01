@@ -13,27 +13,14 @@ namespace ReactorUI.WPF.Controls
 {
     internal class Border : INativeControl<IBorder>, INativeControlContainer
     {
-        public Border(VisualNode child = null)
-        {
-            _child = child;
-        }
-
         private System.Windows.Controls.Border _nativeBorder = null;
 
-        private readonly VisualNode _child;
-
-        public void AddChild(System.Windows.UIElement child)
+        public void AddChild(object child)
         {
-            _nativeBorder.Child = child;
+            _nativeBorder.Child = (UIElement)child;
         }
 
-        public void InsertChild(System.Windows.UIElement child, int index)
-        {
-            _nativeBorder.Child = child;
-        }
-
-
-        public void RemoveChild(System.Windows.UIElement child)
+        public void RemoveChild(object child)
         {
             _nativeBorder.Child = null;
         }

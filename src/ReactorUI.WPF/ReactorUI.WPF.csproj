@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\FrameworkElement.cs" />
+    <Compile Include="Controls\Image.cs" />
     <Compile Include="Controls\Primitives\BrushExtensions.cs" />
     <Compile Include="Controls\Primitives\ColorExtensions.cs" />
     <Compile Include="Controls\Button.cs" />
@@ -71,6 +72,8 @@
     <Compile Include="Controls\Primitives\TextTrimmingExtensions.cs" />
     <Compile Include="Controls\Primitives\TextAlignmentExtensions.cs" />
     <Compile Include="Controls\Primitives\ThicknessExtensions.cs" />
+    <Compile Include="Controls\TreeView.cs" />
+    <Compile Include="Controls\TreeViewNode.cs" />
     <Compile Include="Controls\UIElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

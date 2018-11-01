@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ReactorUI.Widgets.Panels
@@ -10,7 +11,7 @@ namespace ReactorUI.Widgets.Panels
 
         protected override IEnumerable<VisualNode> RenderChildren()
         {
-            return InternalChildren;
+            return InternalChildren.Where(_ => _ != null);
         }
     }
 

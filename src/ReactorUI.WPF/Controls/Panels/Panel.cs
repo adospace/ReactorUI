@@ -18,19 +18,14 @@ namespace ReactorUI.WPF.Controls.Panels
         }
 
 
-        public void AddChild(System.Windows.UIElement child)
+        public void AddChild(object child)
         {
-            NativePanel.Children.Add(child);
+            NativePanel.Children.Add((UIElement)child);
         }
 
-        public void InsertChild(System.Windows.UIElement child, int index)
+        public void RemoveChild(object child)
         {
-            NativePanel.Children.Insert(index, child);
-        }
-
-        public void RemoveChild(System.Windows.UIElement child)
-        {
-            NativePanel.Children.Remove(child);
+            NativePanel.Children.Remove((UIElement)child);
         }
 
         public void DidMount(IWidget widget)

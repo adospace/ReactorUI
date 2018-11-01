@@ -17,20 +17,21 @@ namespace ReactorUI.Widgets
         }
 
         public string Text { get; set; }
-        public FontWeight FontWeight { get; set; }
-        public FontStyle FontStyle { get; set; }
-        public string FontFamily { get; set; }
 
-        public FontStretch FontStretch { get; set; }
+        public FontStyle FontStyle { get; set; } = FontStyle.Normal;
+        public FontStretch FontStretch { get; set; } = FontStretch.Normal;
+        public FontWeight FontWeight { get; set; } = FontWeight.Normal;
+        public double FontSize { get; set; } = 12;
+
+        public string FontFamily { get; set; }
         public double BaselineOffset { get; set; }
-        public double FontSize { get; set; }
         public TextWrapping TextWrapping { get; set; }
         public Brush Background { get; set; }
-        public double LineHeight { get; set; }
+        public double LineHeight { get; set; } = double.NaN;
         public Thickness Padding { get; set; }
         public TextAlignment TextAlignment { get; set; }
         public TextTrimming TextTrimming { get; set; }
-        public Brush Foreground { get; set; }
+        public Brush Foreground { get; set; } = new SolidColorBrush(Color.FromRGB(0, 0, 0));
 
         protected override IEnumerable<VisualNode> RenderChildren()
         {

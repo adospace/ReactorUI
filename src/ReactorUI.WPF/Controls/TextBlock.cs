@@ -42,10 +42,6 @@ namespace ReactorUI.WPF.Controls
             _nativeTextBlock.TextAlignment = widget.TextAlignment.ToNativeTextAlignment();
             _nativeTextBlock.TextTrimming = widget.TextTrimming.ToNativeTextTrimming();
             _nativeTextBlock.TextWrapping = widget.TextWrapping.ToNativeTextWrapping();
-
-
         }
-
-
     }
 }
