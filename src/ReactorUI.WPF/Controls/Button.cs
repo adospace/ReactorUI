@@ -1,12 +1,13 @@
 ﻿using ReactorUI.Widgets;
-using ReactorUI.Widgets.Contracts;
-using ReactorUI.Widgets.Primitives;
+using ReactorUI.Contracts;
+using ReactorUI.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using ReactorUI.Styles;
 
 namespace ReactorUI.WPF.Controls
 {

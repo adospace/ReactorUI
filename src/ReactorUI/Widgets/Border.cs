@@ -1,12 +1,13 @@
-﻿using ReactorUI.Widgets.Contracts;
-using ReactorUI.Widgets.Primitives;
+﻿using ReactorUI.Contracts;
+using ReactorUI.Styles;
+using ReactorUI.Primitives;
 using System.Collections.Generic;
 
 namespace ReactorUI.Widgets
 {
     public class Border : FrameworkElement<IBorder, BorderStyle>, IBorder
     {
-        private VisualNode _child;
+        private readonly VisualNode _child;
 
         public Border(VisualNode child = null)
         {

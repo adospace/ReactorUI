@@ -1,4 +1,5 @@
-﻿using ReactorUI.Widgets.Contracts;
+﻿using ReactorUI.Contracts;
+using ReactorUI.Styles;
 using ReactorUI.WPF.Controls.Primitives;
 using System;
 using System.Collections.Generic;

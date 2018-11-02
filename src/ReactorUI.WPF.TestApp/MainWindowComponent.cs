@@ -1,6 +1,6 @@
 ﻿using ReactorUI.Widgets;
 using ReactorUI.Widgets.Panels;
-using ReactorUI.Widgets.Primitives;
+using ReactorUI.Primitives;
 using System;
 
 namespace ReactorUI.WPF.TestApp

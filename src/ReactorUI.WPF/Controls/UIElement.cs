@@ -1,5 +1,5 @@
 ﻿using ReactorUI.Widgets;
-using ReactorUI.Widgets.Contracts;
+using ReactorUI.Contracts;
 using ReactorUI.WPF.Controls.Primitives;
 
 using System;
@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ReactorUI.Styles;
 
 namespace ReactorUI.WPF.Controls
 {

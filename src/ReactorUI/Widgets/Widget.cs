@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReactorUI.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Text;
 

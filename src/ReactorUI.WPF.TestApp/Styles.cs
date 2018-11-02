@@ -1,5 +1,6 @@
-﻿using ReactorUI.Widgets.Contracts;
-using ReactorUI.Widgets.Primitives;
+﻿using ReactorUI.Contracts;
+using ReactorUI.Styles;
+using ReactorUI.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;

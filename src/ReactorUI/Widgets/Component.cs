@@ -1,5 +1,5 @@
 ﻿using ReactorUI.Widgets;
-using ReactorUI.Widgets.Contracts;
+using ReactorUI.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Text;
