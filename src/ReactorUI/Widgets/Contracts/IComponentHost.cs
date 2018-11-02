@@ -4,7 +4,8 @@ using System.Text;
 
 namespace ReactorUI.Widgets.Contracts
 {
-    public interface IComponent
+    internal interface IComponentHost
     {
+        void Invalidate();
     }
 }

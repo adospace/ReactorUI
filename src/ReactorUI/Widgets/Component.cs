@@ -7,106 +7,72 @@ using System.Threading;
 
 namespace ReactorUI.Widgets
 {
-    public abstract class Component : Widget<IComponent>, IComponent, IWidgetContainer
+    public abstract class Component
     {
-        protected sealed override IEnumerable<VisualNode> RenderChildren()
+        protected Component()
+        { }
+
+        public abstract VisualNode Render();
+
+        protected virtual void OnDeactivate()
         {
-            yield return Render();
+
         }
 
-        protected sealed override void OnUpdate()
+        protected void Invalidate()
         {
-            base.OnUpdate();
+            _host.Invalidate();
         }
 
-        protected abstract VisualNode Render();
+        internal void Deactivate()
+        {
+            OnDeactivate();
+        }
 
-    }
+        private IComponentHost _host;
+
+        internal void SetOwner(IComponentHost host)
+        {
+            _host = host;
+        }
+ 
+        public static ComponentHost<T> Host<T>() where T : Component, new()
+        {
+            return new ComponentHost<T>();
+        }
+   }
 
 
 
     public abstract class Component<S> : Component where S : class, new()
     {
-        public class ComponentState
-        {
-            public S Value { get; private set; }
-            private Component<S> _owner;
+        public S State { get; private set; }
 
-            public ComponentState(S state, Component<S> initialOwner)
+        protected Component(S state)
+        {
+            State = state ?? new S();
+        }
+
+        public void SetState(Action<S> actionOnState)
+        {
+            if (actionOnState == null)
             {
-                Value = state;
-                _owner = initialOwner;
+                throw new ArgumentNullException(nameof(actionOnState));
             }
 
-            public void Set(Action<S> actionOnState)
-            {
-                if (actionOnState == null)
-                {
-                    throw new ArgumentNullException(nameof(actionOnState));
-                }
-
-                actionOnState(Value);
-                _owner.Invalidate();
-            }
-
-            internal S GetRenderState()
-            {
-                S renderState = null;
-                Interlocked.Exchange(ref renderState, Value);
-
-                return renderState;
-            }
-
-            internal void SetOwner(Component<S> owner)
-            {
-                this._owner = owner;
-                this._owner.CurrentState = this;
-            }
+            actionOnState(State);
+            Invalidate();
         }
 
-        public ComponentState CurrentState { get; private set; }
-    
-        protected Component()
+        public sealed override VisualNode Render()
         {
+            S renderState = null;
+            Interlocked.Exchange(ref renderState, State);
+
+            return Render(renderState);
         }
 
-        internal override void MergeWith(VisualNode newNode)
-        {
-            this.OnReleaseState();
-            if (GetType() == newNode.GetType())
-            {
-                var newComponent = (Component<S>)newNode;
-                CurrentState.SetOwner(newComponent);
-                newComponent.OnAttachState();
-            }
-
-            base.MergeWith(newNode);
-        }
-
-        protected virtual void OnAttachState()
-        {
-            System.Diagnostics.Debug.WriteLine($"{GetType()} OnDetachState");
-        }
-
-        protected virtual void OnReleaseState()
-        {
-            System.Diagnostics.Debug.WriteLine($"{GetType()} OnAttachState");
-        }
-
-        protected override void OnMount()
-        {
-            CurrentState = new ComponentState(new S(), this);
-            OnAttachState();
-
-            base.OnMount();
-        }
-        
-        protected sealed override VisualNode Render()
-        {
-            return Render(CurrentState.GetRenderState());
-        }
-
-        protected abstract VisualNode Render(S state);
+        public abstract VisualNode Render(S state);
     }
 
 }

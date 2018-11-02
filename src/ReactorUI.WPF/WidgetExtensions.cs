@@ -12,7 +12,19 @@ namespace ReactorUI.WPF
     {
         public static INativeControlContainer ParentAsNativeControlContainer(this IWidget widget)
         {
-            return widget.Parent.NativeControl as INativeControlContainer;
+            var node = (VisualNode)widget;
+            var parent = node.Parent;
+
+            while (parent != null && (!(parent is IWidget)))
+                parent = parent.Parent;
+
+            if (parent == null ||
+                (!(parent is IWidget)))
+            {
+                throw new InvalidOperationException();
+            }
+
+            return ((IWidget)parent).NativeControl as INativeControlContainer;
         }
     }
 }

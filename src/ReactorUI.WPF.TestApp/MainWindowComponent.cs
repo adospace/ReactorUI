@@ -28,7 +28,7 @@ namespace ReactorUI.WPF.TestApp
                             .OnClick(OnButtonClicked)
                             .Padding(5)
                             .Style(Styles.CustomButtonStyle),
-                        new TimerComponent()))
+                        Component.Host<TimerComponent>()))
                     .VerticalAlignment(VerticalAlignment.Center)
                     .HorizontalAlignment(HorizontalAlignment.Center);
         }

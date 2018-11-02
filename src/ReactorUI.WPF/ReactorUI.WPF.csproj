@@ -54,7 +54,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\Component.cs" />
     <Compile Include="Controls\FrameworkElement.cs" />
     <Compile Include="Controls\Image.cs" />
     <Compile Include="Controls\Primitives\BrushExtensions.cs" />
