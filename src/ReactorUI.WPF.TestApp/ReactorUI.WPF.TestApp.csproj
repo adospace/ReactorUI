@@ -58,8 +58,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Styles.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Images.cs" />
     <Compile Include="MainWindowComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

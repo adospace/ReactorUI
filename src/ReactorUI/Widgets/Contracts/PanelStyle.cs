@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ReactorUI.Widgets.Contracts
 {
-    public interface IPanel : IFrameworkElement
+    public class PanelStyle<T> : FrameworkElementStyle<T> where T : IPanel
     {
     }
 }

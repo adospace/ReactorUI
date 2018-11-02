@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ReactorUI.Widgets
 {
-    public class Button : ContentControl<IButton>, IButton
+    public class Button : ContentControl<IButton, ButtonStyle>, IButton
     {
         public Button(VisualNode content = null)
             :base(content)
@@ -19,7 +19,8 @@ namespace ReactorUI.Widgets
 
         public string Text { get; set; }
 
-        public Action Click { get; set; }
+        public Action<IButton> OnClickAction { get; set; }
+
     }
 
     public static class ButtonExtensions
@@ -42,7 +43,19 @@ namespace ReactorUI.Widgets
 
         public static Button OnClick(this Button button, Action onClick)
         {
-            button.Click = onClick;
+            button.OnClickAction = _ => onClick();
+            return button;
+        }
+
+        public static Button OnClick(this Button button, Action<Button> onClick)
+        {
+            button.OnClickAction = (Action<IButton>)onClick;
+            return button;
+        }
+
+        public static Button Style(this Button button, ButtonStyle style)
+        {
+            button.Style = style;
             return button;
         }
     }

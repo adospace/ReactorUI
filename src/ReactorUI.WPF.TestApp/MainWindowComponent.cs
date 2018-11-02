@@ -1,4 +1,5 @@
 ﻿using ReactorUI.Widgets;
+using ReactorUI.Widgets.Panels;
 using ReactorUI.Widgets.Primitives;
 using System;
 
@@ -8,25 +9,31 @@ namespace ReactorUI.WPF.TestApp
     {
         public MainWindowComponent() : base(new System.Windows.Window())
         {
-            System.Threading.Timer timer = new System.Threading.Timer(new System.Threading.TimerCallback(_ => this.Invalidate()));
-            timer.Change(0, 1000);
+            //System.Threading.Timer timer = new System.Threading.Timer(new System.Threading.TimerCallback(_ => this.Invalidate()));
+            //timer.Change(0, 1000);
         }
 
+        private int _counter;
 
         private void OnButtonClicked()
         {
-            System.Windows.MessageBox.Show("Clicked!");
+            _counter--;
+            this.Invalidate();
         }
+
+
 
         protected override VisualNode Render()
         {
-            return this.TreeView(
-                new TreeViewNode("Node1", DateTime.Now.Second % 2 == 0 ? new TreeViewNode("Node1_1") : null, new TreeViewNode("Node1_2")).IsExpanded(true),
-                new TreeViewNode("Node2"),
-                new TreeViewNode("Node3", "pack://application:,,/Images/FieldPrivate_16x.png")
-
-                );
-            
+            return new Border(
+                new Button(_counter.ToString())
+                    .OnClick(OnButtonClicked)
+                    .Padding(5)
+                    //.Background(new SolidColorBrush(Color.FromRGB(255, 0, 0)))
+                    .Style(Styles.CustomButtonStyle)
+                    )
+                .VerticalAlignment(VerticalAlignment.Center)
+                .HorizontalAlignment(HorizontalAlignment.Center);
         }
     }
 }

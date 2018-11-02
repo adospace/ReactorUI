@@ -9,5 +9,7 @@ namespace ReactorUI.Widgets
         INativeControl NativeControl { get; set; }
 
         IWidget Parent { get; }
+
+        void Invalidate();
     }
 }

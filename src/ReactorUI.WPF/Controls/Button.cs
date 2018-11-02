@@ -10,33 +10,48 @@ using System.Windows;
 
 namespace ReactorUI.WPF.Controls
 {
-    internal class Button : ContentControl<System.Windows.Controls.Button, IButton>
+    internal class Button : ContentControl<System.Windows.Controls.Button, IButton, ButtonStyle>
     {
         public Button()
         {
         }
 
-        public override void Update(IButton widget)
+        private Action<IButton> _actionToFireOnClick;
+
+        protected override void OnDidMount()
+        {
+
+            base.OnDidMount();
+        }
+
+        protected override void OnWillUnmount()
+        {
+            if (_actionToFireOnClick != null)
+                _nativeControl.Click -= _nativeButton_Click;
+
+            base.OnWillUnmount();
+        }
+
+        protected override void OnUpdate()
         {
             if (!HasContent)
             {
-                _nativeControl.Content = widget.Text;
+                _nativeControl.Content = _widget.Text;
             }
 
-            if (widget.Click != null && _actionToFireOnClick == null)
+            if (_actionToFireOnClick == null && _widget.OnClickAction != null)
                 _nativeControl.Click += _nativeButton_Click;
-            else if (widget.Click == null && _actionToFireOnClick != null)
+            else if (_actionToFireOnClick != null && _widget.OnClickAction == null)
                 _nativeControl.Click -= _nativeButton_Click;
 
-            _actionToFireOnClick = widget.Click;
+            _actionToFireOnClick = _widget.OnClickAction;
 
-            base.Update(widget);
+            base.OnUpdate();
         }
 
-        private Action _actionToFireOnClick;
         private void _nativeButton_Click(object sender, RoutedEventArgs e)
         {
-            _actionToFireOnClick();
+            _actionToFireOnClick(_widget);
         }
     }
 }

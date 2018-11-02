@@ -7,10 +7,8 @@ namespace ReactorUI
         void DidMount(IWidget widget);
 
         void WillUnmount(IWidget widget);
+
+        void Update(IWidget widget);
     }
 
-    public interface INativeControl<T> : INativeControl
-    {
-        void Update(T widget);
-    }
 }

@@ -18,6 +18,7 @@ namespace ReactorUI.WPF
             WidgetRegistry.Instance.Register<IButton>(() => new Controls.Button());
             WidgetRegistry.Instance.Register<ITreeView>(() => new Controls.TreeView());
             WidgetRegistry.Instance.Register<ITreeViewNode>(() => new Controls.TreeViewNode());
+            WidgetRegistry.Instance.Register<IImage>(() => new Controls.Image());
 
             WidgetRegistry.Instance.Register<IStackPanel>(() => new Controls.Panels.StackPanel());
         }

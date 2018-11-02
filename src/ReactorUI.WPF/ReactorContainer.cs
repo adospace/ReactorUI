@@ -60,6 +60,12 @@ namespace ReactorUI.WPF
 
         public void WillUnmount(IWidget widget)
         {
+
+        }
+
+        public void Update(IWidget widget)
+        {
+
         }
     }
 }

@@ -4,31 +4,63 @@ using System.Collections.Generic;
 
 namespace ReactorUI.Widgets
 {
-    public class Border : Widget<IBorder>, IBorder
+    public class Border : FrameworkElement<IBorder, BorderStyle>, IBorder
     {
+        private VisualNode _child;
+
         public Border(VisualNode child = null)
         {
-            Child = child;
+            _child = child;
         }
 
+        public Thickness BorderThickness { get; set; }
+        public Thickness Padding { get; set; }
+        public CornerRadius CornerRadius { get; set; }
+        public Brush BorderBrush { get; set; }
         public Brush Background { get; set; }
-
-        public VisualNode Child { get; set; }
 
         protected override IEnumerable<VisualNode> RenderChildren()
         {
-            if (Child != null)
-                yield return Child;
+            if (_child != null)
+                yield return _child;
         }
     }
 
     public static class BorderExtensions
     {
-        public static Button Button(this IWidgetContainer parent, VisualNode child = null)
+        public static Border Border(this IWidgetContainer parent, VisualNode child = null)
         {
-            return new Button();
+            return new Border(child);
         }
 
+        public static Border BorderThickness(this Border border, Thickness borderThickness)
+        {
+            border.BorderThickness = borderThickness;
+            return border;
+        }
 
+        public static Border Padding(this Border border, Thickness padding)
+        {
+            border.Padding = padding;
+            return border;
+        }
+
+        public static Border CornerRadius(this Border border, CornerRadius cornerRadius)
+        {
+            border.CornerRadius = cornerRadius;
+            return border;
+        }
+
+        public static Border BorderBrush(this Border border, Brush brush)
+        {
+            border.BorderBrush = brush;
+            return border;
+        }
+
+        public static Border Background(this Border border, Brush brush)
+        {
+            border.Background = brush;
+            return border;
+        }
     }
 }

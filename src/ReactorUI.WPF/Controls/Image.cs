@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace ReactorUI.WPF.Controls
 {
-    internal class Image : FrameworkElement<System.Windows.Controls.Image, IImage>
+    internal class Image : FrameworkElement<System.Windows.Controls.Image, IImage, ImageStyle>
     {
-        public override void Update(IImage widget)
+        protected override void OnUpdate()
         {
-            if (widget.Url != null)
-                _nativeControl.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(widget.Url));
+            if (_widget.Url != null)
+                _nativeControl.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(_widget.Url));
 
-            base.Update(widget);
+            base.OnUpdate();
         }
     }
 }

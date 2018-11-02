@@ -34,6 +34,17 @@ namespace ReactorUI.Widgets
             base.OnUnmount();
         }
 
+        protected override void OnUpdate()
+        {
+            NativeControl.Update(this);
+
+            base.OnUpdate();
+        }
+
+        void IWidget.Invalidate()
+        {
+            base.Invalidate();
+        }
     }
 
     public abstract class Widget<T> : Widget where T : class
@@ -44,13 +55,6 @@ namespace ReactorUI.Widgets
             NativeControl.DidMount(this);
 
             base.OnMount();
-        }
-
-        protected override void OnUpdate()
-        {
-            ((INativeControl<T>)NativeControl).Update(this as T);
-
-            base.OnUpdate();
         }
     }
 }

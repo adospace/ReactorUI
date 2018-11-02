@@ -11,33 +11,36 @@ using System.Threading.Tasks;
 
 namespace ReactorUI.WPF.Controls
 {
-    internal class Control<T, I> : FrameworkElement<T, I> where T : System.Windows.Controls.Control, new() where I : IControl
+    internal class Control<T, I, TS> : FrameworkElement<T, I, TS> 
+        where T : System.Windows.Controls.Control, new() 
+        where I : IControl
+        where TS : ControlStyle<I>
     {
-        public override void Update(I widget)
+        protected override void OnUpdate()
         {
-            _nativeControl.IsEnabled = widget.IsEnabled;
+            if (_widget.FontFamily != null)
+                _nativeControl.FontFamily = new System.Windows.Media.FontFamily(_widget.FontFamily);
 
-            if (widget.FontFamily != null)
-                _nativeControl.FontFamily = new System.Windows.Media.FontFamily(widget.FontFamily);
-            _nativeControl.FontStyle = widget.FontStyle.ToNativeFontStyle();
-            _nativeControl.FontStretch = widget.FontStretch.ToNativeFontStyle();
-            _nativeControl.FontWeight = widget.FontWeight.ToNativeFontWeight();
-            _nativeControl.FontSize = widget.FontSize;
+            _nativeControl.FontStyle = _widget.FontStyle.ToNativeFontStyle();
+            _nativeControl.FontStretch = _widget.FontStretch.ToNativeFontStyle();
+            _nativeControl.FontWeight = _widget.FontWeight.ToNativeFontWeight();
+            _nativeControl.FontSize = _widget.FontSize;
 
-            _nativeControl.Foreground = widget.Foreground?.ToNativeBrush();
-            _nativeControl.Background = widget.Background?.ToNativeBrush();
-            _nativeControl.BorderBrush = widget.BorderBrush?.ToNativeBrush();
-            _nativeControl.BorderThickness = widget.BorderThickness.ToNativeThickness();
+            _nativeControl.Foreground = _widget.Foreground?.ToNativeBrush();
+            System.Diagnostics.Debug.WriteLine($"{_widget}->Background:{_widget.Background?.ToNativeBrush()}");
+            _nativeControl.Background = _widget.Background?.ToNativeBrush();
+            _nativeControl.BorderBrush = _widget.BorderBrush?.ToNativeBrush();
+            _nativeControl.BorderThickness = _widget.BorderThickness.ToNativeThickness();
 
-            _nativeControl.IsTabStop = widget.IsTabStop;
-            _nativeControl.TabIndex = widget.TabIndex;
+            _nativeControl.IsTabStop = _widget.IsTabStop;
+            _nativeControl.TabIndex = _widget.TabIndex;
 
-            _nativeControl.Padding = widget.Padding.ToNativeThickness();
+            _nativeControl.Padding = _widget.Padding.ToNativeThickness();
 
-            _nativeControl.HorizontalContentAlignment = (System.Windows.HorizontalAlignment)widget.HorizontalContentAlignment;
-            _nativeControl.VerticalContentAlignment = (System.Windows.VerticalAlignment)widget.VerticalContentAlignment;
+            _nativeControl.HorizontalContentAlignment = (System.Windows.HorizontalAlignment)_widget.HorizontalContentAlignment;
+            _nativeControl.VerticalContentAlignment = (System.Windows.VerticalAlignment)_widget.VerticalContentAlignment;
 
-            base.Update(widget);
+            base.OnUpdate();
         }
     }
 }

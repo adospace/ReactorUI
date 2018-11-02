@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ReactorUI.Widgets
 {
-    public class ContentControl<T> : Control<T>, IContentControl, IWidgetContainer where T : class, IContentControl
+    public class ContentControl<T, TS> : Control<T, TS>, IContentControl, IWidgetContainer where T : class, IContentControl where TS : ContentControlStyle<T>
     {
         private readonly VisualNode _content;
 

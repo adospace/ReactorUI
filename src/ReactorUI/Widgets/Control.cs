@@ -6,10 +6,8 @@ using System.Text;
 
 namespace ReactorUI.Widgets
 {
-    public class Control<T> : FrameworkElement<T>, IControl where T : class, IControl
+    public class Control<T, TS> : FrameworkElement<T, TS>, IControl where T : class, IControl where TS : ControlStyle<T>
     {
-        public bool IsEnabled { get; set; } = true;
-
         public string FontFamily { get; set; }
         public FontStyle FontStyle { get; set; } = FontStyle.Normal;
         public FontStretch FontStretch { get; set; } = FontStretch.Normal;
@@ -28,8 +26,6 @@ namespace ReactorUI.Widgets
 
         public HorizontalAlignment HorizontalContentAlignment { get; set; } = HorizontalAlignment.Stretch;
         public VerticalAlignment VerticalContentAlignment { get; set; } = VerticalAlignment.Stretch;
-
-
     }
 
 

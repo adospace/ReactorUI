@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ReactorUI.Widgets.Contracts
 {
-    public interface ITextBlock
+    public interface ITextBlock : IFrameworkElement
     {
         string Text { get; set; }
 

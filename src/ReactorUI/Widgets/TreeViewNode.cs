@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ReactorUI.Widgets
 {
-    public class TreeViewNode : Control<ITreeViewNode>, ITreeViewNode
+    public class TreeViewNode : Control<ITreeViewNode, TreeViewNodeStyle>, ITreeViewNode
     {
         private readonly VisualNode _header;
         private readonly TreeViewNode[] _nodes;

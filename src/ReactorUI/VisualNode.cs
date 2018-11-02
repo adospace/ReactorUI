@@ -9,7 +9,12 @@ namespace ReactorUI
         public VisualNode Parent { get; private set; }
 
         private bool _invalidated = false;
-        protected void Invalidate() { _invalidated = true; }
+        protected void Invalidate()
+        {
+            _invalidated = true;
+            if (Parent != null)
+                Parent.Invalidate();
+        }
 
         private IReadOnlyList<VisualNode> _children = null;
         public IReadOnlyList<VisualNode> Children
@@ -77,6 +82,7 @@ namespace ReactorUI
                 var oldChildren = Children;
                 _children = null;
                 MergeChildrenFrom(oldChildren);
+                _invalidated = false;
             }
 
             if (!_isMounted && Parent != null)

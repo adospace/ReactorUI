@@ -30,8 +30,8 @@ namespace ReactorUI.Widgets
             if (nativeControl == null)
                 throw new InvalidOperationException($"Unable to create a native control that implements interface '{typeof(I)}': registered constructor function returned null");
 
-            if (!(nativeControl is INativeControl<I>))
-                throw new InvalidOperationException($"Unable to create a native control that implements interface '{typeof(I)}': ensure that type '{nativeControl.GetType()}' implements interface '{typeof(I)}'");
+            //if (!(nativeControl is INativeControl))
+            //    throw new InvalidOperationException($"Unable to create a native control that implements interface '{typeof(I)}': ensure that type '{nativeControl.GetType()}' implements interface '{typeof(I)}'");
 
             return nativeControl;
         }

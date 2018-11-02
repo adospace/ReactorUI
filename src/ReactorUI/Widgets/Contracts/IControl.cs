@@ -7,7 +7,6 @@ namespace ReactorUI.Widgets.Contracts
 {
     public interface IControl : IFrameworkElement
     {
-        bool IsEnabled { get; set; }
 
         string FontFamily { get; set; }
         FontStyle FontStyle { get; set; }

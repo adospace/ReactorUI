@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ReactorUI.Widgets.Panels
 {
-    public class StackPanel : Panel<IStackPanel>, IStackPanel
+    public class StackPanel : Panel<IStackPanel, StackPanelStyle>, IStackPanel
     {
         public StackPanel(params VisualNode[] children)
         {

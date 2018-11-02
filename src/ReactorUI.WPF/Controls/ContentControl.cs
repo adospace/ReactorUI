@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace ReactorUI.WPF.Controls
 {
-    internal class ContentControl<T, I> : Control<T, I>, INativeControlContainer where T : System.Windows.Controls.ContentControl, new() where I : IContentControl
+    internal class ContentControl<T, I, TS> : Control<T, I, TS>, INativeControlContainer 
+        where T : System.Windows.Controls.ContentControl, new() 
+        where I : IContentControl 
+        where TS : ContentControlStyle<I>
     {
         public ContentControl()
         {

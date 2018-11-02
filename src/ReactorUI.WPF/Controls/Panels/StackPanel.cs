@@ -9,19 +9,18 @@ using System.Threading.Tasks;
 
 namespace ReactorUI.WPF.Controls.Panels
 {
-    internal class StackPanel : Panel<System.Windows.Controls.StackPanel, IStackPanel>
+    internal class StackPanel : Panel<System.Windows.Controls.StackPanel, IStackPanel, StackPanelStyle>
     {
         public StackPanel()
         {
 
         }
 
-        public override void Update(IStackPanel widget)
+
+        protected override void OnUpdate()
         {
-            NativePanel.Orientation = (System.Windows.Controls.Orientation)widget.Orientation;
-
-            base.Update(widget);
+            NativePanel.Orientation = (System.Windows.Controls.Orientation)_widget.Orientation;
+            base.OnUpdate();
         }
-
     }
 }

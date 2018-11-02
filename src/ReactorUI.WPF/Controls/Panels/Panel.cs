@@ -9,7 +9,10 @@ using ReactorUI.Widgets.Contracts;
 
 namespace ReactorUI.WPF.Controls.Panels
 {
-    internal abstract class Panel<T, I> : INativeControl<I>, INativeControlContainer, IPanel where T : System.Windows.Controls.Panel, new()
+    internal abstract class Panel<T, I, TS> : FrameworkElement<T, I, TS>
+        where T : System.Windows.Controls.Panel, new()
+        where I : IPanel
+        where TS : PanelStyle<I>
     {
         protected T NativePanel { get; private set; }
 
@@ -28,20 +31,5 @@ namespace ReactorUI.WPF.Controls.Panels
             NativePanel.Children.Remove((UIElement)child);
         }
 
-        public void DidMount(IWidget widget)
-        {
-            NativePanel = NativePanel ?? new T();
-            widget.ParentAsNativeControlContainer().AddChild(NativePanel);
-        }
-
-        public void WillUnmount(IWidget widget)
-        {
-            widget.ParentAsNativeControlContainer().RemoveChild(NativePanel);
-        }
-
-        public virtual void Update(I widget)
-        {
-            
-        }
     }
 }

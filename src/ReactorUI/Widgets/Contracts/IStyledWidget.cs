@@ -4,7 +4,8 @@ using System.Text;
 
 namespace ReactorUI.Widgets.Contracts
 {
-    public interface IPanel : IFrameworkElement
+    public interface IStyledWidget<TS>
     {
+        TS Style { get; }
     }
 }

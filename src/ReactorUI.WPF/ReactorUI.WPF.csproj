@@ -65,6 +65,7 @@
     <Compile Include="Controls\Border.cs" />
     <Compile Include="Controls\Panels\Panel.cs" />
     <Compile Include="Controls\Panels\StackPanel.cs" />
+    <Compile Include="Controls\Primitives\CornerRadiusExtensions.cs" />
     <Compile Include="Controls\Primitives\FontStretchExtensions.cs" />
     <Compile Include="Controls\Primitives\FontWeightExtensions.cs" />
     <Compile Include="Controls\Primitives\FontStyleExtensions.cs" />

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ReactorUI.Widgets
 {
-    public class TextBlock : Widget<ITextBlock>, ITextBlock
+    public class TextBlock : FrameworkElement<ITextBlock, TextBlockStyle>, ITextBlock
     {
         public TextBlock()
         { }

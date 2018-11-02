@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ReactorUI.WPF.Controls
 {
-    internal class TreeViewNode : Control<System.Windows.Controls.TreeViewItem, ITreeViewNode>, INativeControlContainer
+    internal class TreeViewNode : Control<System.Windows.Controls.TreeViewItem, ITreeViewNode, TreeViewNodeStyle>, INativeControlContainer
     {
         public ObservableCollection<System.Windows.Controls.TreeViewItem> Items { get; } = new ObservableCollection<System.Windows.Controls.TreeViewItem>();
 
@@ -37,34 +37,39 @@ namespace ReactorUI.WPF.Controls
             }
         }
 
-        public override void DidMount(IWidget widget)
+        protected override void OnDidMount()
         {
-            base.DidMount(widget);
-
             _nativeControl.SetBinding(System.Windows.Controls.TreeView.ItemsSourceProperty, new System.Windows.Data.Binding("Items")
             {
                 Source = this
             });
 
-            _nativeControl.IsExpanded = ((ITreeViewNode)widget).IsExpanded;
+            _nativeControl.IsExpanded = ((ITreeViewNode)_widget).IsExpanded;
+            base.OnDidMount();
         }
 
+        protected override void OnWillUnmount()
+        {
+            System.Windows.Data.BindingOperations.ClearBinding(_nativeControl, System.Windows.Controls.TreeView.ItemsSourceProperty);
+            base.OnWillUnmount();
+        }
+               
         private string _cachedText;
         private string _cachedIconUrl;
 
-        public override void Update(ITreeViewNode widget)
+        protected override void OnUpdate()
         {
             if (!HasHeader)
             {
-                if (widget.IconUrl == null)
-                    _nativeControl.Header = widget.Text;
+                if (_widget.IconUrl == null)
+                    _nativeControl.Header = _widget.Text;
                 else
                 {
-                    if (_cachedText != widget.Text ||
-                        _cachedIconUrl != widget.IconUrl)
+                    if (_cachedText != _widget.Text ||
+                        _cachedIconUrl != _widget.IconUrl)
                     {
-                        _cachedText = widget.Text;
-                        _cachedIconUrl = widget.IconUrl;
+                        _cachedText = _widget.Text;
+                        _cachedIconUrl = _widget.IconUrl;
 
                         var dockPanel = new System.Windows.Controls.DockPanel();
                         var txtElement = new System.Windows.Controls.TextBlock() { Text = _cachedText, Margin = new System.Windows.Thickness(4, 0, 0, 0) };
@@ -79,9 +84,9 @@ namespace ReactorUI.WPF.Controls
                     }
                 }
             }
-
-            base.Update(widget);
+            base.OnUpdate();
         }
+
 
     }
 }

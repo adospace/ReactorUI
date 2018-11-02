@@ -11,35 +11,28 @@ using System.Windows;
 
 namespace ReactorUI.WPF.Controls
 {
-    internal class Border : INativeControl<IBorder>, INativeControlContainer
+    internal class Border : FrameworkElement<System.Windows.Controls.Border, IBorder, BorderStyle>, INativeControlContainer
     {
-        private System.Windows.Controls.Border _nativeBorder = null;
-
         public void AddChild(object child)
         {
-            _nativeBorder.Child = (UIElement)child;
+            _nativeControl.Child = (UIElement)child;
         }
 
         public void RemoveChild(object child)
         {
-            _nativeBorder.Child = null;
+            _nativeControl.Child = null;
         }
 
-        public void DidMount(IWidget widget)
-        {
-            _nativeBorder = _nativeBorder ?? new System.Windows.Controls.Border();
 
-            widget.ParentAsNativeControlContainer().AddChild(_nativeBorder);
-        }
-
-        public void WillUnmount(IWidget widget)
+        protected override void OnUpdate()
         {
-            widget.ParentAsNativeControlContainer().RemoveChild(_nativeBorder);
-        }
+            _nativeControl.Background = _widget.Background?.ToNativeBrush();
+            _nativeControl.BorderBrush = _widget.BorderBrush?.ToNativeBrush();
+            _nativeControl.BorderThickness = _widget.BorderThickness.ToNativeThickness();
+            _nativeControl.Padding = _widget.Padding.ToNativeThickness();
+            _nativeControl.CornerRadius = _widget.CornerRadius.ToNativeCornerRadius();
 
-        public void Update(IBorder widget)
-        {
-            _nativeBorder.Background = widget.Background?.ToNativeBrush();
+            base.OnUpdate();
         }
     }
 }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ReactorUI.WPF.Controls
 {
-    internal class TreeView : Control<System.Windows.Controls.TreeView, ITreeView>, INativeControlContainer
+    internal class TreeView : Control<System.Windows.Controls.TreeView, ITreeView, TreeViewStyle>, INativeControlContainer
     {
         public ObservableCollection<System.Windows.Controls.TreeViewItem> Items { get; } = new ObservableCollection<System.Windows.Controls.TreeViewItem>();
 
@@ -25,21 +25,20 @@ namespace ReactorUI.WPF.Controls
             Items.Remove((System.Windows.Controls.TreeViewItem)child);
         }
 
-        public override void DidMount(IWidget widget)
+        protected override void OnDidMount()
         {
-            base.DidMount(widget);
-
             _nativeControl.SetBinding(System.Windows.Controls.TreeView.ItemsSourceProperty, new System.Windows.Data.Binding("Items")
             {
                 Source = this
             });
+
+            base.OnDidMount();
         }
 
-        public override void WillUnmount(IWidget widget)
+        protected override void OnWillUnmount()
         {
             System.Windows.Data.BindingOperations.ClearBinding(_nativeControl, System.Windows.Controls.TreeView.ItemsSourceProperty);
-
-            base.WillUnmount(widget);
+            base.OnWillUnmount();
         }
     }
 }
