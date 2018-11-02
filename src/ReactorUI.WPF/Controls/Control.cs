@@ -27,7 +27,7 @@ namespace ReactorUI.WPF.Controls
             _nativeControl.FontSize = _widget.FontSize;
 
             _nativeControl.Foreground = _widget.Foreground?.ToNativeBrush();
-            System.Diagnostics.Debug.WriteLine($"{_widget}->Background:{_widget.Background?.ToNativeBrush()}");
+            //System.Diagnostics.Debug.WriteLine($"{_widget}->Background:{_widget.Background?.ToNativeBrush()}");
             _nativeControl.Background = _widget.Background?.ToNativeBrush();
             _nativeControl.BorderBrush = _widget.BorderBrush?.ToNativeBrush();
             _nativeControl.BorderThickness = _widget.BorderThickness.ToNativeThickness();

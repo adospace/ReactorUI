@@ -59,6 +59,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Styles.cs" />
+    <Compile Include="TimerComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Images.cs" />

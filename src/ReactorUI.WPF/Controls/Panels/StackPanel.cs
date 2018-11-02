@@ -19,7 +19,7 @@ namespace ReactorUI.WPF.Controls.Panels
 
         protected override void OnUpdate()
         {
-            NativePanel.Orientation = (System.Windows.Controls.Orientation)_widget.Orientation;
+            _nativeControl.Orientation = (System.Windows.Controls.Orientation)_widget.Orientation;
             base.OnUpdate();
         }
     }

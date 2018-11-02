@@ -17,11 +17,12 @@ namespace ReactorUI.WPF.TestApp
         {
             ReactorApplication.Initialize();
 
-            var mainWindow = new MainWindowComponent();
+            var mainWindow = new Window();
+            var mainWindowComponent = 
+                new MainWindowComponent(mainWindow)
+                .Run();
 
-            mainWindow.Run();
-
-            mainWindow.Container.Show();
+            mainWindow.Show();
 
             base.OnStartup(e);
         }

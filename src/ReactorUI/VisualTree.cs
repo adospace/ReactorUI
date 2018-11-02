@@ -18,9 +18,5 @@ namespace ReactorUI
             Root.Layout();
         }
 
-        public void MergeWith(VisualNode newRoot)
-        {
-            Root.MergeWith(newRoot);
-        }
     }
 }

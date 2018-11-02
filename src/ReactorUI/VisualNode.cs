@@ -4,6 +4,11 @@ namespace ReactorUI
 {
     public abstract class VisualNode
     {
+        protected VisualNode()
+        {
+            System.Diagnostics.Debug.WriteLine($"{this}->Created()");
+        }
+
         public object Key { get; set; }
 
         public VisualNode Parent { get; private set; }
@@ -12,8 +17,7 @@ namespace ReactorUI
         protected void Invalidate()
         {
             _invalidated = true;
-            if (Parent != null)
-                Parent.Invalidate();
+            System.Diagnostics.Debug.WriteLine($"{this}->Invalidated()");
         }
 
         private IReadOnlyList<VisualNode> _children = null;
@@ -79,6 +83,7 @@ namespace ReactorUI
         {
             if (_invalidated)
             {
+                System.Diagnostics.Debug.WriteLine($"{this}->Layout(Invalidated)");
                 var oldChildren = Children;
                 _children = null;
                 MergeChildrenFrom(oldChildren);

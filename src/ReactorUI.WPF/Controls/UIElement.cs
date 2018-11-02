@@ -10,7 +10,10 @@ using System.Threading.Tasks;
 
 namespace ReactorUI.WPF.Controls
 {
-    internal class UIElement<T, I, TS> : INativeControl where T : System.Windows.UIElement, new() where I : IUIElement where TS : UIElementStyle<I>
+    internal class UIElement<T, I, TS> : INativeControl 
+        where T : System.Windows.UIElement, new() 
+        where I : IUIElement 
+        where TS : UIElementStyle<I>
     {
         protected T _nativeControl;
 
