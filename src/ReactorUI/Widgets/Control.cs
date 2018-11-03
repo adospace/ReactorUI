@@ -27,6 +27,13 @@ namespace ReactorUI.Widgets
 
         public HorizontalAlignment HorizontalContentAlignment { get; set; } = HorizontalAlignment.Stretch;
         public VerticalAlignment VerticalContentAlignment { get; set; } = VerticalAlignment.Stretch;
+
+        protected override void OnApplyStyle()
+        {
+
+
+            base.OnApplyStyle();
+        }
     }
 
 
@@ -41,6 +48,12 @@ namespace ReactorUI.Widgets
         public static T Background<T>(this T control, Brush background) where T : class, IControl
         {
             control.Background = background;
+            return control;
+        }
+
+        public static T Background<T>(this T control, Color backgroundColor) where T : class, IControl
+        {
+            control.Background = new SolidColorBrush(backgroundColor);
             return control;
         }
 

@@ -1,11 +1,12 @@
 ﻿using ReactorUI.Contracts;
+using ReactorUI.Styles;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ReactorUI.Widgets
 {
-    public class ComponentHost<T> : VisualNode, IComponentHost where T : Component, new()
+    public class ComponentHost<T> : ContentControl<IComponentHost, ComponentHostStyle>, IComponentHost where T : Component, new()
     {
         private T _component;
         private T Component {

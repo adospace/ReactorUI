@@ -54,6 +54,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ComponentHost.cs" />
     <Compile Include="Controls\FrameworkElement.cs" />
     <Compile Include="Controls\Image.cs" />
     <Compile Include="Controls\Panels\DockPanel.cs" />

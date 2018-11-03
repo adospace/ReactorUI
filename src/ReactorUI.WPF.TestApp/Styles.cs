@@ -18,6 +18,7 @@ namespace ReactorUI.WPF.TestApp
     public static class Styles
     {
         public static ButtonStyle CustomButtonStyle { get; } = new ButtonStyle()
+            .Padding(4.0)
             .Background(Colors.ButtonBackground)
             .OnMouseEnter(_ => _.Background = Colors.Hover)
             .OnMouseLeave(_ => _.Background = Colors.ButtonBackground)

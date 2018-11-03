@@ -58,6 +58,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CounterComponent.cs" />
     <Compile Include="Styles.cs" />
     <Compile Include="TimerComponent.cs" />
   </ItemGroup>

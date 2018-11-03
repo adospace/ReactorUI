@@ -22,13 +22,7 @@ namespace ReactorUI.WPF.TestApp
         protected override VisualNode Render()
         {
             return 
-                new Border(
-                    new StackPanel(
-                        new Button(_counter.ToString())
-                            .OnClick(OnButtonClicked)
-                            .Padding(5)
-                            .Style(Styles.CustomButtonStyle),
-                        Component.Host<TimerComponent>()))
+                Component.Host<CounterComponent>()
                     .VerticalAlignment(VerticalAlignment.Center)
                     .HorizontalAlignment(HorizontalAlignment.Center);
         }

@@ -11,8 +11,8 @@ namespace ReactorUI.Contracts
         bool IsVisible { get; set; }
         double Opacity { get; set; }
 
-        LinkedList<Action<IUIElement>> OnMouseEnterActions { get; }
-        LinkedList<Action<IUIElement>> OnMouseLeaveActions { get; }
+        Action<IUIElement> OnMouseEnter { get; set; }
+        Action<IUIElement> OnMouseLeave { get; set; }
 
     }
 }

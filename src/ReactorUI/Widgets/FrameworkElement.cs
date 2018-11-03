@@ -65,6 +65,18 @@ namespace ReactorUI.Widgets
             return element;
         }
 
+        public static T Margin<T>(this T element, double marginValue) where T : class, IFrameworkElement
+        {
+            element.Margin = new Thickness(marginValue);
+            return element;
+        }
+
+        public static T Margin<T>(this T element, double left, double top, double right, double bottom) where T : class, IFrameworkElement
+        {
+            element.Margin = new Thickness(left, top, right, bottom);
+            return element;
+        }
+
         public static T VerticalAlignment<T>(this T element, VerticalAlignment verticalAlignment) where T : class, IFrameworkElement
         {
             element.VerticalAlignment = verticalAlignment;

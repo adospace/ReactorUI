@@ -48,6 +48,8 @@ namespace ReactorUI.WPF.Controls
         {
             if (_fireOnMouseEnterAction != null)
                 _nativeControl.MouseEnter -= _nativeControl_MouseEnter;
+            if (_fireOnMouseLeaveAction != null)
+                _nativeControl.MouseLeave -= _nativeControl_MouseLeave;
         }
 
         public void Update(IWidget widget)
@@ -76,6 +78,8 @@ namespace ReactorUI.WPF.Controls
                 _nativeControl.MouseLeave -= _nativeControl_MouseLeave;
 
             _fireOnMouseLeaveAction = Style?.OnMouseLeaveAction;
+
+
         }
 
         private void _nativeControl_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)

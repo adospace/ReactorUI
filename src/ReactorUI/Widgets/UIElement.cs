@@ -21,8 +21,8 @@ namespace ReactorUI.Widgets
             yield break;
         }
 
-        public LinkedList<Action<IUIElement>> OnMouseEnterActions { get; } = new LinkedList<Action<IUIElement>>();
-        public LinkedList<Action<IUIElement>> OnMouseLeaveActions { get; } = new LinkedList<Action<IUIElement>>();
+        public Action<IUIElement> OnMouseEnter { get; set; }
+        public Action<IUIElement> OnMouseLeave { get; set; }
 
         protected override void OnMount()
         {
@@ -49,8 +49,6 @@ namespace ReactorUI.Widgets
         {
 
         }
-
-
     }
 
     public static class UIElementExtentsions

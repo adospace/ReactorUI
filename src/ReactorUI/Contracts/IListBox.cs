@@ -4,8 +4,7 @@ using System.Text;
 
 namespace ReactorUI.Contracts
 {
-    public interface IComponentHost : IContentControl
+    public interface IListBox : IControl
     {
-        void Invalidate();
     }
 }

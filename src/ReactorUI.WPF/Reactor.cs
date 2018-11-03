@@ -13,6 +13,8 @@ namespace ReactorUI.WPF
     {
         public static void Initialize()
         {
+            WidgetRegistry.Instance.Register<IComponentHost>(() => new Controls.ComponentHost());
+
             WidgetRegistry.Instance.Register<ITextBlock>(()=> new Controls.TextBlock());
             WidgetRegistry.Instance.Register<IBorder>(() => new Controls.Border());
             WidgetRegistry.Instance.Register<IButton>(() => new Controls.Button());

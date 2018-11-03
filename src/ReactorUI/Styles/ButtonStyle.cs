@@ -30,6 +30,14 @@ namespace ReactorUI.Styles
             return style;
         }
 
+        public static ButtonStyle Padding(this ButtonStyle control, Thickness thickness)
+            => control.Padding<ButtonStyle, IButton>(thickness);
+
+        public static ButtonStyle Padding(this ButtonStyle control, double thickness)
+            => control.Padding<ButtonStyle, IButton>(thickness);
+
+        public static ButtonStyle Padding(this ButtonStyle control, double left, double top, double right, double bottom)
+            => control.Padding<ButtonStyle, IButton>(left, top, right, bottom);
     }
 
 }
