@@ -27,7 +27,7 @@ namespace ReactorUI.WPF.Controls
             _widget = (I)widget;
             _nativeControl = _nativeControl ?? new T();
 
-            widget.ParentAsNativeControlContainer().AddChild(_nativeControl);
+            widget.ParentAsNativeControlContainer().AddChild(widget, _nativeControl);
 
             OnDidMount();
         }
@@ -41,7 +41,7 @@ namespace ReactorUI.WPF.Controls
         {
             OnWillUnmount();
 
-            widget.ParentAsNativeControlContainer().RemoveChild(_nativeControl);
+            widget.ParentAsNativeControlContainer().RemoveChild(widget, _nativeControl);
         }
 
         protected virtual void OnWillUnmount()

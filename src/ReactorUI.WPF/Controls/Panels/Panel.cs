@@ -20,12 +20,12 @@ namespace ReactorUI.WPF.Controls.Panels
         }
 
 
-        public void AddChild(object child)
+        public virtual void AddChild(IWidget widget, object child)
         {
             _nativeControl.Children.Add((UIElement)child);
         }
 
-        public void RemoveChild(object child)
+        public virtual void RemoveChild(IWidget widget, object child)
         {
             _nativeControl.Children.Remove((UIElement)child);
         }

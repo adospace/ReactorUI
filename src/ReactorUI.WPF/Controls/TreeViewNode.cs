@@ -16,7 +16,7 @@ namespace ReactorUI.WPF.Controls
 
         protected bool HasHeader { get; private set; }
 
-        public void AddChild(object child)
+        public void AddChild(IWidget widget, object child)
         {
             if (child is System.Windows.Controls.TreeViewItem)
                 Items.Add((System.Windows.Controls.TreeViewItem)child);
@@ -27,7 +27,7 @@ namespace ReactorUI.WPF.Controls
             }
         }
 
-        public void RemoveChild(object child)
+        public void RemoveChild(IWidget widget, object child)
         {
             if (child is System.Windows.Controls.TreeViewItem)
                 Items.Remove((System.Windows.Controls.TreeViewItem)child);

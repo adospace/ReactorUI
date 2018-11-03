@@ -18,13 +18,13 @@ namespace ReactorUI.WPF.Controls
         }
 
         protected bool HasContent { get; private set; }
-        public void AddChild(object child)
+        public void AddChild(IWidget widget, object child)
         {
             _nativeControl.Content = child;
             HasContent = child != null;
         }
 
-        public void RemoveChild(object child)
+        public void RemoveChild(IWidget widget, object child)
         {
             _nativeControl.Content = null;
             HasContent = false;

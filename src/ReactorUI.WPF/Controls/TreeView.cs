@@ -16,12 +16,12 @@ namespace ReactorUI.WPF.Controls
     {
         public ObservableCollection<System.Windows.Controls.TreeViewItem> Items { get; } = new ObservableCollection<System.Windows.Controls.TreeViewItem>();
 
-        public void AddChild(object child)
+        public void AddChild(IWidget widget, object child)
         {
             Items.Add((System.Windows.Controls.TreeViewItem)child);
         }
 
-        public void RemoveChild(object child)
+        public void RemoveChild(IWidget widget, object child)
         {
             Items.Remove((System.Windows.Controls.TreeViewItem)child);
         }

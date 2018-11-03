@@ -45,12 +45,12 @@ namespace ReactorUI.WPF
             return this;
         }
 
-        public void AddChild(object child)
+        public void AddChild(IWidget widget, object child)
         {
             Container.Content = child;
         }
 
-        public void RemoveChild(object child)
+        public void RemoveChild(IWidget widget, object child)
         {
             Container.Content = null;
         }

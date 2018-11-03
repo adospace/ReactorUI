@@ -14,12 +14,12 @@ namespace ReactorUI.WPF.Controls
 {
     internal class Border : FrameworkElement<System.Windows.Controls.Border, IBorder, BorderStyle>, INativeControlContainer
     {
-        public void AddChild(object child)
+        public void AddChild(IWidget widget, object child)
         {
             _nativeControl.Child = (UIElement)child;
         }
 
-        public void RemoveChild(object child)
+        public void RemoveChild(IWidget widget, object child)
         {
             _nativeControl.Child = null;
         }

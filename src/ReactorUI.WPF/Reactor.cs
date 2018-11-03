@@ -21,6 +21,7 @@ namespace ReactorUI.WPF
             WidgetRegistry.Instance.Register<IImage>(() => new Controls.Image());
 
             WidgetRegistry.Instance.Register<IStackPanel>(() => new Controls.Panels.StackPanel());
+            WidgetRegistry.Instance.Register<IDockPanel>(() => new Controls.Panels.DockPanel());
         }
     }
 }

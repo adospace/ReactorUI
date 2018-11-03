@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using ReactorUI.Contracts;
+using System.Collections.Generic;
 
 namespace ReactorUI
 {
-    public abstract class VisualNode
+    public abstract class VisualNode : IMetadataProvider
     {
         protected VisualNode()
         {
@@ -113,6 +114,34 @@ namespace ReactorUI
         protected virtual void OnUpdate()
         {
             _stateChanged = false;
+        }
+
+
+        private Dictionary<string, object> _metadata = null;
+        void IMetadataProvider.SetMetadata<T>(string key, T value)
+        {
+            _metadata = _metadata ?? new Dictionary<string, object>();
+            _metadata[key] = value;
+        }
+
+        T IMetadataProvider.GetMetadata<T>(string key, T defaultValue)
+        {
+            if (_metadata == null)
+                return defaultValue;
+
+            if (_metadata.TryGetValue(key, out var value))
+                return (T)value;
+
+            return defaultValue;
+        }
+
+        bool IMetadataProvider.ContainsMetadata(string key)
+        {
+            if (_metadata == null ||
+                !_metadata.ContainsKey(key))
+                return false;
+
+            return true;
         }
     }
 
