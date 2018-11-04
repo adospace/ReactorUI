@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactorUI", "ReactorUI\ReactorUI.csproj", "{50650CFC-4468-4203-A5EE-FE23267921A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReactorUI", "ReactorUI\ReactorUI.csproj", "{50650CFC-4468-4203-A5EE-FE23267921A6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactorUI.WPF", "ReactorUI.WPF\ReactorUI.WPF.csproj", "{FDD59C85-216E-42BB-9576-2849189BA49D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactorUI.WPF.TestApp", "ReactorUI.WPF.TestApp\ReactorUI.WPF.TestApp.csproj", "{7F6680E8-0F15-4E67-A0AD-0D81BEF8141A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReactorUI.Skia", "ReactorUI.Skia\ReactorUI.Skia.csproj", "{750B40A2-3540-4BE3-9933-84EBF55ABA79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactorUI.Skia.WinFormsTestApp", "ReactorUI.Skia.WinFormsTestApp\ReactorUI.Skia.WinFormsTestApp.csproj", "{616D907B-9EE3-4187-97B9-0A7D2BA93409}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{7F6680E8-0F15-4E67-A0AD-0D81BEF8141A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F6680E8-0F15-4E67-A0AD-0D81BEF8141A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F6680E8-0F15-4E67-A0AD-0D81BEF8141A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{750B40A2-3540-4BE3-9933-84EBF55ABA79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{750B40A2-3540-4BE3-9933-84EBF55ABA79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{750B40A2-3540-4BE3-9933-84EBF55ABA79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{750B40A2-3540-4BE3-9933-84EBF55ABA79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{616D907B-9EE3-4187-97B9-0A7D2BA93409}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{616D907B-9EE3-4187-97B9-0A7D2BA93409}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{616D907B-9EE3-4187-97B9-0A7D2BA93409}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{616D907B-9EE3-4187-97B9-0A7D2BA93409}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
