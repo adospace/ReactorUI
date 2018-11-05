@@ -6,16 +6,34 @@ namespace ReactorUI.Primitives
 {
     public struct Size
     {
-        public double Width { get; private set; }
-        public double Height { get; private set; }
-
+        private double _width;
+        public double Width
+        {
+            get => _width < 0 ? throw new InvalidOperationException() : _width;
+            set {
+                if (value < 0)
+                    throw new ArgumentException();
+                _width = value;
+            } 
+        }
+        private double _height;
+        public double Height
+        {
+            get => _height < 0 ? throw new InvalidOperationException() : _height;
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentException();
+                _height = value;
+            }
+        }
         public Size(double width, double height)
         {
             if (width < 0.0) throw new ArgumentException();
             if (height < 0.0) throw new ArgumentException();
 
-            Width = width;
-            Height = height;
+            _width = width;
+            _height = height;
         }
 
         public bool IsEmpty => Width < 0.0;

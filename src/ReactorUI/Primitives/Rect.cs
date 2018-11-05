@@ -9,8 +9,8 @@ namespace ReactorUI.Primitives
         public double X { get; }
         public double Y { get; }
 
-        public double Width { get; }
-        public double Height { get; }
+        public double Width { get; private set; }
+        public double Height { get; private set; }
 
         public Rect(double x, double y, double width, double height)
         {
@@ -23,7 +23,18 @@ namespace ReactorUI.Primitives
             Height = height;
         }
 
-        public Point Location => new Point(X, Y);
+        public Vector Location => new Vector(X, Y);
         public Size Size => new Size(Width, Height);
+
+        public bool IsEmpty => Width < 0.0;
+
+        public static Rect Empty { get; } = new Rect() { Width = -1.0, Height = -1.0 };
+
+        public bool IsCloseTo(Rect other) =>
+            Math.Abs(X - other.X) < 1e-10 &&
+            Math.Abs(Y - other.Y) < 1e-10 &&
+            Math.Abs(Width - other.Width) < 1e-10 && 
+            Math.Abs(Height - other.Height) < 1e-10;
+
     }
 }

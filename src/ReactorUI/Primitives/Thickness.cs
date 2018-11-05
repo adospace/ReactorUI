@@ -27,6 +27,16 @@ namespace ReactorUI.Primitives
 
         public double Bottom { get; set; }
 
+        public bool IsCloseTo(Thickness other) =>
+            Math.Abs(Left - other.Left) < 1e-10 &&
+            Math.Abs(Top - other.Top) < 1e-10 &&
+            Math.Abs(Right - other.Right) < 1e-10 &&
+            Math.Abs(Bottom - other.Bottom) < 1e-10;
 
+        public Size ToSize() => new Size(Left + Right, Top + Bottom);
+
+        public bool IsUniformLength => (Left == Right && Left == Top && Left == Bottom);
+
+        public double UniformLength => IsUniformLength ? Left : throw new InvalidOperationException();
     }
 }

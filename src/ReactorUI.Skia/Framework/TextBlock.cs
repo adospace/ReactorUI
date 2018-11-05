@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ReactorUI.Primitives
+namespace ReactorUI.Skia.Framework
 {
-    public abstract class Brush
+    internal class TextBlock : FrameworkElement
     {
-
     }
 }
