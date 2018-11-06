@@ -20,7 +20,7 @@ namespace ReactorUI.Skia.Controls
         protected bool HasContent { get; private set; }
         public void AddChild(IWidget widget, Framework.UIElement child)
         {
-            _nativeControl.Content = (Framework.UIElement)child;
+            _nativeControl.Content = child;
             HasContent = child != null;
         }
 

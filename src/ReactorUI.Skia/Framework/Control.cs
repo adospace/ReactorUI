@@ -177,5 +177,31 @@ namespace ReactorUI.Skia.Framework
             }
         }
         #endregion
+
+        #region Measure Pass
+        #endregion
+
+        #region Arrange Pass
+        #endregion
+
+        #region Render Pass
+        protected override void RenderOverride(RenderContext context)
+        {
+            base.RenderOverride(context);
+
+            var finalWidth = RenderSize.Width - (BorderThickness.Left + BorderThickness.Right);
+            var finalHeight = RenderSize.Height - (BorderThickness.Top + BorderThickness.Bottom);
+
+            if (Background != null)
+            {
+                context.Canvas.DrawRect(
+                    0.0f, 0.0f, (float)finalWidth, (float)finalHeight,
+                    new SkiaSharp.SKPaint()
+                    {
+                    }.ApplyBrush(Background));
+            }
+
+        }
+        #endregion
     }
 }

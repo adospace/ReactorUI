@@ -21,8 +21,8 @@ namespace ReactorUI.Widgets
             yield break;
         }
 
-        public Action<IUIElement> OnMouseEnter { get; set; }
-        public Action<IUIElement> OnMouseLeave { get; set; }
+        public Action<IUIElement> OnMouseEnterAction { get; set; }
+        public Action<IUIElement> OnMouseLeaveAction { get; set; }
 
         protected override void OnMount()
         {
@@ -80,6 +80,18 @@ namespace ReactorUI.Widgets
         public static T Style<T, TS>(this T element, TS style) where T : UIElement<T, TS> where TS : UIElementStyle<T>
         {
             element.Style = style;
+            return element;
+        }
+
+        public static T OnMouseEnter<T>(this T element, Action<T> action) where T : class, IUIElement
+        {
+            element.OnMouseEnterAction = (_) => action((T)_);
+            return element;
+        }
+
+        public static T OnMouseLeave<T>(this T element, Action<T> action) where T : class, IUIElement
+        {
+            element.OnMouseLeaveAction = (_) => action((T)_);
             return element;
         }
     }

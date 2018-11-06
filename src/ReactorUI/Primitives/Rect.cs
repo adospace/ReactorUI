@@ -33,8 +33,9 @@ namespace ReactorUI.Primitives
         public bool IsCloseTo(Rect other) =>
             Math.Abs(X - other.X) < 1e-10 &&
             Math.Abs(Y - other.Y) < 1e-10 &&
-            Math.Abs(Width - other.Width) < 1e-10 && 
+            Math.Abs(Width - other.Width) < 1e-10 &&
             Math.Abs(Height - other.Height) < 1e-10;
 
+        public bool Contains(int x, int y) => x >= X && y >= Y && x <= X + Width && y <= Y + Height;
     }
 }

@@ -18,9 +18,17 @@ namespace ReactorUI.Skia.Framework
                 if (_isVisible != value)
                 {
                     _isVisible = value;
+                    Invalidate(InvalidateMode.Measure);
+                    OnVisibileChanged();
                 }
             }
         }
+
+        protected virtual void OnVisibileChanged()
+        {
+
+        }
+
         private bool _isHitTestVisible;
         public bool IsHitTestVisible
         {
@@ -30,8 +38,14 @@ namespace ReactorUI.Skia.Framework
                 if (_isHitTestVisible != value)
                 {
                     _isHitTestVisible = value;
+                    OnIsHitTestVisibleChanged();
                 }
             }
+        }
+
+        protected virtual void OnIsHitTestVisibleChanged()
+        {
+
         }
         private bool _isEnabled;
         public bool IsEnabled
@@ -61,7 +75,16 @@ namespace ReactorUI.Skia.Framework
 
         #region Public Events
         public event EventHandler<Input.MouseEventArgs> MouseEnter;
+        protected void OnMouseEnter()
+        {
+            MouseEnter?.Invoke(this, new Input.MouseEventArgs());
+        }
+
         public event EventHandler<Input.MouseEventArgs> MouseLeave;
+        protected void OnMouseLeave()
+        {
+            MouseLeave?.Invoke(this, new Input.MouseEventArgs());
+        }
         #endregion
 
         public Size DesiredSize { get; private set; } = Size.Empty;
@@ -183,5 +206,17 @@ namespace ReactorUI.Skia.Framework
         }
 
         public event EventHandler<InvalidatedEventArgs> Invalidated;
+
+        public void HitTest(int x, int y)
+        {
+            if (IsHitTestVisible && IsVisible)
+                OnHitTest(x, y);
+        }
+
+        protected virtual void OnHitTest(int x, int y)
+        {
+
+        }
+
     }
 }

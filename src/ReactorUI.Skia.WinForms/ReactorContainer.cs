@@ -65,13 +65,18 @@ namespace ReactorUI.Skia.WinForms
             _skiaView = new SkiaSharp.Views.Desktop.SKGLControl();
             this._skiaView.Dock = System.Windows.Forms.DockStyle.Fill;
             this._skiaView.PaintSurface += _skiaView_PaintSurface;
-
+            this._skiaView.MouseMove += _skiaView_MouseMove;
             Container.Controls.Add(_skiaView);
 
             _root = child;
             _root.Invalidated += _root_LayoutUpdated;
 
             _skiaView.Invalidate();
+        }
+
+        private void _skiaView_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            _root.HitTest(e.X, e.Y);
         }
 
         private void _skiaView_PaintSurface(object sender, SKPaintGLSurfaceEventArgs e)
@@ -109,5 +114,7 @@ namespace ReactorUI.Skia.WinForms
         {
 
         }
+
+        
     }
 }

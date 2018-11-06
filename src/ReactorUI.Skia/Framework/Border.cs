@@ -167,5 +167,16 @@ namespace ReactorUI.Skia.Framework
                 Child.Render(context.Canvas);
         }
         #endregion
+
+        #region Hit Test
+        protected override void OnHitTest(int x, int y)
+        {
+            if (Background != null)
+                base.OnHitTest(x, y);
+
+            if (Child != null)
+                Child.HitTest(x, y);
+        }
+        #endregion
     }
 }

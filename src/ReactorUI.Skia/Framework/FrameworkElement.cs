@@ -382,6 +382,42 @@ namespace ReactorUI.Skia.Framework
 
         }
         #endregion
+
+        #region Hit Test
+        bool _mouseEntered = false;
+        protected override void OnHitTest(int x, int y)
+        {
+            var hitTestRect = new Rect(_visualOffset.X, _visualOffset.Y, RenderSize.Width, RenderSize.Height);
+
+            if (hitTestRect.Contains(x, y))
+            {
+                if (!_mouseEntered)
+                {
+                    OnMouseEnter();
+                    _mouseEntered = true;
+                }
+            }
+            else if (_mouseEntered)
+            {
+                OnMouseLeave();
+                _mouseEntered = false;
+            }
+
+            base.OnHitTest(x, y);
+        }
+        protected override void OnVisibileChanged()
+        {
+            _mouseEntered = false;
+
+            base.OnVisibileChanged();
+        }
+        protected override void OnIsHitTestVisibleChanged()
+        {
+            _mouseEntered = false;
+
+            base.OnIsHitTestVisibleChanged();
+        }
+        #endregion
     }
 
 

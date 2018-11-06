@@ -8,7 +8,6 @@ namespace ReactorUI.Styles
     public class UIElementStyle<T> where T : IUIElement
     {
         public Action<T> OnMouseEnterAction { get; set; }
-
         public Action<T> OnMouseLeaveAction { get; set; }
     }
 

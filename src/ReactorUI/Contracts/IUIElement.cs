@@ -11,8 +11,8 @@ namespace ReactorUI.Contracts
         bool IsVisible { get; set; }
         double Opacity { get; set; }
 
-        Action<IUIElement> OnMouseEnter { get; set; }
-        Action<IUIElement> OnMouseLeave { get; set; }
+        Action<IUIElement> OnMouseEnterAction { get; set; }
+        Action<IUIElement> OnMouseLeaveAction { get; set; }
 
     }
 }

@@ -18,6 +18,7 @@ namespace ReactorUI.Skia.Framework
                 if (_text != value)
                 {
                     _text = value;
+                    Invalidate(InvalidateMode.Measure);
                 }
             }
         }
@@ -90,6 +91,7 @@ namespace ReactorUI.Skia.Framework
                 if (_fontFamily != value)
                 {
                     _fontFamily = value;
+                    Invalidate(InvalidateMode.Measure);
                 }
             }
         }
@@ -102,6 +104,7 @@ namespace ReactorUI.Skia.Framework
                 if (_fontStyle != value)
                 {
                     _fontStyle = value;
+                    Invalidate(InvalidateMode.Measure);
                 }
             }
         }
@@ -114,6 +117,7 @@ namespace ReactorUI.Skia.Framework
                 if (_fontStretch != value)
                 {
                     _fontStretch = value;
+                    Invalidate(InvalidateMode.Measure);
                 }
             }
         }
@@ -126,6 +130,7 @@ namespace ReactorUI.Skia.Framework
                 if (_fontWeight != value)
                 {
                     _fontWeight = value;
+                    Invalidate(InvalidateMode.Measure);
                 }
             }
         }
@@ -138,6 +143,7 @@ namespace ReactorUI.Skia.Framework
                 if (_fontSize != value)
                 {
                     _fontSize = value;
+                    Invalidate(InvalidateMode.Measure);
                 }
             }
         }
@@ -150,6 +156,7 @@ namespace ReactorUI.Skia.Framework
                 if (_foreground != value)
                 {
                     _foreground = value;
+                    Invalidate(InvalidateMode.Render);
                 }
             }
         }
@@ -162,6 +169,7 @@ namespace ReactorUI.Skia.Framework
                 if (_background != value)
                 {
                     _background = value;
+                    Invalidate(InvalidateMode.Render);
                 }
             }
         }
@@ -174,11 +182,11 @@ namespace ReactorUI.Skia.Framework
                 if (!_padding.IsCloseTo(value))
                 {
                     _padding = value;
+                    Invalidate(InvalidateMode.Render);
                 }
             }
         }
         #endregion
-
 
         #region Measure Pass
         protected override Size MeasureOverride(Size availableSize)
@@ -210,13 +218,19 @@ namespace ReactorUI.Skia.Framework
         {
             if (Text != null)
             {
+                var finalWidth = this.RenderSize.Width - (Padding.Left + Padding.Right);
+                var finalHeight = this.RenderSize.Height - (Padding.Top + Padding.Bottom);
+
+                float x = (float)Padding.Left;
+                float y = (float)Padding.Top + (float)DesiredSize.Height;
+
                 var paint = new SKPaint();
 
                 paint.IsAntialias = true;
                 paint.ApplyBrush(Foreground);
                 paint.ApplyFont(FontFamily, FontSize, FontStyle, FontStretch, FontWeight);
 
-                context.Canvas.DrawText(Text, 0.0f, (float)DesiredSize.Height, paint);
+                context.Canvas.DrawText(Text, x, y, paint);
             }
 
             base.RenderOverride(context);

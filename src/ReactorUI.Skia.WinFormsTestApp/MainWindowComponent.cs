@@ -24,12 +24,14 @@ namespace ReactorUI.Skia.WinFormsTestApp
         {
             return
                 new Border(new TextBlock(DateTime.Now.ToString())
-                            .Foreground(new SolidColorBrush(Color.FromRGB(255,255,255))))
-                    .Width(100)
-                    .Height(100)
-                    .VerticalAlignment(VerticalAlignment.Center)
-                    .HorizontalAlignment(HorizontalAlignment.Center)
-                    .Background(new SolidColorBrush(Color.FromRGB(255, 0, 0)));
+                            .Foreground(new SolidColorBrush(Color.FromRGB(255,255,255)))
+                            .VerticalAlignment(VerticalAlignment.Bottom)
+                            .HorizontalAlignment(HorizontalAlignment.Center))
+                    .Margin(100)
+                    .Background(new SolidColorBrush(Color.FromRGB(255, 0, 0)))
+                    .OnMouseEnter(_ => _.Background = new SolidColorBrush(Color.FromRGB(0, 255, 0)))
+                    .OnMouseLeave(_ => _.Background = new SolidColorBrush(Color.FromRGB(0, 0, 255)))
+                    ;
         }
     }
 }
