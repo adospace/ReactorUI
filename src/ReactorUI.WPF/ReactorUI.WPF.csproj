@@ -92,7 +92,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ReactorContainer.cs" />
-    <Compile Include="Reactor.cs" />
+    <Compile Include="ReactorApplication.cs" />
     <Compile Include="Controls\TextBlock.cs" />
     <Compile Include="WidgetExtensions.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

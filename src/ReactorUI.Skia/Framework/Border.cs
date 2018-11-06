@@ -16,7 +16,11 @@ namespace ReactorUI.Skia.Framework
             {
                 if (_child != value)
                 {
+                    if (_child != null)
+                        _child.Parent = null;
                     _child = value;
+                    if (_child != null)
+                        _child.Parent = this;
                 }
             }
         }
@@ -53,6 +57,30 @@ namespace ReactorUI.Skia.Framework
                 if (_borderBrush != value)
                 {
                     _borderBrush = value;
+                }
+            }
+        }
+        Brush _background;
+        public Brush Background
+        {
+            get => _background;
+            set
+            {
+                if (_background != value)
+                {
+                    _background = value;
+                }
+            }
+        }
+        private CornerRadius _cornerRadius;
+        public CornerRadius CornerRadius
+        {
+            get { return _cornerRadius; }
+            set
+            {
+                //if (!_cornerRadius.IsCloseTo(value))
+                {
+                    _cornerRadius = value;
                 }
             }
         }
@@ -125,13 +153,15 @@ namespace ReactorUI.Skia.Framework
         {
             var finalWidth = this.RenderSize.Width - (BorderThickness.Left + BorderThickness.Right);
             var finalHeight = this.RenderSize.Height - (BorderThickness.Top + BorderThickness.Bottom);
-            context.Canvas.DrawRect((float)context.Offset.X, (float)context.Offset.Y, (float)this.RenderSize.Width, (float)this.RenderSize.Height,
-                new SkiaSharp.SKPaint()
-                {
-                    IsStroke = true,
-                    Color = new SkiaSharp.SKColor(),
-                    StrokeWidth = (float)BorderThickness.UniformLength
-                });
+
+            if (Background != null)
+            {
+                context.Canvas.DrawRect(
+                    0.0f, 0.0f, (float)finalWidth, (float)finalHeight,
+                    new SkiaSharp.SKPaint()
+                    {
+                    }.ApplyBrush(Background));
+            }
 
             if (Child != null)
                 Child.Render(context.Canvas);

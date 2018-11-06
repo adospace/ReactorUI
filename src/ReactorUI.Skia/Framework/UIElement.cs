@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ReactorUI.Skia.Framework
 {
-    internal class UIElement
+    public class UIElement
     {
         #region Public Properties
         private bool _isVisible;
@@ -21,6 +21,47 @@ namespace ReactorUI.Skia.Framework
                 }
             }
         }
+        private bool _isHitTestVisible;
+        public bool IsHitTestVisible
+        {
+            get { return _isHitTestVisible; }
+            set
+            {
+                if (_isHitTestVisible != value)
+                {
+                    _isHitTestVisible = value;
+                }
+            }
+        }
+        private bool _isEnabled;
+        public bool IsEnabled
+        {
+            get { return _isEnabled; }
+            set
+            {
+                if (_isEnabled != value)
+                {
+                    _isEnabled = value;
+                }
+            }
+        }
+        private double _opacity;
+        public double Opacity
+        {
+            get { return _opacity; }
+            set
+            {
+                if (_opacity != value)
+                {
+                    _opacity = value;
+                }
+            }
+        }
+        #endregion
+
+        #region Public Events
+        public event EventHandler<Input.MouseEventArgs> MouseEnter;
+        public event EventHandler<Input.MouseEventArgs> MouseLeave;
         #endregion
 
         public Size DesiredSize { get; private set; } = Size.Empty;
@@ -64,7 +105,7 @@ namespace ReactorUI.Skia.Framework
         private Rect _previousFinalRect = Rect.Empty;
 
         private bool _arrangeIsDirty = true;
-        private bool _layoutInvalid = false;
+        private bool _renderIsDirty = false;
 
         public void Arrange(Rect finalRect)
         {
@@ -80,7 +121,7 @@ namespace ReactorUI.Skia.Framework
             if (!this._arrangeIsDirty && isCloseToPreviousArrange)
                 return;
 
-            this._layoutInvalid = true;
+            this._renderIsDirty = true;
             this._previousFinalRect = finalRect;
             this.ArrangeCore(finalRect);
 
@@ -95,13 +136,9 @@ namespace ReactorUI.Skia.Framework
         ///Render Pass
         public void Render(SKCanvas skCanvas)
         {
-            if (this._layoutInvalid)
-            {
-                this.RenderCore(new RenderContext(skCanvas, _finalRect.Location));
+            this.RenderCore(new RenderContext(skCanvas));
 
-
-                this._layoutInvalid = false;
-            }
+            this._renderIsDirty = false;
         }
 
         protected virtual void RenderCore(RenderContext context)
@@ -109,6 +146,42 @@ namespace ReactorUI.Skia.Framework
 
         }
 
+        public UIElement Parent { get; internal set; }
 
+        protected void Invalidate(InvalidateMode mode)
+        {
+            if (mode == InvalidateMode.Measure)
+            {
+                _arrangeIsDirty = true;
+                _renderIsDirty = true;
+                if (!_measureIsDirty)
+                {
+                    _measureIsDirty = true;
+                    Parent?.Invalidate(mode);
+                    Invalidated?.Invoke(this, new InvalidatedEventArgs(mode));
+                }
+            }
+            else if (mode == InvalidateMode.Arrange)
+            {
+                _renderIsDirty = true;
+                if (!_arrangeIsDirty)
+                {
+                    _arrangeIsDirty = true;
+                    Parent?.Invalidate(mode);
+                    Invalidated?.Invoke(this, new InvalidatedEventArgs(mode));
+                }
+            }
+            else if (mode == InvalidateMode.Render)
+            {
+                if (!_renderIsDirty)
+                {
+                    _renderIsDirty = true;
+                    Parent?.Invalidate(mode);
+                    Invalidated?.Invoke(this, new InvalidatedEventArgs(mode));
+                }
+            }
+        }
+
+        public event EventHandler<InvalidatedEventArgs> Invalidated;
     }
 }

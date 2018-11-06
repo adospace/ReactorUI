@@ -216,7 +216,7 @@ namespace ReactorUI.Skia.Framework
 
         protected virtual Size MeasureOverride(Size availableSize)
         {
-            return Size.Empty;
+            return new Size();
         }
         #endregion
 
@@ -367,7 +367,12 @@ namespace ReactorUI.Skia.Framework
         #region Render Pass
         protected sealed override void RenderCore(RenderContext context)
         {
+            context.Canvas.Save();
+            context.Canvas.Translate((float)_visualOffset.X, (float)_visualOffset.Y);
+            context.Canvas.ClipRect(new SkiaSharp.SKRect(0.0f, 0.0f, (float)RenderSize.Width, (float)RenderSize.Height));
             RenderOverride(context);
+
+            context.Canvas.Restore();
 
             base.RenderCore(context);
         }
