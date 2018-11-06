@@ -66,6 +66,9 @@ namespace ReactorUI.Skia.WinForms
             this._skiaView.Dock = System.Windows.Forms.DockStyle.Fill;
             this._skiaView.PaintSurface += _skiaView_PaintSurface;
             this._skiaView.MouseMove += _skiaView_MouseMove;
+            this._skiaView.MouseDown += _skiaView_MouseDown;
+            this._skiaView.MouseUp += _skiaView_MouseUp;
+
             Container.Controls.Add(_skiaView);
 
             _root = child;
@@ -74,9 +77,19 @@ namespace ReactorUI.Skia.WinForms
             _skiaView.Invalidate();
         }
 
+        private void _skiaView_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            _root.HandleMouseUp(new Framework.Input.MouseEventArgs((Framework.Input.MouseButtons)e.Button, e.Clicks, e.X, e.Y, e.Delta));
+        }
+
+        private void _skiaView_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            _root.HandleMouseDown(new Framework.Input.MouseEventArgs((Framework.Input.MouseButtons)e.Button, e.Clicks, e.X, e.Y, e.Delta));
+        }
+
         private void _skiaView_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            _root.HitTest(e.X, e.Y);
+            _root.HandleMouseMove(new Framework.Input.MouseEventArgs((Framework.Input.MouseButtons)e.Button, e.Clicks, e.X, e.Y, e.Delta));
         }
 
         private void _skiaView_PaintSurface(object sender, SKPaintGLSurfaceEventArgs e)

@@ -69,6 +69,7 @@ namespace ReactorUI.Skia.Framework
                 if (_background != value)
                 {
                     _background = value;
+                    Invalidate(InvalidateMode.Render);
                 }
             }
         }
@@ -168,14 +169,30 @@ namespace ReactorUI.Skia.Framework
         }
         #endregion
 
-        #region Hit Test
-        protected override void OnHitTest(int x, int y)
+        #region Mouse
+        protected override void OnHitTest(Input.MouseEventArgs mouseEventArgs)
         {
             if (Background != null)
-                base.OnHitTest(x, y);
+                base.OnHitTest(mouseEventArgs);
 
             if (Child != null)
-                Child.HitTest(x, y);
+                Child.HandleMouseMove(mouseEventArgs);
+        }
+
+        protected override void OnMouseDown(Input.MouseEventArgs mouseEventArgs)
+        {
+            if (Child != null)
+                Child.HandleMouseDown(mouseEventArgs);
+
+            base.OnMouseDown(mouseEventArgs);
+        }
+
+        protected override void OnMouseUp(Input.MouseEventArgs mouseEventArgs)
+        {
+            if (Child != null)
+                Child.HandleMouseUp(mouseEventArgs);
+
+            base.OnMouseUp(mouseEventArgs);
         }
         #endregion
     }

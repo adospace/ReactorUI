@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ReactorUI.Primitives;
+using ReactorUI.Skia.Framework.Input;
 using SkiaSharp;
 
 namespace ReactorUI.Skia.Framework
@@ -9,15 +10,21 @@ namespace ReactorUI.Skia.Framework
     internal class ContentControl : Control
     {
         #region Public Properties
-        private UIElement _content;
-        public UIElement Content
+        private object _content;
+        public object Content
         {
             get { return _content; }
             set
             {
                 if (_content != value)
                 {
+                    if (_content != null && Content is UIElement)
+                        ((UIElement)_content).Parent = null;
                     _content = value;
+                    if (_content != null && Content is UIElement)
+                        ((UIElement)_content).Parent = this;
+
+                    Invalidate(InvalidateMode.Measure);
                 }
             }
         }
@@ -119,7 +126,6 @@ namespace ReactorUI.Skia.Framework
 
                 var paint = new SKPaint();
 
-                paint.IsAntialias = true;
                 paint.ApplyBrush(Foreground);
                 paint.ApplyFont(FontFamily, FontSize, FontStyle, FontStretch, FontWeight);
 
@@ -129,14 +135,31 @@ namespace ReactorUI.Skia.Framework
         }
         #endregion
 
-        #region Hit Test
-        protected override void OnHitTest(int x, int y)
+        #region Mouse
+        protected override void OnHitTest(Input.MouseEventArgs mouseEventArgs)
         {
             if (Background != null)
-                base.OnHitTest(x, y);
+                base.OnHitTest(mouseEventArgs);
 
             if (Content is UIElement child)
-                child.HitTest(x, y);
+                child.HandleMouseMove(mouseEventArgs);
+        }
+
+
+        protected override void OnMouseDown(Input.MouseEventArgs mouseEventArgs)
+        {
+            if (Content is UIElement child)
+                child.HandleMouseDown(mouseEventArgs);
+
+            base.OnMouseDown(mouseEventArgs);
+        }
+
+        protected override void OnMouseUp(Input.MouseEventArgs mouseEventArgs)
+        {
+            if (Content is UIElement child)
+                child.HandleMouseUp(mouseEventArgs);
+
+            base.OnMouseUp(mouseEventArgs);
         }
         #endregion
     }

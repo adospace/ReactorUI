@@ -75,15 +75,31 @@ namespace ReactorUI.Skia.Framework
 
         #region Public Events
         public event EventHandler<Input.MouseEventArgs> MouseEnter;
-        protected void OnMouseEnter()
+        protected virtual void OnMouseEnter(Input.MouseEventArgs mouseEventArgs)
         {
-            MouseEnter?.Invoke(this, new Input.MouseEventArgs());
+            IsMouseOver = true;
+            MouseEnter?.Invoke(this, mouseEventArgs);
+            System.Diagnostics.Debug.WriteLine($"{this} OnMouseEnter");
         }
 
         public event EventHandler<Input.MouseEventArgs> MouseLeave;
-        protected void OnMouseLeave()
+        protected virtual void OnMouseLeave(Input.MouseEventArgs mouseEventArgs)
         {
-            MouseLeave?.Invoke(this, new Input.MouseEventArgs());
+            IsMouseOver = false;
+            MouseLeave?.Invoke(this, mouseEventArgs);
+            System.Diagnostics.Debug.WriteLine($"{this} OnMouseLeave");
+        }
+
+        public event EventHandler<Input.MouseEventArgs> MouseDown;
+        protected virtual void OnMouseDown(Input.MouseEventArgs mouseEventArgs)
+        {
+            MouseDown?.Invoke(this, mouseEventArgs);
+        }
+
+        public event EventHandler<Input.MouseEventArgs> MouseUp;
+        protected virtual void OnMouseUp(Input.MouseEventArgs mouseEventArgs)
+        {
+            MouseUp?.Invoke(this, mouseEventArgs);
         }
         #endregion
 
@@ -207,16 +223,38 @@ namespace ReactorUI.Skia.Framework
 
         public event EventHandler<InvalidatedEventArgs> Invalidated;
 
-        public void HitTest(int x, int y)
+        /// Mouse events
+        public void HandleMouseMove(Input.MouseEventArgs mouseEventArgs)
         {
             if (IsHitTestVisible && IsVisible)
-                OnHitTest(x, y);
+                HitTestCore(mouseEventArgs);
         }
 
-        protected virtual void OnHitTest(int x, int y)
+        protected virtual void HitTestCore(Input.MouseEventArgs mouseEventArgs)
         {
 
         }
 
+        public bool IsMouseOver { get; private set; }
+        protected virtual void OnHitTest(Input.MouseEventArgs mouseEventArgs)
+        {
+
+        }
+
+        public void HandleMouseDown(Input.MouseEventArgs mouseEventArgs)
+        {
+            //HandleMouseMove(mouseEventArgs);
+
+            if (IsMouseOver)
+                OnMouseDown(mouseEventArgs);
+        }
+
+        public void HandleMouseUp(Input.MouseEventArgs mouseEventArgs)
+        {
+            //HandleMouseMove(mouseEventArgs);
+
+            if (IsMouseOver)
+                OnMouseUp(mouseEventArgs);
+        }
     }
 }

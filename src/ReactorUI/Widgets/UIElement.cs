@@ -14,7 +14,6 @@ namespace ReactorUI.Widgets
         public double Opacity { get; set; } = 1.0;
 
         public TS Style { get; set; }
-        
 
         protected override IEnumerable<VisualNode> RenderChildren()
         {

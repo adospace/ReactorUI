@@ -226,7 +226,6 @@ namespace ReactorUI.Skia.Framework
 
                 var paint = new SKPaint();
 
-                paint.IsAntialias = true;
                 paint.ApplyBrush(Foreground);
                 paint.ApplyFont(FontFamily, FontSize, FontStyle, FontStretch, FontWeight);
 

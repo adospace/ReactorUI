@@ -1,4 +1,5 @@
 ﻿using ReactorUI.Primitives;
+using ReactorUI.Skia.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -385,25 +386,38 @@ namespace ReactorUI.Skia.Framework
 
         #region Hit Test
         bool _mouseEntered = false;
-        protected override void OnHitTest(int x, int y)
+        protected override void HitTestCore(MouseEventArgs mouseEventArgs)
         {
-            var hitTestRect = new Rect(_visualOffset.X, _visualOffset.Y, RenderSize.Width, RenderSize.Height);
+            var relativeMouseArgs = new MouseEventArgs(
+                mouseEventArgs.MouseButtons,
+                mouseEventArgs.Clicks,
+                mouseEventArgs.X - (int)_visualOffset.X,
+                mouseEventArgs.Y - (int)_visualOffset.Y,
+                mouseEventArgs.Delta);
 
-            if (hitTestRect.Contains(x, y))
+            OnHitTest(relativeMouseArgs);
+
+
+            base.HitTestCore(mouseEventArgs);
+        }
+
+        protected override void OnHitTest(Input.MouseEventArgs mouseEventArgs)
+        {
+            if (RenderSize.Contains(mouseEventArgs.X, mouseEventArgs.Y))
             {
                 if (!_mouseEntered)
                 {
-                    OnMouseEnter();
+                    OnMouseEnter(mouseEventArgs);
                     _mouseEntered = true;
                 }
             }
             else if (_mouseEntered)
             {
-                OnMouseLeave();
+                OnMouseLeave(mouseEventArgs);
                 _mouseEntered = false;
             }
 
-            base.OnHitTest(x, y);
+            base.OnHitTest(mouseEventArgs);
         }
         protected override void OnVisibileChanged()
         {

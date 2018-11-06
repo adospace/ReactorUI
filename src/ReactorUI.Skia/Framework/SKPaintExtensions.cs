@@ -28,6 +28,8 @@ namespace ReactorUI.Skia.Framework
 
             paint.Typeface = SKTypeface.FromFamilyName(fontfamily, ConvertFontStyle(fontWeight), ConvertFontStyle(fontStretch), ConvertFontStyle(fontStyle));
 
+            paint.IsAntialias = true;
+
             return paint;
         }
 

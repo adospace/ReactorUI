@@ -89,6 +89,7 @@ namespace ReactorUI.Skia.Framework
                 if (_background != value)
                 {
                     _background = value;
+                    Invalidate(InvalidateMode.Render);
                 }
             }
         }
