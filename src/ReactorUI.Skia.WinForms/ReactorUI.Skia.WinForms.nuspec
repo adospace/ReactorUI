@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>ReactorUI.Skia.WinForms</id>
+    <version>$version$-beta</version>
+    <authors>Adolfo Marinucci</authors>
+    <owners>Adolfo Marinucci</owners>
+    <licenseUrl>https://github.com/adospace/ReactorUI/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/adospace/ReactorUI</projectUrl>
+    <iconUrl>https://github.com/adospace/ReactorUI/ReactorUI.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>ReactorUI is .NET UI framework for building cross-platform desktop application heavily inspired to Reactjs and Flutter. This package contains the Skia backend hosted in a WinForms container.</description>
+    <releaseNotes>Initial version</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>UI react reactive desktop .net Skia WinForms</tags>
+    <dependencies>
+      <dependency id="ReactorUI" version="$version$-beta" />
+    </dependencies>
+  </metadata>
+</package>

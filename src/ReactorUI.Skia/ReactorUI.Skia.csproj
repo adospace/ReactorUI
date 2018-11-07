@@ -1,7 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <Version Condition=" '$(APPVEYOR_BUILD_VERSION)' == '' ">0.0.1-local</Version>
+    <Version Condition=" '$(APPVEYOR_BUILD_VERSION)' != '' ">$(APPVEYOR_BUILD_VERSION)-beta</Version>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>adospace</Authors>
+    <Description>ReactorUI is .NET UI framework for building cross-platform desktop application heavily inspired to Reactjs and Flutter. This is the Skia based backend.</Description>
+    <Copyright>Adolfo Marinucci</Copyright>
+    <PackageProjectUrl>https://github.com/adospace/ReactorUI</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/adospace/ReactorUI/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/adospace/ReactorUI</RepositoryUrl>
+    <PackageTags>UI react reactive desktop .net Skia</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
