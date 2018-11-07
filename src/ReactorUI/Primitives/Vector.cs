@@ -25,5 +25,8 @@ namespace ReactorUI.Primitives
             return new Vector(X + x, Y + y);
         }
 
+        public bool IsCloseTo(Vector other) =>
+            Math.Abs(X - other.X) < 1e-10 && Math.Abs(Y - other.Y) < 1e-10;
+
     }
 }

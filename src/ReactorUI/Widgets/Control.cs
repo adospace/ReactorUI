@@ -57,6 +57,18 @@ namespace ReactorUI.Widgets
             return control;
         }
 
+        public static T Background<T>(this T control, byte r, byte g, byte b) where T : class, IControl
+        {
+            control.Background = new SolidColorBrush(Color.FromRGB(r, g, b));
+            return control;
+        }
+
+        public static T Background<T>(this T control, byte a, byte r, byte g, byte b) where T : class, IControl
+        {
+            control.Background = new SolidColorBrush(Color.FromARGB(a, r, g, b));
+            return control;
+        }
+
         public static T BorderBrush<T>(this T control, Brush borderBrush) where T : class, IControl
         {
             control.BorderBrush = borderBrush;

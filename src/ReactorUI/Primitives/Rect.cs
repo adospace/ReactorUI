@@ -36,6 +36,7 @@ namespace ReactorUI.Primitives
             Math.Abs(Width - other.Width) < 1e-10 &&
             Math.Abs(Height - other.Height) < 1e-10;
 
-        public bool Contains(int x, int y) => x >= X && y >= Y && x <= X + Width && y <= Y + Height;
+        public bool Contains(double x, double y) => x >= X && y >= Y && x <= X + Width && y <= Y + Height;
+        public bool Contains(Point pt) => Contains(pt.X, pt.Y);
     }
 }

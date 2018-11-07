@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ReactorUI.Contracts
+namespace ReactorUI.Skia.Framework
 {
-    public interface IListBox : IControl
+    internal class ListViewItem : ContentControl
     {
     }
 }

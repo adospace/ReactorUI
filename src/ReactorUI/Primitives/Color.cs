@@ -14,6 +14,22 @@ namespace ReactorUI.Primitives
 
         public byte B;
 
+        public Color(byte r, byte g, byte b)
+        {
+            R = r;
+            G = g;
+            B = b;
+            A = 255;
+        }
+
+        public Color(byte a, byte r, byte g, byte b)
+        {
+            R = r;
+            G = g;
+            B = b;
+            A = a;
+        }
+
         public static Color FromRGB(byte r, byte g, byte b)
         {
             return new Color() { A = 255, R = r, G = g, B = b };

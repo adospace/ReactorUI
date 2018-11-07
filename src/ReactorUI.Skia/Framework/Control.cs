@@ -202,6 +202,22 @@ namespace ReactorUI.Skia.Framework
                     }.ApplyBrush(Background));
             }
 
+            if (BorderBrush != null)
+            {
+                if (BorderThickness.IsUniformLength)
+                {
+                    if (BorderThickness.UniformLength > 0.0)
+                    {
+                        context.Canvas.DrawRect(
+                            0.0f, 0.0f, (float)finalWidth, (float)finalHeight,
+                            new SkiaSharp.SKPaint()
+                            {
+                                IsStroke = true
+                            }.ApplyBrush(BorderBrush));
+                    }
+                }
+            }
+
         }
         #endregion
     }

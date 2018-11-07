@@ -18,6 +18,7 @@ namespace ReactorUI.Skia
             WidgetRegistry.Instance.Register<ITextBlock>(()=> new Controls.TextBlock());
             WidgetRegistry.Instance.Register<IBorder>(() => new Controls.Border());
             WidgetRegistry.Instance.Register<IButton>(() => new Controls.Button());
+            WidgetRegistry.Instance.Register<IScrollBar>(() => new Controls.ScrollBar());
             //WidgetRegistry.Instance.Register<ITreeView>(() => new Controls.TreeView());
             //WidgetRegistry.Instance.Register<ITreeViewNode>(() => new Controls.TreeViewNode());
             //WidgetRegistry.Instance.Register<IImage>(() => new Controls.Image());

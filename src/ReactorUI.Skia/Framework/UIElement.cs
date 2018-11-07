@@ -75,31 +75,53 @@ namespace ReactorUI.Skia.Framework
 
         #region Public Events
         public event EventHandler<Input.MouseEventArgs> MouseEnter;
-        protected virtual void OnMouseEnter(Input.MouseEventArgs mouseEventArgs)
+        protected virtual void OnMouseEnter(int x, int y, Input.MouseEventsContext context)
         {
             IsMouseOver = true;
-            MouseEnter?.Invoke(this, mouseEventArgs);
+            MouseEnter?.Invoke(this, new Input.MouseEventArgs(context.MouseButtons, context.Clicks, x, y, context.Delta));
             System.Diagnostics.Debug.WriteLine($"{this} OnMouseEnter");
         }
-
+        public event EventHandler<Input.MouseEventArgs> MouseMove;
+        protected virtual void OnMouseMove(int x, int y, Input.MouseEventsContext context)
+        {
+            MouseMove?.Invoke(this, new Input.MouseEventArgs(context.MouseButtons, context.Clicks, x, y, context.Delta));
+            //System.Diagnostics.Debug.WriteLine($"{this} OnMouseMove");
+        }
         public event EventHandler<Input.MouseEventArgs> MouseLeave;
-        protected virtual void OnMouseLeave(Input.MouseEventArgs mouseEventArgs)
+        protected virtual void OnMouseLeave(int x, int y, Input.MouseEventsContext context)
         {
             IsMouseOver = false;
-            MouseLeave?.Invoke(this, mouseEventArgs);
+            MouseLeave?.Invoke(this, new Input.MouseEventArgs(context.MouseButtons, context.Clicks, x, y, context.Delta));
             System.Diagnostics.Debug.WriteLine($"{this} OnMouseLeave");
         }
 
         public event EventHandler<Input.MouseEventArgs> MouseDown;
-        protected virtual void OnMouseDown(Input.MouseEventArgs mouseEventArgs)
+        protected virtual void OnMouseDown(int x, int y, Input.MouseEventsContext context)
         {
-            MouseDown?.Invoke(this, mouseEventArgs);
+            MouseDown?.Invoke(this, new Input.MouseEventArgs(context.MouseButtons, context.Clicks, x, y, context.Delta));
         }
 
         public event EventHandler<Input.MouseEventArgs> MouseUp;
-        protected virtual void OnMouseUp(Input.MouseEventArgs mouseEventArgs)
+        protected virtual void OnMouseUp(int x, int y, Input.MouseEventsContext context)
         {
-            MouseUp?.Invoke(this, mouseEventArgs);
+            MouseUp?.Invoke(this, new Input.MouseEventArgs(context.MouseButtons, context.Clicks, x, y, context.Delta));
+        }
+        #endregion
+
+        #region Layout Engine
+        private bool _layoutSuspended = false;
+        internal void SuspendLayout()
+        {
+            _layoutSuspended = true;
+        }
+
+        internal void ResumeLayout()
+        {
+            if (_layoutSuspended)
+            {
+                _layoutSuspended = false;
+                Invalidate(InvalidateMode.Measure);
+            }
         }
         #endregion
 
@@ -110,6 +132,8 @@ namespace ReactorUI.Skia.Framework
         private bool _measureIsDirty = true;
         public void Measure(Size availableSize)
         {
+            if (_layoutSuspended)
+                return;
 
             if (!this.IsVisible)
             {
@@ -148,6 +172,9 @@ namespace ReactorUI.Skia.Framework
 
         public void Arrange(Rect finalRect)
         {
+            if (_layoutSuspended)
+                return;
+
             if (this._measureIsDirty)
                 this.Measure(finalRect.Size);
 
@@ -175,6 +202,9 @@ namespace ReactorUI.Skia.Framework
         ///Render Pass
         public void Render(SKCanvas skCanvas)
         {
+            if (_layoutSuspended)
+                return;
+
             this.RenderCore(new RenderContext(skCanvas));
 
             this._renderIsDirty = false;
@@ -189,6 +219,9 @@ namespace ReactorUI.Skia.Framework
 
         protected void Invalidate(InvalidateMode mode)
         {
+            if (_layoutSuspended)
+                return;
+
             if (mode == InvalidateMode.Measure)
             {
                 _arrangeIsDirty = true;
@@ -224,37 +257,43 @@ namespace ReactorUI.Skia.Framework
         public event EventHandler<InvalidatedEventArgs> Invalidated;
 
         /// Mouse events
-        public void HandleMouseMove(Input.MouseEventArgs mouseEventArgs)
+        public void HandleMouseMove(int x, int y, Input.MouseEventsContext mouseEventsContext)
         {
             if (IsHitTestVisible && IsVisible)
-                HitTestCore(mouseEventArgs);
+                HitTestCore(x, y, mouseEventsContext);
         }
 
-        protected virtual void HitTestCore(Input.MouseEventArgs mouseEventArgs)
+        protected virtual void HitTestCore(int x, int y, Input.MouseEventsContext mouseEventsContext)
         {
 
         }
 
         public bool IsMouseOver { get; private set; }
-        protected virtual void OnHitTest(Input.MouseEventArgs mouseEventArgs)
+        protected virtual void OnHitTest(int x, int y, Input.MouseEventsContext context)
         {
 
         }
 
-        public void HandleMouseDown(Input.MouseEventArgs mouseEventArgs)
+        public void HandleMouseDown(int x, int y, Input.MouseEventsContext mouseEventsContext)
         {
-            //HandleMouseMove(mouseEventArgs);
-
-            if (IsMouseOver)
-                OnMouseDown(mouseEventArgs);
+            if (IsMouseOver || mouseEventsContext.CaptureTo == this)
+                MouseDownCore(x, y, mouseEventsContext);
         }
 
-        public void HandleMouseUp(Input.MouseEventArgs mouseEventArgs)
+        protected virtual void MouseDownCore(int x, int y, Input.MouseEventsContext mouseEventsContext)
         {
-            //HandleMouseMove(mouseEventArgs);
 
-            if (IsMouseOver)
-                OnMouseUp(mouseEventArgs);
+        }
+
+        public void HandleMouseUp(int x, int y, Input.MouseEventsContext mouseEventsContext)
+        {
+            if (IsMouseOver || mouseEventsContext.CaptureTo == this)
+                MouseUpCore(x, y, mouseEventsContext);
+        }
+
+        protected virtual void MouseUpCore(int x, int y, Input.MouseEventsContext mouseEventsContext)
+        {
+
         }
     }
 }

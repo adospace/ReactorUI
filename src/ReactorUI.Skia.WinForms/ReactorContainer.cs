@@ -77,19 +77,50 @@ namespace ReactorUI.Skia.WinForms
             _skiaView.Invalidate();
         }
 
-        private void _skiaView_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            _root.HandleMouseUp(new Framework.Input.MouseEventArgs((Framework.Input.MouseButtons)e.Button, e.Clicks, e.X, e.Y, e.Delta));
-        }
-
+        Framework.UIElement _capturedMouseEvents = null;
         private void _skiaView_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            _root.HandleMouseDown(new Framework.Input.MouseEventArgs((Framework.Input.MouseButtons)e.Button, e.Clicks, e.X, e.Y, e.Delta));
+            _capturedMouseEvents = null;
+            var context = new Framework.Input.MouseEventsContext((Framework.Input.MouseButtons)e.Button, e.Clicks, e.Delta);
+            _root.HandleMouseDown(e.X, e.Y, context);
+            _capturedMouseEvents = context.CaptureTo;
         }
 
         private void _skiaView_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            _root.HandleMouseMove(new Framework.Input.MouseEventArgs((Framework.Input.MouseButtons)e.Button, e.Clicks, e.X, e.Y, e.Delta));
+            var context = new Framework.Input.MouseEventsContext((Framework.Input.MouseButtons)e.Button, e.Clicks, e.Delta)
+            {
+                CaptureTo = _capturedMouseEvents
+            };
+
+            if (_capturedMouseEvents != null)
+            {
+                _capturedMouseEvents.HandleMouseMove(e.X, e.Y, context);
+            }
+            else
+            {
+                _root.HandleMouseMove(e.X, e.Y, context);
+            }
+
+            _capturedMouseEvents = context.CaptureTo;
+        }
+
+        private void _skiaView_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            var context = new Framework.Input.MouseEventsContext((Framework.Input.MouseButtons)e.Button, e.Clicks, e.Delta)
+            {
+                CaptureTo = _capturedMouseEvents
+            };
+
+            if (_capturedMouseEvents != null)
+            {
+                _capturedMouseEvents.HandleMouseUp(e.X, e.Y, context);
+                _capturedMouseEvents = null;
+            }
+            else
+            {
+                _root.HandleMouseUp(e.X, e.Y, new Framework.Input.MouseEventsContext((Framework.Input.MouseButtons)e.Button, e.Clicks, e.Delta));
+            }
         }
 
         private void _skiaView_PaintSurface(object sender, SKPaintGLSurfaceEventArgs e)

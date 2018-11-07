@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ReactorUI.Contracts
 {
-    public interface IListBoxItem : IControl
+    public interface IListView : IControl
     {
     }
 }

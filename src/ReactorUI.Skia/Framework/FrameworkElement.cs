@@ -386,38 +386,36 @@ namespace ReactorUI.Skia.Framework
 
         #region Hit Test
         bool _mouseEntered = false;
-        protected override void HitTestCore(MouseEventArgs mouseEventArgs)
+        protected override void HitTestCore(int x, int y, Input.MouseEventsContext context)
         {
-            var relativeMouseArgs = new MouseEventArgs(
-                mouseEventArgs.MouseButtons,
-                mouseEventArgs.Clicks,
-                mouseEventArgs.X - (int)_visualOffset.X,
-                mouseEventArgs.Y - (int)_visualOffset.Y,
-                mouseEventArgs.Delta);
-
-            OnHitTest(relativeMouseArgs);
+            OnHitTest(
+                x - (int)_visualOffset.X,
+                y - (int)_visualOffset.Y, 
+                context);
 
 
-            base.HitTestCore(mouseEventArgs);
+            base.HitTestCore(x, y, context);
         }
 
-        protected override void OnHitTest(Input.MouseEventArgs mouseEventArgs)
+        protected override void OnHitTest(int x, int y, Input.MouseEventsContext context)
         {
-            if (RenderSize.Contains(mouseEventArgs.X, mouseEventArgs.Y))
+            if (RenderSize.Contains(x, y) || context.CaptureTo == this)
             {
                 if (!_mouseEntered)
                 {
-                    OnMouseEnter(mouseEventArgs);
+                    OnMouseEnter(x, y, context);
                     _mouseEntered = true;
                 }
+
+                OnMouseMove(x, y, context);
             }
             else if (_mouseEntered)
             {
-                OnMouseLeave(mouseEventArgs);
+                OnMouseLeave(x, y, context);
                 _mouseEntered = false;
             }
 
-            base.OnHitTest(mouseEventArgs);
+            base.OnHitTest(x, y, context);
         }
         protected override void OnVisibileChanged()
         {
@@ -430,6 +428,27 @@ namespace ReactorUI.Skia.Framework
             _mouseEntered = false;
 
             base.OnIsHitTestVisibleChanged();
+        }
+
+        protected override void MouseDownCore(int x, int y, Input.MouseEventsContext mouseEventsContext)
+        {
+            OnMouseDown(
+                x - (int)_visualOffset.X, 
+                y - (int)_visualOffset.Y, 
+                mouseEventsContext);
+
+            base.MouseDownCore(x, y, mouseEventsContext);
+        }
+
+
+        protected override void MouseUpCore(int x, int y, Input.MouseEventsContext mouseEventsContext)
+        {
+            OnMouseUp(
+                x - (int)_visualOffset.X, 
+                y - (int)_visualOffset.Y, 
+                mouseEventsContext);
+
+            base.MouseUpCore(x, y, mouseEventsContext);
         }
         #endregion
     }

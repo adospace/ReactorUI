@@ -13,27 +13,31 @@ namespace ReactorUI.Skia.Framework
 
         #region Public Events
         public event EventHandler<Input.MouseEventArgs> Click;
-        protected virtual void OnClick(Input.MouseEventArgs mouseEventArgs)
+        protected virtual void OnClick(int x, int y, Input.MouseEventsContext context)
         {
-            Click?.Invoke(this, mouseEventArgs);
+            Click?.Invoke(this, new Input.MouseEventArgs(context.MouseButtons, context.Clicks, x, y, context.Delta));
         }
         #endregion
 
         bool _mouseDown = false;
-        protected override void OnMouseDown(MouseEventArgs mouseEventArgs)
+
+        protected override void OnMouseDown(int x, int y, MouseEventsContext context)
         {
             _mouseDown = true;
-            base.OnMouseDown(mouseEventArgs);
+            context.CaptureTo = this;
+
+            base.OnMouseDown(x, y, context);
         }
 
-        protected override void OnMouseUp(MouseEventArgs mouseEventArgs)
+        protected override void OnMouseUp(int x, int y, MouseEventsContext context)
         {
             if (_mouseDown)
             {
-                OnClick(mouseEventArgs);
+                OnClick(x, y, context);
                 _mouseDown = false;
             }
-            base.OnMouseUp(mouseEventArgs);
+            base.OnMouseUp(x, y, context);
         }
+
     }
 }
