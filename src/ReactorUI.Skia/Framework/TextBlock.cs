@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ReactorUI.Skia.Framework
 {
-    internal class TextBlock : FrameworkElement
+    public class TextBlock : FrameworkElement
     {
         #region Public Properties
         string _text;

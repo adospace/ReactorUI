@@ -40,7 +40,12 @@ namespace ReactorUI.Widgets
         {
             return new ComponentHost<T>();
         }
-   }
+
+        public static ComponentHost Host(Component component)
+        {
+            return new ComponentHost(component);
+        }
+    }
 
 
 

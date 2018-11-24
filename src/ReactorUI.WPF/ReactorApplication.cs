@@ -13,17 +13,17 @@ namespace ReactorUI.WPF
     {
         public static void Initialize()
         {
-            WidgetRegistry.Instance.Register<IComponentHost>(() => new Controls.ComponentHost());
+            //WidgetRegistry.Instance.Register<IComponentHost>(() => new Controls.ComponentHost());
 
-            WidgetRegistry.Instance.Register<ITextBlock>(()=> new Controls.TextBlock());
-            WidgetRegistry.Instance.Register<IBorder>(() => new Controls.Border());
-            WidgetRegistry.Instance.Register<IButton>(() => new Controls.Button());
-            WidgetRegistry.Instance.Register<ITreeView>(() => new Controls.TreeView());
-            WidgetRegistry.Instance.Register<ITreeViewNode>(() => new Controls.TreeViewNode());
-            WidgetRegistry.Instance.Register<IImage>(() => new Controls.Image());
+            //WidgetRegistry.Instance.Register<ITextBlock>(()=> new Controls.TextBlock());
+            //WidgetRegistry.Instance.Register<IBorder>(() => new Controls.Border());
+            //WidgetRegistry.Instance.Register<IButton>(() => new Controls.Button());
+            //WidgetRegistry.Instance.Register<ITreeView>(() => new Controls.TreeView());
+            //WidgetRegistry.Instance.Register<ITreeViewNode>(() => new Controls.TreeViewNode());
+            //WidgetRegistry.Instance.Register<IImage>(() => new Controls.Image());
 
-            WidgetRegistry.Instance.Register<IStackPanel>(() => new Controls.Panels.StackPanel());
-            WidgetRegistry.Instance.Register<IDockPanel>(() => new Controls.Panels.DockPanel());
+            //WidgetRegistry.Instance.Register<IStackPanel>(() => new Controls.Panels.StackPanel());
+            //WidgetRegistry.Instance.Register<IDockPanel>(() => new Controls.Panels.DockPanel());
         }
     }
 }

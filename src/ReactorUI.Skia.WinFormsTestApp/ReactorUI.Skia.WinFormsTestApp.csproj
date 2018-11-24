@@ -95,6 +95,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ReactorUI.Skia.Theme.Modern\ReactorUI.Skia.Theme.Modern.csproj">
+      <Project>{0a7aa541-f172-4531-882b-d0ea3bef2c48}</Project>
+      <Name>ReactorUI.Skia.Theme.Modern</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ReactorUI.Skia.WinForms\ReactorUI.Skia.WinForms.csproj">
       <Project>{60177527-3F81-4220-9722-617812E07DCE}</Project>
       <Name>ReactorUI.Skia.WinForms</Name>

@@ -11,7 +11,7 @@ using ReactorUI.Styles;
 
 namespace ReactorUI.Skia.Controls
 {
-    internal class Control<T, I, TS> : FrameworkElement<T, I, TS> 
+    public class Control<T, I, TS> : FrameworkElement<T, I, TS> 
         where T : Framework.Control, new() 
         where I : IControl
         where TS : ControlStyle<I>

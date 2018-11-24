@@ -11,7 +11,7 @@ using ReactorUI.Styles;
 
 namespace ReactorUI.Skia.Controls
 {
-    internal class Border : FrameworkElement<Framework.Border, IBorder, BorderStyle>, INativeControlContainer
+    public class Border : FrameworkElement<Framework.Border, IBorder, BorderStyle>, INativeControlContainer
     {
         public void AddChild(IWidget widget, Framework.UIElement child)
         {

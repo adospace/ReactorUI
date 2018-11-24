@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ReactorUI.Skia.Framework
 {
-    internal static class SKPaintExtensions
+    public static class SKPaintExtensions
     {
         public static SKPaint ApplyBrush(this SKPaint paint, Brush brush)
         {

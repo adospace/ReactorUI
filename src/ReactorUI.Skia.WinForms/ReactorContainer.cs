@@ -32,8 +32,10 @@ namespace ReactorUI.Skia.WinForms
         System.Windows.Forms.Timer _timerRenderer;
         public ReactorContainer<T> Run()
         {
-            _timerRenderer = new System.Windows.Forms.Timer();
-            _timerRenderer.Interval = 16;
+            _timerRenderer = new System.Windows.Forms.Timer
+            {
+                Interval = 16
+            };
             _timerRenderer.Tick += _timerRenderer_Tick;
             _timerRenderer.Start();
             return this;

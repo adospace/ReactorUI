@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ReactorUI.Skia.Framework
 {
-    internal class Control : FrameworkElement
+    public class Control : FrameworkElement
     {
         #region Public Properties
         string _fontFamily;

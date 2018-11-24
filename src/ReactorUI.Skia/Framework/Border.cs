@@ -5,7 +5,7 @@ using ReactorUI.Primitives;
 
 namespace ReactorUI.Skia.Framework
 {
-    internal class Border : FrameworkElement
+    public class Border : FrameworkElement
     {
         #region Public Properties
         private UIElement _child;

@@ -52,7 +52,7 @@ namespace ReactorUI.Widgets
     {
         protected override void OnMount()
         {
-            NativeControl = WidgetRegistry.Instance.CreateNew<T>();
+            NativeControl = Application.Current.WidgetRegistry.CreateNew<T>();
             NativeControl.DidMount(this);
 
             base.OnMount();

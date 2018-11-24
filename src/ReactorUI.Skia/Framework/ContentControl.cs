@@ -7,7 +7,7 @@ using SkiaSharp;
 
 namespace ReactorUI.Skia.Framework
 {
-    internal class ContentControl : Control
+    public class ContentControl : Control
     {
         #region Public Properties
         private object _content;

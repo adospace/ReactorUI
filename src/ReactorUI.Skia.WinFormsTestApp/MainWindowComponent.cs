@@ -6,9 +6,9 @@ using ReactorUI.Skia.WinForms;
 
 namespace ReactorUI.Skia.WinFormsTestApp
 {
-    public class MainWindowComponent : ReactorContainer<System.Windows.Forms.Form>
+    public class MainWindowComponent : Component
     {
-        public MainWindowComponent(System.Windows.Forms.Form window) : base(window)
+        public MainWindowComponent()
         {
         }
 
@@ -20,7 +20,7 @@ namespace ReactorUI.Skia.WinFormsTestApp
             this.Invalidate();
         }
 
-        protected override VisualNode Render()
+        public override VisualNode Render()
         {
             return
                 new ScrollBar()

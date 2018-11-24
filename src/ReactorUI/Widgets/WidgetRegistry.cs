@@ -7,9 +7,11 @@ namespace ReactorUI.Widgets
 {
     public sealed class WidgetRegistry
     {
-        private WidgetRegistry() { }
+        public WidgetRegistry()
+        {
+        }
 
-        public static WidgetRegistry Instance { get; } = new WidgetRegistry();
+        //public static WidgetRegistry Instance { get; } = new WidgetRegistry();
 
         private readonly ConcurrentDictionary<Type, object> _registry = new ConcurrentDictionary<Type, object>();
 

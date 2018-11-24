@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ReactorUI.Skia.Controls
 {
-    internal class FrameworkElement<T, I, TS> : UIElement<T, I, TS>
+    public class FrameworkElement<T, I, TS> : UIElement<T, I, TS>
         where T : Framework.FrameworkElement, new()
         where I : IFrameworkElement
         where TS : FrameworkElementStyle<I>

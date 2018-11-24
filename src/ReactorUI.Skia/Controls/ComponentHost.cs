@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ReactorUI.Skia.Controls
 {
-    internal class ComponentHost : ContentControl<Framework.ContentControl, IComponentHost, ComponentHostStyle>
+    public class ComponentHost : ContentControl<Framework.ContentControl, IComponentHost, ComponentHostStyle>
     {
     }
 }

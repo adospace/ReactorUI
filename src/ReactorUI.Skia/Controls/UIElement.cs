@@ -10,7 +10,7 @@ using ReactorUI.Styles;
 
 namespace ReactorUI.Skia.Controls
 {
-    internal class UIElement<T, I, TS> : INativeControl
+    public class UIElement<T, I, TS> : INativeControl
         where T : Framework.UIElement, new()
         where I : IUIElement
         where TS : UIElementStyle<I>

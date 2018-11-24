@@ -5,7 +5,7 @@ using ReactorUI.Skia.Framework.Input;
 
 namespace ReactorUI.Skia.Framework
 {
-    internal class Button : ContentControl
+    public class Button : ContentControl
     {
         #region Public Properties
 

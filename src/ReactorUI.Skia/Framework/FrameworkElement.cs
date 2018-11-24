@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ReactorUI.Skia.Framework
 {
-    internal class FrameworkElement : UIElement
+    public class FrameworkElement : UIElement
     {
         #region Private Classes
         private struct MinMax
@@ -452,6 +452,4 @@ namespace ReactorUI.Skia.Framework
         }
         #endregion
     }
-
-
 }

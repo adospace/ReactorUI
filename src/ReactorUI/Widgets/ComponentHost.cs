@@ -6,10 +6,11 @@ using System.Text;
 
 namespace ReactorUI.Widgets
 {
-    public class ComponentHost<T> : ContentControl<IComponentHost, ComponentHostStyle>, IComponentHost where T : Component, new()
+    public class ComponentHost : ContentControl<IComponentHost, ComponentHostStyle>, IComponentHost
     {
-        private T _component;
-        private T Component {
+        private Component _component;
+        protected Component Component
+        {
             get => _component;
             set
             {
@@ -18,26 +19,23 @@ namespace ReactorUI.Widgets
             }
         }
 
-        public ComponentHost()
+        protected ComponentHost()
+        { }
+
+        public ComponentHost(Component component)
         {
+            Component = component ?? throw new ArgumentNullException(nameof(component));
         }
 
         internal override void MergeWith(VisualNode newNode)
         {
             if (GetType() == newNode.GetType())
             {
-                var newHost = ((ComponentHost<T>)newNode);
+                var newHost = (ComponentHost)newNode;
                 newHost.Component = Component;
             }
 
             base.MergeWith(newNode);
-        }
-
-        protected override void OnMount()
-        {
-            Component = Component ?? new T();
-
-            base.OnMount();
         }
 
         protected override void OnUnmount()
@@ -55,6 +53,17 @@ namespace ReactorUI.Widgets
         void IComponentHost.Invalidate()
         {
             Invalidate();
+        }
+    }
+
+
+    public class ComponentHost<T> : ComponentHost where T : Component, new()
+    {
+        protected override void OnMount()
+        {
+            Component = Component ?? new T();
+
+            base.OnMount();
         }
     }
 }

@@ -14,17 +14,13 @@ namespace ReactorUI.Skia.WinFormsTestApp
         [STAThread]
         static void Main()
         {
-            ReactorApplication.Initialize();
+            //ReactorControls.Initialize();
+            //ModernTheme.Initialize();
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-            var frmMain = new Form();
-            var mainWindowComponent =
-                new MainWindowComponent(frmMain)
+            WinForms.ReactorApplication
+                .Create(new MainWindowComponent())
+                .ModernTheme()
                 .Run();
-            
-            Application.Run(frmMain);
         }
     }
 }
