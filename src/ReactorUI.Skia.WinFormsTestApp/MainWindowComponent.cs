@@ -26,11 +26,11 @@ namespace ReactorUI.Skia.WinFormsTestApp
                 new ScrollBar()
                     .Orientation(Orientation.Vertical)
                     .Width(10)
+                    .Extent(100)
+                    .Viewport(10)
                     .HorizontalAlignment(HorizontalAlignment.Center)
                     .Background(100,100,100)
                     .ThumbBrush(new Color(200,200,200))
-                    .Extent(100)
-                    .Viewport(10)
                     ;
         }
     }

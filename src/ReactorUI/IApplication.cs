@@ -7,7 +7,7 @@ namespace ReactorUI
 {
     public interface IApplication
     {
-        Component Root { get; }
+        //Component Root { get; }
 
         WidgetRegistry WidgetRegistry { get; }
 

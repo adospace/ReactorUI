@@ -9,14 +9,25 @@ namespace ReactorUI.Skia.WinForms
 {
     public class ReactorApplication : IApplication
     {
+        static ReactorApplication()
+        {
+            System.Windows.Forms.Application.EnableVisualStyles();
+            System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+        }
+
         protected ReactorApplication()
         { }
 
-        public Component Root { get; private set; }
+        public ComponentHost RootHost { get; private set; }
+
+        //public Component Root => RootHost.Compoent;
+
+        public System.Windows.Forms.Form Form { get; private set; }
 
         public WidgetRegistry WidgetRegistry { get; } = new WidgetRegistry();
 
-        public static IApplication Create(Component root)
+
+        public static IApplication Create(Component root, System.Windows.Forms.Form form = null)
         {
             if (root == null)
             {
@@ -25,18 +36,37 @@ namespace ReactorUI.Skia.WinForms
 
             return Application.Register(new ReactorApplication()
             {
-                Root = root
+                RootHost = Component.Host(root),
+                Form = form
+            });
+        }
+
+        public static IApplication Create<T>(ComponentHost rootHost) where T : System.Windows.Forms.Form, new()
+        {
+            if (rootHost == null)
+            {
+                throw new ArgumentNullException(nameof(rootHost));
+            }
+
+            return Application.Register(new ReactorApplication()
+            {
+                RootHost = rootHost,
+                Form = new T()
             });
         }
 
         public void Run()
         {
-            System.Windows.Forms.Application.EnableVisualStyles();
-            System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+            Run(Form ?? new System.Windows.Forms.Form());
+        }
 
-            var mainWindowComponent = new ReactorForm(Root).Run();
+        public void Run(System.Windows.Forms.Form form)
+        {
+            var reactorForm = new ReactorForm(RootHost, form);
 
-            System.Windows.Forms.Application.Run(mainWindowComponent.Container);
+            reactorForm.Run();
+
+            System.Windows.Forms.Application.Run(reactorForm.Container);
         }
     }
 }
