@@ -23,7 +23,7 @@ namespace ReactorUI.Skia.WinForms.Host
         private static void RunWithOptions(RunOptions options)
         {
             ReactorApplication
-                .Create<FormHost>(Component.Loader(options.AssemblyPath, options.ComponentTypeName))
+                .Create<FormHost>(new ComponentLoaderHost(options.AssemblyPath, options.ComponentTypeName))
                 .ModernTheme()
                 .Run();
         }

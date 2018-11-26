@@ -45,15 +45,7 @@ namespace ReactorUI.Widgets
         {
             return new ComponentHost(component);
         }
-
-        public static ComponentLoaderHost Loader(string assemblyPath, string typeName)
-        {
-            return new ComponentLoaderHost(assemblyPath, typeName);
-        }
-
     }
-
-
 
     public abstract class Component<S> : Component where S : class, new()
     {

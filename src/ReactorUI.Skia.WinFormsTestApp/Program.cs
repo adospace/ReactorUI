@@ -14,9 +14,6 @@ namespace ReactorUI.Skia.WinFormsTestApp
         [STAThread]
         static void Main()
         {
-            //ReactorControls.Initialize();
-            //ModernTheme.Initialize();
-
             WinForms.ReactorApplication
                 .Create(new MainWindowComponent())
                 .ModernTheme()
