@@ -1,11 +1,12 @@
 ﻿using ReactorUI.Primitives;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ReactorUI.Skia.Framework.Panels
 {
-    internal class DockPanel : Panel
+    public class DockPanel : Panel
     {
         #region Public Properties
         private Orientation _orientation;
@@ -52,6 +53,16 @@ namespace ReactorUI.Skia.Framework.Panels
                     Invalidate(InvalidateMode.Measure);
                 }
             }
+        }
+
+        protected override IEnumerable<UIElement> GetChildren()
+        {
+            foreach (var child in DockPreviousChildren)
+                yield return child;
+            foreach (var child in DockNextChildren)
+                yield return child;
+
+            yield return FillChild;
         }
         #endregion
 
@@ -111,7 +122,6 @@ namespace ReactorUI.Skia.Framework.Panels
 
             return mySize;
         }
-
         #endregion
 
         #region Arrange Pass

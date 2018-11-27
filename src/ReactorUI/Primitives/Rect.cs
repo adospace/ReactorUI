@@ -12,6 +12,7 @@ namespace ReactorUI.Primitives
         public double Width { get; private set; }
         public double Height { get; private set; }
 
+        [System.Diagnostics.DebuggerStepThrough]
         public Rect(double x, double y, double width, double height)
         {
             if (width < 0.0) throw new ArgumentException();
@@ -24,19 +25,24 @@ namespace ReactorUI.Primitives
         }
 
         public Vector Location => new Vector(X, Y);
+
         public Size Size => new Size(Width, Height);
 
         public bool IsEmpty => Width < 0.0;
 
         public static Rect Empty { get; } = new Rect() { Width = -1.0, Height = -1.0 };
 
+        [System.Diagnostics.DebuggerStepThrough]
         public bool IsCloseTo(Rect other) =>
             Math.Abs(X - other.X) < 1e-10 &&
             Math.Abs(Y - other.Y) < 1e-10 &&
             Math.Abs(Width - other.Width) < 1e-10 &&
             Math.Abs(Height - other.Height) < 1e-10;
 
+        [System.Diagnostics.DebuggerStepThrough]
         public bool Contains(double x, double y) => x >= X && y >= Y && x <= X + Width && y <= Y + Height;
+
+        [System.Diagnostics.DebuggerStepThrough]
         public bool Contains(Point pt) => Contains(pt.X, pt.Y);
     }
 }

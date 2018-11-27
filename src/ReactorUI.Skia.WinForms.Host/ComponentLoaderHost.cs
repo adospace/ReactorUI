@@ -28,7 +28,18 @@ namespace ReactorUI.Widgets
             TypeName = typeName;
         }
 
-        
+        protected override IEnumerable<VisualNode> RenderChildren()
+        {
+            if (_componentChanged)
+            {
+                _componentChanged = false;
+                System.Diagnostics.Debug.WriteLine($"AssemblyChanged");
+                Component = CreateInstance<Component>(AssemblyPath, TypeName);
+            }
+
+            return base.RenderChildren();
+        }
+
         protected override void OnMount()
         {
             if (Component == null)
@@ -36,15 +47,17 @@ namespace ReactorUI.Widgets
                 Component = CreateInstance<Component>(AssemblyPath, TypeName);
                 var fileSystemWatcher = new FileSystemWatcher(Path.GetDirectoryName(AssemblyPath), Path.GetFileName(AssemblyPath));
                 fileSystemWatcher.Changed += AssemblyChanged;
+                fileSystemWatcher.NotifyFilter = NotifyFilters.LastWrite;
                 fileSystemWatcher.EnableRaisingEvents = true;
             }
 
             base.OnMount();
         }
 
+        private bool _componentChanged;
         private void AssemblyChanged(object sender, FileSystemEventArgs e)
         {
-            Component = CreateInstance<Component>(AssemblyPath, TypeName);
+            _componentChanged = true;
             Invalidate();
         }
 

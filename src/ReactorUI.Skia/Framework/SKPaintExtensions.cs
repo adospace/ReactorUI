@@ -10,6 +10,16 @@ namespace ReactorUI.Skia.Framework
     {
         public static SKPaint ApplyBrush(this SKPaint paint, Brush brush)
         {
+            if (paint == null)
+            {
+                throw new ArgumentNullException(nameof(paint));
+            }
+
+            if (brush == null)
+            {
+                throw new ArgumentNullException(nameof(brush));
+            }
+
             if (brush is SolidColorBrush solidBrush)
                 return paint.ApplyBrush(solidBrush);
 
@@ -18,18 +28,55 @@ namespace ReactorUI.Skia.Framework
 
         public static SKPaint ApplyBrush(this SKPaint paint, SolidColorBrush brush)
         {
+            if (paint == null)
+            {
+                throw new ArgumentNullException(nameof(paint));
+            }
+
+            if (brush == null)
+            {
+                throw new ArgumentNullException(nameof(brush));
+            }
+
             paint.Color = new SKColor(brush.Color.R, brush.Color.G, brush.Color.B, brush.Color.A);
             return paint;
         }
 
         public static SKPaint ApplyFont(this SKPaint paint, string fontfamily, double fontSize, FontStyle fontStyle, FontStretch fontStretch, FontWeight fontWeight)
         {
+            if (paint == null)
+            {
+                throw new ArgumentNullException(nameof(paint));
+            }
+
             paint.TextSize = (float)fontSize;
 
             paint.Typeface = SKTypeface.FromFamilyName(fontfamily, ConvertFontStyle(fontWeight), ConvertFontStyle(fontStretch), ConvertFontStyle(fontStyle));
 
             paint.IsAntialias = true;
 
+            return paint;
+        }
+
+        public static SKPaint IsStroke(this SKPaint paint)
+        {
+            if (paint == null)
+            {
+                throw new ArgumentNullException(nameof(paint));
+            }
+
+            paint.IsStroke = true;
+            return paint;
+        }
+
+        public static SKPaint IsFill(this SKPaint paint)
+        {
+            if (paint == null)
+            {
+                throw new ArgumentNullException(nameof(paint));
+            }
+
+            paint.IsStroke = false;
             return paint;
         }
 
@@ -118,5 +165,6 @@ namespace ReactorUI.Skia.Framework
             }
         }
 
+        
     }
 }

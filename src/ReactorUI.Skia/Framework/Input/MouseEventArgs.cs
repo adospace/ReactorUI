@@ -6,6 +6,7 @@ namespace ReactorUI.Skia.Framework.Input
 {
     public class MouseEventArgs : EventArgs
     {
+        [System.Diagnostics.DebuggerStepThrough]
         public MouseEventArgs(MouseButtons mouseButtons, int clicks, int x, int y, int delta)
         {
             MouseButtons = mouseButtons;

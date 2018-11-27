@@ -222,7 +222,7 @@ namespace ReactorUI.Skia.Framework
                 var finalHeight = this.RenderSize.Height - (Padding.Top + Padding.Bottom);
 
                 float x = (float)Padding.Left;
-                float y = (float)Padding.Top + (float)DesiredSize.Height;
+                float y = (float)Padding.Top + (float)finalHeight;
 
                 var paint = new SKPaint();
 

@@ -1,5 +1,6 @@
 ﻿using ReactorUI.Primitives;
 using ReactorUI.Skia.Framework.Input;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -46,9 +47,10 @@ namespace ReactorUI.Skia.Framework
             get { return _margin; }
             set
             {
-                //if (_margin != value)
+                if (!_margin.IsCloseTo(value))
                 {
                     _margin = value;
+                    Invalidate(InvalidateMode.Measure);
                 }
             }
         }
@@ -62,6 +64,7 @@ namespace ReactorUI.Skia.Framework
                 if (!DoubleUtil.AreClose(_width, value))
                 {
                     _width = value;
+                    Invalidate(InvalidateMode.Measure);
                 }
             }
         }
@@ -74,6 +77,7 @@ namespace ReactorUI.Skia.Framework
                 if (!DoubleUtil.AreClose(_height, value))
                 {
                     _height = value;
+                    Invalidate(InvalidateMode.Measure);
                 }
             }
         }
@@ -87,6 +91,7 @@ namespace ReactorUI.Skia.Framework
                 if (!DoubleUtil.AreClose(_minWidth, value))
                 {
                     _minWidth = value;
+                    Invalidate(InvalidateMode.Measure);
                 }
             }
         }
@@ -99,6 +104,7 @@ namespace ReactorUI.Skia.Framework
                 if (!DoubleUtil.AreClose(_minHeight, value))
                 {
                     _minHeight = value;
+                    Invalidate(InvalidateMode.Measure);
                 }
             }
         }
@@ -112,6 +118,7 @@ namespace ReactorUI.Skia.Framework
                 if (!DoubleUtil.AreClose(_maxWidth, value))
                 {
                     _maxWidth = value;
+                    Invalidate(InvalidateMode.Measure);
                 }
             }
         }
@@ -124,6 +131,7 @@ namespace ReactorUI.Skia.Framework
                 if (!DoubleUtil.AreClose(_maxHeight, value))
                 {
                     _maxHeight = value;
+                    Invalidate(InvalidateMode.Measure);
                 }
             }
         }
@@ -137,6 +145,7 @@ namespace ReactorUI.Skia.Framework
                 if (_horizontalAlignment != value)
                 {
                     _horizontalAlignment = value;
+                    Invalidate(InvalidateMode.Measure);
                 }
             }
         }
@@ -150,6 +159,7 @@ namespace ReactorUI.Skia.Framework
                 if (_verticalAlignment != value)
                 {
                     _verticalAlignment = value;
+                    Invalidate(InvalidateMode.Measure);
                 }
             }
         }
@@ -366,14 +376,23 @@ namespace ReactorUI.Skia.Framework
         #endregion
 
         #region Render Pass
+        public static bool RenderClipRects { get; set; }
         protected sealed override void RenderCore(RenderContext context)
         {
-            context.Canvas.Save();
-            context.Canvas.Translate((float)_visualOffset.X, (float)_visualOffset.Y);
-            context.Canvas.ClipRect(new SkiaSharp.SKRect(0.0f, 0.0f, (float)RenderSize.Width, (float)RenderSize.Height));
-            RenderOverride(context);
+            using (new SKAutoCanvasRestore(context.Canvas))
+            {
+                context.Canvas.Translate((float)_visualOffset.X, (float)_visualOffset.Y);
+                context.Canvas.ClipRect(new SkiaSharp.SKRect(0.0f, 0.0f, (float)RenderSize.Width, (float)RenderSize.Height));
+                RenderOverride(context);
+                if (RenderClipRects)
+                {
+                    var pt = new SkiaSharp.SKPaint()
+                        .IsStroke()
+                        .ApplyBrush(new SolidColorBrush(new Color(255, 0, 0)));
 
-            context.Canvas.Restore();
+                    context.Canvas.DrawRect(new SkiaSharp.SKRect(0.5f, 0.5f, (float)RenderSize.Width -0.5f, (float)RenderSize.Height - 0.5f), pt);
+                }
+            }
 
             base.RenderCore(context);
         }

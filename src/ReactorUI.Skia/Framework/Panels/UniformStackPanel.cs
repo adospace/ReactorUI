@@ -17,6 +17,11 @@ namespace ReactorUI.Skia.Framework.Panels
                 return _children;
             }
         }
+        protected override IEnumerable<UIElement> GetChildren()
+        {
+            return Children;
+        }
+
         private Orientation _orientation;
         public Orientation Orientation
         {

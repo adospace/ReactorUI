@@ -11,7 +11,7 @@ using ReactorUI.Skia.Framework;
 
 namespace ReactorUI.Skia.Controls.Panels
 {
-    internal class StackPanel : Panel<Framework.Panels.StackPanel, IStackPanel, StackPanelStyle>
+    public class StackPanel : Panel<Framework.Panels.StackPanel, IStackPanel, StackPanelStyle>
     {
         public StackPanel()
         {

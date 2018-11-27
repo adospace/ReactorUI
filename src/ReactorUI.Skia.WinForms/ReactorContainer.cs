@@ -127,6 +127,8 @@ namespace ReactorUI.Skia.WinForms
 
         private void _skiaView_PaintSurface(object sender, SKPaintGLSurfaceEventArgs e)
         {
+            e.Surface.Canvas.Clear(new SKColor(Container.BackColor.R, Container.BackColor.G, Container.BackColor.B, Container.BackColor.A));
+
             _root.Measure(new Primitives.Size(Container.ClientSize.Width, Container.ClientSize.Height));
 
             _root.Arrange(new Primitives.Rect(0, 0, Container.ClientSize.Width, Container.ClientSize.Height));

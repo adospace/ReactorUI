@@ -22,6 +22,8 @@ namespace ReactorUI.Skia.WinForms.Host
 
         private static void RunWithOptions(RunOptions options)
         {
+            Framework.FrameworkElement.RenderClipRects = options.RenderClipRects;
+
             ReactorApplication
                 .Create<FormHost>(new ComponentLoaderHost(options.AssemblyPath, options.ComponentTypeName))
                 .ModernTheme()

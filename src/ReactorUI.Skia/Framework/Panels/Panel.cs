@@ -1,12 +1,17 @@
-﻿using System;
+﻿using ReactorUI.Skia.Framework.Input;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ReactorUI.Skia.Framework.Panels
 {
-    internal class Panel : FrameworkElement
+    public abstract class Panel : FrameworkElement
     {
+        protected Panel()
+        {
+        }
+
         public class ChildrenList : IReadOnlyList<UIElement>
         {
             private List<UIElement> _internalList = new List<UIElement>();
@@ -25,6 +30,9 @@ namespace ReactorUI.Skia.Framework.Panels
                 }
 
                 _internalList.Add(element);
+                if (element.Parent != null && element.Parent != _owner)
+                    throw new InvalidOperationException();
+                element.Parent = _owner;
                 _owner.Invalidate(InvalidateMode.Measure);
             }
 
@@ -37,6 +45,7 @@ namespace ReactorUI.Skia.Framework.Panels
 
                 if (_internalList.Remove(element))
                 {
+                    element.Parent = null;
                     _owner.Invalidate(InvalidateMode.Measure);
                     return true;
                 }
@@ -59,6 +68,44 @@ namespace ReactorUI.Skia.Framework.Panels
             }
         }
 
+        protected abstract IEnumerable<UIElement> GetChildren();
+
+        #region Render Pass
+        protected override void RenderOverride(RenderContext context)
+        {
+            foreach (var child in GetChildren())
+            {
+                child.Render(context.Canvas);
+            }
+
+            base.RenderOverride(context);
+        }
+        #endregion
+
+        #region Mouse
+        protected override void OnHitTest(int x, int y, MouseEventsContext context)
+        {
+            foreach (var child in GetChildren())
+                child.HandleMouseMove(x, y, context);
+
+            base.OnHitTest(x, y, context);
+        }
+
+        protected override void OnMouseDown(int x, int y, MouseEventsContext context)
+        {
+            foreach (var child in GetChildren())
+                child.HandleMouseDown(x, y, context);
+            base.OnMouseDown(x, y, context);
+        }
+
+        protected override void OnMouseUp(int x, int y, MouseEventsContext context)
+        {
+            foreach (var child in GetChildren())
+                child.HandleMouseUp(x, y, context);
+            base.OnMouseUp(x, y, context);
+        }
+
+        #endregion
 
     }
 }

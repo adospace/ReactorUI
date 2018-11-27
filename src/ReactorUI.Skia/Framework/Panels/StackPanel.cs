@@ -5,18 +5,16 @@ using System.Text;
 
 namespace ReactorUI.Skia.Framework.Panels
 {
-    internal class StackPanel : Panel
+    public class StackPanel : Panel
     {
-        #region Public Properties
-        private ChildrenList _children;
-        public ChildrenList Children
+        public StackPanel()
         {
-            get
-            {
-                _children = _children ?? new ChildrenList(this);
-                return _children;
-            }
+            Children = new ChildrenList(this);
         }
+
+        #region Public Properties
+        public ChildrenList Children { get; }
+
         private Orientation _orientation;
         public Orientation Orientation
         {
@@ -29,6 +27,11 @@ namespace ReactorUI.Skia.Framework.Panels
                     Invalidate(InvalidateMode.Measure);
                 }
             }
+        }
+
+        protected override IEnumerable<UIElement> GetChildren()
+        {
+            return Children;
         }
         #endregion
 

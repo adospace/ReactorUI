@@ -11,7 +11,7 @@ using ReactorUI.Skia.Framework;
 
 namespace ReactorUI.Skia.Controls.Panels
 {
-    internal abstract class Panel<T, I, TS> : FrameworkElement<T, I, TS>, INativeControlContainer
+    public abstract class Panel<T, I, TS> : FrameworkElement<T, I, TS>, INativeControlContainer
         where T : Framework.Panels.Panel, new()
         where I : IPanel
         where TS : PanelStyle<I>
@@ -19,7 +19,6 @@ namespace ReactorUI.Skia.Controls.Panels
         protected Panel()
         {
         }
-
 
         public abstract void AddChild(IWidget widget, UIElement child);
 

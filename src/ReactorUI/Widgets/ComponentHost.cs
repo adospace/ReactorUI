@@ -14,8 +14,14 @@ namespace ReactorUI.Widgets
             get => _component;
             set
             {
-                _component = value;
-                _component.SetOwner(this);
+                if (_component != value)
+                {
+                    var oldComponent = _component;
+                    _component = value;
+                    _component.SetOwner(this);
+                    if (oldComponent != null)
+                        _component.MigrateStateFrom(oldComponent);
+                }
             }
         }
 
@@ -45,7 +51,7 @@ namespace ReactorUI.Widgets
             base.OnUnmount();
         }
 
-        protected sealed override IEnumerable<VisualNode> RenderChildren()
+        protected override IEnumerable<VisualNode> RenderChildren()
         {
             yield return _component.Render();
         }

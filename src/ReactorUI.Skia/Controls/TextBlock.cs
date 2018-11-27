@@ -15,7 +15,7 @@ namespace ReactorUI.Skia.Controls
         {
             _nativeControl.Background = _widget.Background;
             _nativeControl.BaselineOffset = _widget.BaselineOffset;
-            _nativeControl.Text = _widget.FontFamily;
+            _nativeControl.FontFamily = _widget.FontFamily;
             _nativeControl.FontSize = _widget.FontSize;
             _nativeControl.FontStretch = _widget.FontStretch;
             _nativeControl.FontStyle = _widget.FontStyle;

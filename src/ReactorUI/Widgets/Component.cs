@@ -35,7 +35,7 @@ namespace ReactorUI.Widgets
         {
             _host = host;
         }
- 
+
         public static ComponentHost<T> Host<T>() where T : Component, new()
         {
             return new ComponentHost<T>();
@@ -45,13 +45,24 @@ namespace ReactorUI.Widgets
         {
             return new ComponentHost(component);
         }
+
+        internal virtual void MigrateStateFrom(Component component)
+        {
+
+        }
+
     }
 
-    public abstract class Component<S> : Component where S : class, new()
+    internal interface IStatefulComponent
+    {
+        object GetState();
+    }
+
+    public abstract class Component<S> : Component, IStatefulComponent where S : class, new()
     {
         public S State { get; private set; }
 
-        protected Component(S state)
+        protected Component(S state = null)
         {
             State = state ?? new S();
         }
@@ -76,6 +87,23 @@ namespace ReactorUI.Widgets
         }
 
         public abstract VisualNode Render(S state);
+
+        internal sealed override void MigrateStateFrom(Component component)
+        {
+            if (component is IStatefulComponent statefulComponent)
+            {
+                var otherState = statefulComponent.GetState();
+
+                otherState.CopyProperties(State);
+            }
+
+            base.MigrateStateFrom(component);
+        }
+
+        object IStatefulComponent.GetState()
+        {
+            return State;
+        }
     }
 
 }

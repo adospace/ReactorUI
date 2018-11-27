@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ReactorUI.Skia.Controls.Panels
 {
-    internal class DockPanel : Panel<Framework.Panels.DockPanel, IDockPanel, DockPanelStyle>
+    public class DockPanel : Panel<Framework.Panels.DockPanel, IDockPanel, DockPanelStyle>
     {
         public DockPanel()
         {
