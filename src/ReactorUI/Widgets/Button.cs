@@ -26,15 +26,15 @@ namespace ReactorUI.Widgets
 
     public static class ButtonExtensions
     {
-        public static Button Button(this IWidgetContainer parent)
-        {
-            return new Button();
-        }
+        //public static Button Button(this IWidgetContainer parent)
+        //{
+        //    return new Button();
+        //}
 
-        public static Button Button(this IWidgetContainer parent, string text)
-        {
-            return new Button(text);
-        }
+        //public static Button Button(this IWidgetContainer parent, string text)
+        //{
+        //    return new Button(text);
+        //}
 
         public static Button Text(this Button button, string text)
         {

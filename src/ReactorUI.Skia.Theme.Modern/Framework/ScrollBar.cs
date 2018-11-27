@@ -115,7 +115,7 @@ namespace ReactorUI.Skia.Framework
                 var thumbY = (RenderSize.Height - thumbHeight) * Offset / Extent;
 
                 var paint = new SKPaint();
-                paint.ApplyBrush(ThumbBrush);
+                paint.ApplyBrush(ThumbBrush, Opacity);
 
                 context.Canvas.DrawRect(
                     new SKRect(0.0f, (float)thumbY, (float)RenderSize.Width, (float)(thumbY + thumbHeight)),
@@ -128,7 +128,7 @@ namespace ReactorUI.Skia.Framework
                 var thumbX = (RenderSize.Width - thumbWidth) * Offset / Extent;
 
                 var paint = new SKPaint();
-                paint.ApplyBrush(ThumbBrush);
+                paint.ApplyBrush(ThumbBrush, Opacity);
 
                 context.Canvas.DrawRect(
                     new SKRect((float)thumbX, 0.0f, (float)(thumbX + thumbWidth), (float)(RenderSize.Height)),

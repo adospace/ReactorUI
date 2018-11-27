@@ -29,10 +29,10 @@ namespace ReactorUI.Widgets
 
     public static class BorderExtensions
     {
-        public static Border Border(this IWidgetContainer parent, VisualNode child = null)
-        {
-            return new Border(child);
-        }
+        //public static Border Border(this IWidgetContainer parent, VisualNode child = null)
+        //{
+        //    return new Border(child);
+        //}
 
         public static Border BorderThickness(this Border border, Thickness borderThickness)
         {

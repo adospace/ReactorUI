@@ -8,7 +8,7 @@ namespace ReactorUI.Skia.Framework
 {
     public static class SKPaintExtensions
     {
-        public static SKPaint ApplyBrush(this SKPaint paint, Brush brush)
+        public static SKPaint ApplyBrush(this SKPaint paint, Brush brush, double opacity = 1.0)
         {
             if (paint == null)
             {
@@ -21,12 +21,12 @@ namespace ReactorUI.Skia.Framework
             }
 
             if (brush is SolidColorBrush solidBrush)
-                return paint.ApplyBrush(solidBrush);
+                return paint.ApplyBrush(solidBrush, opacity);
 
             return paint;
         }
 
-        public static SKPaint ApplyBrush(this SKPaint paint, SolidColorBrush brush)
+        public static SKPaint ApplyBrush(this SKPaint paint, SolidColorBrush brush, double opacity = 1.0)
         {
             if (paint == null)
             {
@@ -38,7 +38,7 @@ namespace ReactorUI.Skia.Framework
                 throw new ArgumentNullException(nameof(brush));
             }
 
-            paint.Color = new SKColor(brush.Color.R, brush.Color.G, brush.Color.B, brush.Color.A);
+            paint.Color = new SKColor(brush.Color.R, brush.Color.G, brush.Color.B, (byte)(brush.Color.A * opacity));
             return paint;
         }
 

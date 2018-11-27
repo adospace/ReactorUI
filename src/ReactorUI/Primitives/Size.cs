@@ -24,7 +24,7 @@ namespace ReactorUI.Primitives
             {
                 if (value < 0)
                     throw new ArgumentException();
-                _height = value;
+                _height =  value;
             }
         }
         public Size(double width, double height)
@@ -36,9 +36,9 @@ namespace ReactorUI.Primitives
             _height = height;
         }
 
-        public bool IsEmpty => _width < 0.0;
+        public bool IsEmpty => _width == 0.0 && _height == 0.0;
 
-        public static Size Empty { get; } = new Size() { _width = -1.0, _height = -1.0 };
+        //public static Size Empty { get; } = new Size() { _width = -1.0, _height = -1.0 };
 
         public Rect ToRect => new Rect(0.0, 0.0, Width, Height);
 

@@ -94,11 +94,19 @@ namespace ReactorUI
             if (!_isMounted && Parent != null)
                 OnMount();
 
+            OnAnimate();
+
             if (_stateChanged)
                 OnUpdate();
 
             foreach (var child in Children)
                 child.Layout();
+
+        }
+
+        protected virtual void OnAnimate()
+        {
+
         }
 
         protected virtual void OnMount()

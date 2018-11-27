@@ -43,10 +43,10 @@ namespace ReactorUI.Widgets
 
     public static class TextBlockExtensions
     {
-        public static TextBlock TextBlock(this IWidgetContainer parent, string text)
-        {
-            return new TextBlock(text);
-        }
+        //public static TextBlock TextBlock(this IWidgetContainer parent, string text)
+        //{
+        //    return new TextBlock(text);
+        //}
 
         public static TextBlock Text(this TextBlock textBlock, string text)
         {

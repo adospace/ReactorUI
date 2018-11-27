@@ -199,7 +199,7 @@ namespace ReactorUI.Skia.Framework
                     0.0f, 0.0f, (float)finalWidth, (float)finalHeight,
                     new SkiaSharp.SKPaint()
                     {
-                    }.ApplyBrush(Background));
+                    }.ApplyBrush(Background, Opacity));
             }
 
             if (BorderBrush != null)
@@ -213,7 +213,7 @@ namespace ReactorUI.Skia.Framework
                             new SkiaSharp.SKPaint()
                             {
                                 IsStroke = true
-                            }.ApplyBrush(BorderBrush));
+                            }.ApplyBrush(BorderBrush, Opacity));
                     }
                 }
             }

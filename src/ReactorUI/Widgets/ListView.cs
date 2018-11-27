@@ -25,10 +25,10 @@ namespace ReactorUI.Widgets
 
     public static class ListViewExtensions
     {
-        public static ListView ListView(this IWidgetContainer parent, params ListViewItem[] children)
-        {
-            return new ListView(children);
-        }
+        //public static ListView ListView(this IWidgetContainer parent, params ListViewItem[] children)
+        //{
+        //    return new ListView(children);
+        //}
     }
 
 }

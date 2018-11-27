@@ -44,22 +44,12 @@ namespace ReactorUI.Widgets
 
     public static class ListViewItemExtensions
     {
-        public static ListViewItem ListViewItem(this TreeView parent, params ListViewItem[] children)
+        public static ListViewItem ListViewItem(this ListView parent, params ListViewItem[] children)
         {
             return new ListViewItem(children);
         }
 
-        public static ListViewItem ListViewItem(this TreeView parent, VisualNode header, params ListViewItem[] children)
-        {
-            return new ListViewItem(header, children);
-        }
-
-        public static ListViewItem TreeViewNode(this TreeViewNode parent, params ListViewItem[] children)
-        {
-            return new ListViewItem(children);
-        }
-
-        public static ListViewItem TreeViewNode(this TreeViewNode parent, VisualNode header, params ListViewItem[] children)
+        public static ListViewItem ListViewItem(this ListView parent, VisualNode header, params ListViewItem[] children)
         {
             return new ListViewItem(header, children);
         }

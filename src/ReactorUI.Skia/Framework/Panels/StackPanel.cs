@@ -48,14 +48,20 @@ namespace ReactorUI.Skia.Framework.Panels
                 if (Orientation == Orientation.Horizontal)
                 {
                     child.Measure(new Size(double.PositiveInfinity, availableSize.Height));
-                    mySize.Width += child.DesiredSize.Width;
-                    mySize.Height = Math.Max(mySize.Height, child.DesiredSize.Height);
+                    if (!child.DesiredSize.IsEmpty)
+                    {
+                        mySize.Width += child.DesiredSize.Width;
+                        mySize.Height = Math.Max(mySize.Height, child.DesiredSize.Height);
+                    }
                 }
                 else
                 {
                     child.Measure(new Size(availableSize.Width, double.PositiveInfinity));
-                    mySize.Width = Math.Max(mySize.Width, child.DesiredSize.Width);
-                    mySize.Height += child.DesiredSize.Height;
+                    if (!child.DesiredSize.IsEmpty)
+                    {
+                        mySize.Width = Math.Max(mySize.Width, child.DesiredSize.Width);
+                        mySize.Height += child.DesiredSize.Height;
+                    }
                 }
             };
 

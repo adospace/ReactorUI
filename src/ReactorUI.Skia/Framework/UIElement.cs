@@ -125,10 +125,10 @@ namespace ReactorUI.Skia.Framework
         }
         #endregion
 
-        public Size DesiredSize { get; private set; } = Size.Empty;
+        public Size DesiredSize { get; private set; }
 
         ///Measure Pass
-        private Size _previousAvailableSize = Size.Empty;
+        private Size _previousAvailableSize;
         private bool _measureIsDirty = true;
         public void Measure(Size availableSize)
         {
@@ -137,7 +137,7 @@ namespace ReactorUI.Skia.Framework
 
             if (!this.IsVisible)
             {
-                this.DesiredSize = Size.Empty;
+                this.DesiredSize = new Size();
                 this._measureIsDirty = false;
                 return;
             }
@@ -160,7 +160,7 @@ namespace ReactorUI.Skia.Framework
         }
         protected virtual Size MeasureCore(Size availableSize)
         {
-            return Size.Empty;
+            return new Size();
         }
 
         ///Arrange Pass

@@ -14,5 +14,7 @@ namespace ReactorUI.Contracts
         Action<IUIElement> OnMouseEnterAction { get; set; }
         Action<IUIElement> OnMouseLeaveAction { get; set; }
 
+        void Animate(string propertyName, IAnimation animation);
+
     }
 }

@@ -25,10 +25,10 @@ namespace ReactorUI.Widgets
 
     public static class TreeViewExtensions
     {
-        public static TreeView TreeView(this IWidgetContainer parent, params TreeViewNode[] children)
-        {
-            return new TreeView(children);
-        }
+        //public static TreeView TreeView(this IWidgetContainer parent, params TreeViewNode[] children)
+        //{
+        //    return new TreeView(children);
+        //}
     }
 
 }

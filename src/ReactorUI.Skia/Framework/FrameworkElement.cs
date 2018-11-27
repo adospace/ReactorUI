@@ -166,7 +166,7 @@ namespace ReactorUI.Skia.Framework
         #endregion
 
         #region Measure Pass
-        private Size _unclippedDesiredSize = Size.Empty;
+        private Size _unclippedDesiredSize;
         protected Vector _visualOffset;
 
         protected sealed override Size MeasureCore(Size availableSize)
@@ -232,7 +232,7 @@ namespace ReactorUI.Skia.Framework
         #endregion
 
         #region Arrange Pass
-        public Size RenderSize { get; private set; } = Size.Empty;
+        public Size RenderSize { get; private set; }
 
         protected sealed override void ArrangeCore(Rect finalRect)
         {
@@ -387,7 +387,7 @@ namespace ReactorUI.Skia.Framework
                 {
                     var pt = new SkiaSharp.SKPaint()
                         .IsStroke()
-                        .ApplyBrush(new SolidColorBrush(new Color(255, 0, 0)));
+                        .ApplyBrush(new SolidColorBrush(new Color(255, 0, 0)), 1.0f);
 
                     context.Canvas.DrawRect(new SkiaSharp.SKRect(0.5f, 0.5f, (float)RenderSize.Width -0.5f, (float)RenderSize.Height - 0.5f), pt);
                 }

@@ -126,7 +126,7 @@ namespace ReactorUI.Skia.Framework
 
                 var paint = new SKPaint();
 
-                paint.ApplyBrush(Foreground);
+                paint.ApplyBrush(Foreground, Opacity);
                 paint.ApplyFont(FontFamily, FontSize, FontStyle, FontStretch, FontWeight);
 
                 context.Canvas.DrawText(text, x, y, paint);
