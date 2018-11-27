@@ -1,10 +1,14 @@
 ﻿using ReactorUI.Contracts;
+using ReactorUI.Primitives;
 using ReactorUI.Skia.Controls;
+using ReactorUI.Skia.Framework;
 using ReactorUI.Widgets;
 using SkiaSharp;
 using SkiaSharp.Views.Desktop;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -127,6 +131,12 @@ namespace ReactorUI.Skia.WinForms
 
         private void _skiaView_PaintSurface(object sender, SKPaintGLSurfaceEventArgs e)
         {
+            Stopwatch renderStopWatch = null;
+            if (RenderOptions.ShowClipRects)
+            {
+                renderStopWatch = Stopwatch.StartNew();
+            }
+
             e.Surface.Canvas.Clear(new SKColor(Container.BackColor.R, Container.BackColor.G, Container.BackColor.B, Container.BackColor.A));
 
             _root.Measure(new Primitives.Size(Container.ClientSize.Width, Container.ClientSize.Height));
@@ -134,6 +144,21 @@ namespace ReactorUI.Skia.WinForms
             _root.Arrange(new Primitives.Rect(0, 0, Container.ClientSize.Width, Container.ClientSize.Height));
 
             _root.Render(e.Surface.Canvas);
+
+            if (renderStopWatch != null)
+            {
+                renderStopWatch.Stop();
+                using (var ptRect = new SkiaSharp.SKPaint()
+                    .ApplyBrush(new SolidColorBrush(new Color(0, 0, 0))))
+                using (var ptText = new SkiaSharp.SKPaint()
+                    .ApplyBrush(new SolidColorBrush(new Color(255, 255, 255))))
+                {
+                    e.Surface.Canvas.DrawRect(Container.ClientSize.Width - 50.0f, 0.0f, 100.0f, 10.0f, ptRect);
+                    var elapsedString = renderStopWatch.ElapsedMilliseconds == 0 ? "-" : $"{(1.0 / renderStopWatch.ElapsedMilliseconds * 1000).ToString("##.00", CultureInfo.InvariantCulture)}FPS";
+                    e.Surface.Canvas.DrawText(elapsedString, new SKPoint(Container.ClientSize.Width - 50.0f, 10.0f), ptText);
+                }
+                renderStopWatch.Reset();
+            }
         }
 
         public void RemoveChild(IWidget widget, Framework.UIElement child)

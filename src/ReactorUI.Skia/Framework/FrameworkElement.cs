@@ -376,7 +376,6 @@ namespace ReactorUI.Skia.Framework
         #endregion
 
         #region Render Pass
-        public static bool RenderClipRects { get; set; }
         protected sealed override void RenderCore(RenderContext context)
         {
             using (new SKAutoCanvasRestore(context.Canvas))
@@ -384,7 +383,7 @@ namespace ReactorUI.Skia.Framework
                 context.Canvas.Translate((float)_visualOffset.X, (float)_visualOffset.Y);
                 context.Canvas.ClipRect(new SkiaSharp.SKRect(0.0f, 0.0f, (float)RenderSize.Width, (float)RenderSize.Height));
                 RenderOverride(context);
-                if (RenderClipRects)
+                if (RenderOptions.ShowClipRects)
                 {
                     var pt = new SkiaSharp.SKPaint()
                         .IsStroke()

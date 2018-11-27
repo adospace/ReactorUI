@@ -15,7 +15,10 @@ namespace ReactorUI.Skia.WinForms.Host
         [Option('c', "component", Required = true, HelpText = "Type name of the Component to host.")]
         public string ComponentTypeName { get; set; }
 
-        [Option('r', "clip-rects", Required = true, HelpText = "Show clip rects before render visuals.")]
-        public bool RenderClipRects { get; set; }
+        [Option('r', "clip-rects", Required = false, HelpText = "Show clip rects before render visuals.")]
+        public bool ShowClipRects { get; set; }
+
+        [Option('f', "show-fps", Required = false, HelpText = "Show frame rate indicator.")]
+        public bool ShowFrameRate { get; set; }
     }
 }
