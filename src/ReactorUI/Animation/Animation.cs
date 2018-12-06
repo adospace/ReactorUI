@@ -17,7 +17,7 @@ namespace ReactorUI.Animation
 
         public bool KeepTargetValue { get; }
 
-        public Animation(int duration, Func<double, double> easingFunction, bool reverse = false, bool loop = false, bool keepTargetValue = false)
+        public Animation(int duration, Func<double, double> easingFunction, bool reverse = false, bool loop = false, bool keepTargetValue = true)
         {
             if (duration < 0) throw new ArgumentException("can't be less than or equal to zero", "duration");
 

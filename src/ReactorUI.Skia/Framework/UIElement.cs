@@ -56,6 +56,7 @@ namespace ReactorUI.Skia.Framework
                 if (_isEnabled != value)
                 {
                     _isEnabled = value;
+                    Invalidate(InvalidateMode.Render);
                 }
             }
         }
@@ -68,6 +69,8 @@ namespace ReactorUI.Skia.Framework
                 if (_opacity != value)
                 {
                     _opacity = value;
+                    Invalidate(InvalidateMode.Render);
+                    System.Diagnostics.Debug.WriteLine("Framework.Element.Opacity -> {0}", value);
                 }
             }
         }

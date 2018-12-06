@@ -21,11 +21,12 @@ namespace ReactorUI.TestApp
                     new TextBlock($"Counter: {state.Counter}")
                         .Foreground(new SolidColorBrush(Color.FromRGB(0, 0, 0)))
                         .Margin(4.0)
-                        //.Opacity(0.1)
-                        .AnimateOpacity(0.0, 1.0, 400, Easing.Linear)
                         ,
                     new Button("Click Here!!!")
                         //.OnMouseEnter(_=>_.Animate(b=>b.Background).To(
+                        .Opacity(0.5)
+                        .OnMouseEnter(_ => _.AnimateOpacity(1.0, 400, Easing.Linear))
+                        .OnMouseLeave(_ => _.AnimateOpacity(0.5, 400, Easing.Linear))
                         .Margin(4.0)
                         .Padding(4.0)
                         .IsVisible(true)

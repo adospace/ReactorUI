@@ -297,8 +297,6 @@ namespace ReactorUI.Skia.Framework
                 throw new InvalidOperationException("arrangeOverride() can't return null");
 
             this.RenderSize = innerInkSize;
-            //this.setActualWidth(innerInkSize.Width);
-            //this.setActualHeight(innerInkSize.Height);
 
             var clippedInkSize = new Size(Math.Min(innerInkSize.Width, mm.maxWidth),
                 Math.Min(innerInkSize.Height, mm.maxHeight));

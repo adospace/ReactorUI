@@ -3,21 +3,27 @@ using System;
 
 namespace ReactorUI.Animation
 {
-    public class DoubleAnimation : Animation, IAnimation<double>
+    public class DoubleAnimation : Animation//, IAnimation<double>
     {
-        public double From { get; }
+        public double? From { get; }
         public double To { get; }
 
-        public DoubleAnimation(double from, double to, int duration, Func<double, double> easingFunction, bool reverse = false, bool loop = false, bool keepTargetValue = false)
-            :base(duration, easingFunction, reverse, loop, keepTargetValue)
+        public DoubleAnimation(double from, double to, int duration, Func<double, double> easingFunction, bool reverse = false, bool loop = false, bool keepTargetValue = true)
+            : base(duration, easingFunction, reverse, loop, keepTargetValue)
         {
             From = from;
             To = to;
         }
 
-        public double GetValueAtOffset(double offset)
+        public DoubleAnimation(double to, int duration, Func<double, double> easingFunction, bool reverse = false, bool loop = false, bool keepTargetValue = true)
+            : base(duration, easingFunction, reverse, loop, keepTargetValue)
         {
-            return From + (To - From) * EasingFunction(offset);
+            To = to;
         }
+
+        //public double GetValueAtOffset(double from, double offset)
+        //{
+        //    return from + (To - from) * EasingFunction(offset);
+        //}
     }
 }

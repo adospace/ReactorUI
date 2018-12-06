@@ -17,12 +17,10 @@ namespace ReactorUI.Contracts
         bool KeepTargetValue { get; }
     }
 
-    public interface IAnimation<T>
-    {
-        T From { get; }
+    //public interface IAnimation<T>
+    //{
+    //    T To { get; }
 
-        T To { get; }
-
-        T GetValueAtOffset(double v);
-    }
+    //    T GetValueAtOffset(T from, double v);
+    //}
 }

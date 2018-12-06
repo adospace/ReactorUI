@@ -16,33 +16,35 @@ namespace ReactorUI.Widgets
 
         public TS Style { get; set; }
 
-        private Dictionary<string, AnimationElement> _animations = new Dictionary<string, AnimationElement>();
+        private Dictionary<Type, IAnimationActuator> _animations = new Dictionary<Type, IAnimationActuator>();
         
-        public void Animate(string propertyName, IAnimation animation)
+        public void Animate(IAnimationActuator animationActuator)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
+            if (animationActuator == null)
             {
-                throw new ArgumentException("can't be null or empty", nameof(propertyName));
+                throw new ArgumentNullException(nameof(animationActuator));
             }
 
-            if (animation == null)
-            {
-                throw new ArgumentNullException(nameof(animation));
-            }
-
-            _animations[propertyName] = new AnimationElement(this, propertyName, animation);
+            _animations[animationActuator.GetType()] = animationActuator;
         }
 
         protected override void OnAnimate()
         {
-            bool stateChanged = false;
-            if (_animations.TryGetValue(AnimationTarget.Opacity, out var animationElement))
-                stateChanged = animationElement.Tick<double>(newValue => Opacity = newValue);
+            List<Type> actuatorsToRemove = null;
+            foreach (var animationActuator in _animations)
+            {
+                if (!animationActuator.Value.Tick(this))
+                {
+                    actuatorsToRemove = actuatorsToRemove ?? new List<Type>();
+                    actuatorsToRemove.Add(animationActuator.Key);
+                }
+                else
+                    _stateChanged = true;
+            }
 
-
-
-            if (stateChanged)
-                _stateChanged = true;
+            if (actuatorsToRemove != null)
+                foreach (var animationTypeToRemove in actuatorsToRemove)
+                    _animations.Remove(animationTypeToRemove);
 
             base.OnAnimate();
         }
@@ -141,7 +143,13 @@ namespace ReactorUI.Widgets
     {
         public static T AnimateOpacity<T>(this T element, double from, double to, int duration, Func<double, double> easingFunction) where T : class, IUIElement
         {
-            element.Animate(AnimationTarget.Opacity, new DoubleAnimation(from, to, duration, easingFunction));
+            element.Animate(new OpacityAnimationActuator(new DoubleAnimation(from, to, duration, easingFunction)));
+            return element;
+        }
+
+        public static T AnimateOpacity<T>(this T element, double to, int duration, Func<double, double> easingFunction) where T : class, IUIElement
+        {
+            element.Animate(new OpacityAnimationActuator(new DoubleAnimation(to, duration, easingFunction)));
             return element;
         }
     }

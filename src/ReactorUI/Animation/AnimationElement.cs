@@ -7,87 +7,93 @@ using System.Text;
 
 namespace ReactorUI.Animation
 {
-    internal class AnimationElement 
-    {
-        public IUIElement Element { get; }
-        public string PropertyName { get; }
-        public IAnimation Animation { get; }
+    //internal class AnimationElement 
+    //{
+    //    public IUIElement Element { get; }
+    //    public string PropertyName { get; }
+    //    public IAnimation Animation { get; }
 
-        public AnimationElement(IUIElement element, string propertyName, IAnimation animation)
-        {
-            if (string.IsNullOrWhiteSpace(propertyName))
-            {
-                throw new ArgumentException("can't be empty or null", nameof(propertyName));
-            }
+    //    public AnimationElement(IUIElement element, string propertyName, IAnimation animation)
+    //    {
+    //        if (string.IsNullOrWhiteSpace(propertyName))
+    //        {
+    //            throw new ArgumentException("can't be empty or null", nameof(propertyName));
+    //        }
 
-            Element = element ?? throw new ArgumentNullException(nameof(element));
-            PropertyName = propertyName;
-            Animation = animation ?? throw new ArgumentNullException(nameof(animation));
-        }
+    //        Element = element ?? throw new ArgumentNullException(nameof(element));
+    //        PropertyName = propertyName;
+    //        Animation = animation ?? throw new ArgumentNullException(nameof(animation));
+    //    }
 
-        private readonly Stopwatch _runningStopwatch = Stopwatch.StartNew();
-        private bool _reverseDirection = false;
-        private bool _completed = false;
+    //    private readonly Stopwatch _runningStopwatch = Stopwatch.StartNew();
+    //    private bool _reverseDirection = false;
+    //    private bool _completed = false;
+    //    private bool _initialValueSet = false;
+        
+    //    public bool Tick<T>(T initialValue, Action<T> applyValueAction)
+    //    {
+    //        if (applyValueAction == null)
+    //        {
+    //            throw new ArgumentNullException(nameof(applyValueAction));
+    //        }
 
-        public bool Tick<T>(Action<T> applyValueAction)
-        {
-            if (applyValueAction == null)
-            {
-                throw new ArgumentNullException(nameof(applyValueAction));
-            }
+    //        if (!_initialValueSet)
+    //        {
 
-            var animationT = (IAnimation<T>)Animation;
-            if (animationT == null)
-                throw new InvalidOperationException();
+    //        }
 
-            if (_completed)
-            {
-                if (!Animation.KeepTargetValue)
-                    return false;
+    //        var animationT = (IAnimation<T>)Animation;
+    //        if (animationT == null)
+    //            throw new InvalidOperationException();
 
-                if (_reverseDirection)
-                    applyValueAction(animationT.From);
-                else
-                    applyValueAction(animationT.To);
+    //        if (_completed)
+    //        {
+    //            if (!Animation.KeepTargetValue)
+    //                return false;
 
-                return true;
-            }
+    //            if (_reverseDirection)
+    //                applyValueAction(animationT.From);
+    //            else
+    //                applyValueAction(animationT.To);
 
-            double offset = _runningStopwatch.ElapsedMilliseconds / (double)Animation.Duration;
+    //            return true;
+    //        }
 
-            if (offset >= 1.0)
-            {
-                offset = offset % 1.0;
+    //        double offset = _runningStopwatch.ElapsedMilliseconds / (double)Animation.Duration;
 
-                if (Animation.Reverse)
-                {
-                    _reverseDirection = true;
-                }
-                else if (Animation.Loop)
-                {
-                    _reverseDirection = !_reverseDirection;
-                }
-                else
-                {
-                    applyValueAction(animationT.To);
+    //        if (offset >= 1.0)
+    //        {
+    //            offset = offset % 1.0;
 
-                    if (!Animation.KeepTargetValue)
-                        _runningStopwatch.Stop();
+    //            if (Animation.Reverse)
+    //            {
+    //                _reverseDirection = true;
+    //            }
+    //            else if (Animation.Loop)
+    //            {
+    //                _reverseDirection = !_reverseDirection;
+    //            }
+    //            else
+    //            {
+    //                applyValueAction(animationT.To);
 
-                    _completed = true;
-                }
-            }
-            else if (DoubleUtil.IsLessOrClose(offset, 1.0))
-                applyValueAction(animationT.To);
-            else if (DoubleUtil.IsGreaterOrClose(offset, 0.0))
-                applyValueAction(animationT.From);
-            else
-            {
-                applyValueAction(
-                    animationT.GetValueAtOffset(_reverseDirection ? 1.0 - offset : offset));
-            }
+    //                if (!Animation.KeepTargetValue)
+    //                    _runningStopwatch.Stop();
 
-            return true;
-        }
-    }
+    //                _completed = true;
+    //            }
+    //        }
+    //        else if (DoubleUtil.IsLessOrClose(offset, 1.0))
+    //            applyValueAction(animationT.To);
+    //        else if (DoubleUtil.IsGreaterOrClose(offset, 0.0))
+    //            applyValueAction(animationT.From);
+    //        else
+    //        {
+    //            applyValueAction(
+    //                animationT.GetValueAtOffset(_reverseDirection ? 1.0 - offset : offset));
+    //        }
+
+    //        return true;
+    //    }
+    //}
 }
