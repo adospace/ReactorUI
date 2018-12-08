@@ -20,14 +20,20 @@ namespace ReactorUI.TestApp
                 new StackPanel(
                     new TextBlock($"Counter: {state.Counter}")
                         .Foreground(new SolidColorBrush(Color.FromRGB(0, 0, 0)))
-                        .Margin(4.0)
+                        .HitTestVisible(true)
+                        .Margin(14.0)
+                        .Transform(new Transform().ScaleWidthHeight(2.0, 2.0))
+                        .OnMouseEnter(_ => _.Transform(new Transform().ScaleWidth(2.0)))
+                        .OnMouseLeave(_ => _.Transform(new Transform().ScaleWidth(1.0)))
                         ,
                     new Button("Click Here!!!")
                         //.OnMouseEnter(_=>_.Animate(b=>b.Background).To(
                         .Opacity(0.5)
                         .OnMouseEnter(_ => _.AnimateOpacity(1.0, 400, Easing.Linear))
                         .OnMouseLeave(_ => _.AnimateOpacity(0.5, 400, Easing.Linear))
-                        .Margin(4.0)
+                        .OnMouseEnter(_ => _.Transform(new Transform().ScaleWidth(2.0)))
+                        .OnMouseLeave(_ => _.Transform(new Transform().ScaleWidth(1.0)))
+                        .Margin(14.0)
                         .Padding(4.0)
                         .IsVisible(true)
                         .Background(new SolidColorBrush(new Color(100, 100, 100)))

@@ -379,8 +379,12 @@ namespace ReactorUI.Skia.Framework
             using (new SKAutoCanvasRestore(context.Canvas))
             {
                 context.Canvas.Translate((float)_visualOffset.X, (float)_visualOffset.Y);
+
+                context.Canvas.ApplyTransform(Transform);
                 context.Canvas.ClipRect(new SkiaSharp.SKRect(0.0f, 0.0f, (float)RenderSize.Width, (float)RenderSize.Height));
+
                 RenderOverride(context);
+
                 if (RenderOptions.ShowClipRects)
                 {
                     var pt = new SkiaSharp.SKPaint()

@@ -23,5 +23,7 @@ namespace ReactorUI.Contracts
         //ContextMenu ContextMenu { get; set; }
         //object ToolTip { get; set; }
         //Cursor Cursor { get; set; }
+
+
     }
 }

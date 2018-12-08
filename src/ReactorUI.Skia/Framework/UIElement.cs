@@ -74,6 +74,19 @@ namespace ReactorUI.Skia.Framework
                 }
             }
         }
+        private Transform _transform;
+        public Transform Transform
+        {
+            get { return _transform; }
+            set
+            {
+                if (_transform != value)
+                {
+                    _transform = value;
+                    Invalidate(InvalidateMode.Render);
+                }
+            }
+        }
         #endregion
 
         #region Public Events

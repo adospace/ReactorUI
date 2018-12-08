@@ -1,5 +1,6 @@
 ﻿using ReactorUI.Animation;
 using ReactorUI.Contracts;
+using ReactorUI.Primitives;
 using ReactorUI.Styles;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace ReactorUI.Widgets
         public bool IsHitTestVisible { get; set; } = true;
         public bool IsVisible { get; set; } = true;
         public double Opacity { get; set; } = 1.0;
+        public Transform Transform { get; set; } = new Transform();
 
         public TS Style { get; set; }
 
@@ -96,6 +98,12 @@ namespace ReactorUI.Widgets
 
     public static class UIElementExtensions
     {
+        public static T HitTestVisible<T>(this T element, bool isHitTestVisible) where T : class, IUIElement
+        {
+            element.IsHitTestVisible = isHitTestVisible;
+            return element;
+        }
+
         public static T IsEnabled<T>(this T element, bool isEnabled) where T : class, IUIElement
         {
             element.IsEnabled = isEnabled;
@@ -117,6 +125,12 @@ namespace ReactorUI.Widgets
         public static T Opacity<T>(this T element, double opacity) where T : class, IUIElement
         {
             element.Opacity = opacity;
+            return element;
+        }
+
+        public static T Transform<T>(this T element, Transform transform) where T : class, IUIElement
+        {
+            element.Transform = transform;
             return element;
         }
 
