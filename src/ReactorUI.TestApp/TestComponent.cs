@@ -27,22 +27,19 @@ namespace ReactorUI.TestApp
                         .OnMouseLeave(_ => _.Transform(new Transform().ScaleWidth(1.0)))
                         ,
                     new Button("Click Here!!!")
-                        //.OnMouseEnter(_=>_.Animate(b=>b.Background).To(
                         .Opacity(0.5)
-                        .OnMouseEnter(_ => _.AnimateOpacity(1.0, 400, Easing.Linear))
-                        .OnMouseLeave(_ => _.AnimateOpacity(0.5, 400, Easing.Linear))
-                        .OnMouseEnter(_ => _.Transform(new Transform().ScaleWidth(2.0)))
-                        .OnMouseLeave(_ => _.Transform(new Transform().ScaleWidth(1.0)))
+                        .OnMouseEnter(_ => _.AnimateOpacity(1.0, 400, Easing.Linear).Transform(new Transform().ScaleWidth(1.5)))
+                        .OnMouseLeave(_ => _.AnimateOpacity(0.5, 400, Easing.Linear).Transform(new Transform().ScaleWidth(1.0)))
                         .Margin(14.0)
                         .Padding(4.0)
                         .IsVisible(true)
                         .Background(new SolidColorBrush(new Color(100, 100, 100)))
                         .OnClick(() => this.SetState(_ => _.Counter-=100))
                         )
-                        .Orientation(Orientation.Vertical)
-                        .VerticalAlignment(VerticalAlignment.Center)
-                        .HorizontalAlignment(HorizontalAlignment.Center)
-                        ;
+                    .Orientation(Orientation.Vertical)
+                    .VerticalAlignment(VerticalAlignment.Center)
+                    .HorizontalAlignment(HorizontalAlignment.Center)
+                    ;
         }
     }
 

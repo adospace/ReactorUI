@@ -380,7 +380,7 @@ namespace ReactorUI.Skia.Framework
             {
                 context.Canvas.Translate((float)_visualOffset.X, (float)_visualOffset.Y);
 
-                context.Canvas.ApplyTransform(Transform);
+                context.Canvas.ApplyTransform(Transform, RenderSize);
                 context.Canvas.ClipRect(new SkiaSharp.SKRect(0.0f, 0.0f, (float)RenderSize.Width, (float)RenderSize.Height));
 
                 RenderOverride(context);

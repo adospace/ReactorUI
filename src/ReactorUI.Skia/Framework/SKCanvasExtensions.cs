@@ -8,7 +8,7 @@ namespace ReactorUI.Skia.Framework
 {
     public static class SKCanvasExtensions
     {
-        public static void ApplyTransform(this SKCanvas canvas, Transform transform)
+        public static void ApplyTransform(this SKCanvas canvas, Transform transform, Size renderSize)
         {
             if (canvas == null)
             {
@@ -27,7 +27,7 @@ namespace ReactorUI.Skia.Framework
                 else if (operation is Transform.ScaleOrigin)
                     ApplyTransform(canvas, (Transform.ScaleOrigin)operation);
                 else if (operation is Transform.ScaleRelativeOrigin)
-                    ApplyTransform(canvas, (Transform.ScaleRelativeOrigin)operation);
+                    ApplyTransform(canvas, (Transform.ScaleRelativeOrigin)operation, renderSize);
             }
         }
 
@@ -41,9 +41,9 @@ namespace ReactorUI.Skia.Framework
             canvas.Scale((float)transformOperation.X, (float)transformOperation.Y, (float)transformOperation.XOrigin, (float)transformOperation.YOrigin);
         }
 
-        private static void ApplyTransform(this SKCanvas canvas, Transform.ScaleRelativeOrigin transformOperation)
+        private static void ApplyTransform(this SKCanvas canvas, Transform.ScaleRelativeOrigin transformOperation, Size renderSize)
         {
-            canvas.Scale((float)transformOperation.X, (float)transformOperation.Y, (float)transformOperation.XOffset * canvas.LocalClipBounds.Width, (float)transformOperation.YOffset * canvas.LocalClipBounds.Height);
+            canvas.Scale((float)transformOperation.X, (float)transformOperation.Y, (float)(transformOperation.XOffset * renderSize.Width), (float)(transformOperation.YOffset * renderSize.Height));
         }
     }
 }
