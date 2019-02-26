@@ -67,7 +67,6 @@ namespace ReactorUI.Skia.Controls
             _nativeControl.IsVisible = _widget.IsVisible;
             _nativeControl.Transform = _widget.Transform;
 
-            System.Diagnostics.Debug.WriteLine("_nativeControl.Opacity -> {0}", _widget.Opacity);
             _nativeControl.Opacity = _widget.Opacity;
 
             bool shouldFireOnMouseEnter = (_widget.OnMouseEnterAction != null || Style?.OnMouseEnterAction != null);

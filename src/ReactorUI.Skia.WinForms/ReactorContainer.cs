@@ -16,7 +16,7 @@ using System.Windows;
 
 namespace ReactorUI.Skia.WinForms
 {
-    public abstract class ReactorContainer<T> : Widget, INativeControl, INativeControlContainer, IWidgetContainer where T : System.Windows.Forms.Control
+    public abstract class ReactorContainer<T> : Widget, INativeControl, INativeControlContainer, IWidgetContainer, IPopupContainer where T : System.Windows.Forms.Control
     {
         public ReactorContainer(T container)
         {
@@ -132,7 +132,7 @@ namespace ReactorUI.Skia.WinForms
         private void _skiaView_PaintSurface(object sender, SKPaintGLSurfaceEventArgs e)
         {
             Stopwatch renderStopWatch = null;
-            if (RenderOptions.ShowClipRects)
+            if (RenderOptions.ShowFrameRate)
             {
                 renderStopWatch = Stopwatch.StartNew();
             }
@@ -188,6 +188,20 @@ namespace ReactorUI.Skia.WinForms
 
         }
 
-        
+        public void ShowPopup(UIElement popupElement)
+        {
+            if (popupElement == null)
+            {
+                throw new ArgumentNullException(nameof(popupElement));
+            }
+
+            var popupWindow = new PopupWindow(Container, popupElement);
+            popupWindow.Show();
+        }
+
+        public void ShowTooltip(string tooltip)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
