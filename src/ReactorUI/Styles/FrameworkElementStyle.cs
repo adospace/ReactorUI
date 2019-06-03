@@ -8,6 +8,6 @@ namespace ReactorUI.Styles
 {
     public class FrameworkElementStyle<T> : UIElementStyle<T> where T : IFrameworkElement
     {
-        Thickness Margin { get; set; }
+        //Thickness Margin { get; set; }
     }
 }
