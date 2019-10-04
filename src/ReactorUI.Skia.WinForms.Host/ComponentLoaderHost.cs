@@ -45,7 +45,7 @@ namespace ReactorUI.Widgets
             if (Component == null)
             {
                 Component = CreateInstance<Component>(AssemblyPath, TypeName);
-                var fileSystemWatcher = new FileSystemWatcher(Path.GetDirectoryName(AssemblyPath), Path.GetFileName(AssemblyPath));
+                var fileSystemWatcher = new FileSystemWatcher(Path.GetDirectoryName(AssemblyPath), "*.dll");
                 fileSystemWatcher.Changed += AssemblyChanged;
                 fileSystemWatcher.NotifyFilter = NotifyFilters.LastWrite;
                 fileSystemWatcher.EnableRaisingEvents = true;
@@ -65,11 +65,11 @@ namespace ReactorUI.Widgets
         {
             var assembly = Assembly.Load(File.ReadAllBytes(assemblyPath));
             if (assembly == null)
-                throw new InvalidOperationException($"Unable to load assembly '{typeName}'");
+                throw new InvalidOperationException($"Unable to load assembly '{assemblyPath}'");
 
             var obj = assembly.CreateInstance(typeName, true, BindingFlags.Default, null, args, null, null);
             if (obj == null)
-                throw new InvalidOperationException($"Unable to load type '{assemblyPath}' from assembly '{typeName}'");
+                throw new InvalidOperationException($"Unable to load type '{typeName}' from assembly '{assemblyPath}'");
             return (T)obj;
         }
     }

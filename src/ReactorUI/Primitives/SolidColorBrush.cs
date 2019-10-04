@@ -10,6 +10,14 @@ namespace ReactorUI.Primitives
         {
             Color = color;
         }
+        public SolidColorBrush(byte r, byte g, byte b)
+        {
+            Color = new Color(r, g, b);
+        }
+        public SolidColorBrush(byte a, byte r, byte g, byte b)
+        {
+            Color = new Color(a, r, g, b);
+        }
 
         public Color Color { get; }
     }

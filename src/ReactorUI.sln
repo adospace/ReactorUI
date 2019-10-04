@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2048
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReactorUI", "ReactorUI\ReactorUI.csproj", "{50650CFC-4468-4203-A5EE-FE23267921A6}"
 EndProject
@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReactorUI.Skia.Theme.Modern
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactorUI.Skia.WinForms.Host", "ReactorUI.Skia.WinForms.Host\ReactorUI.Skia.WinForms.Host.csproj", "{C260886C-9B52-4CCD-8566-16C4D6E669E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactorUI.TestApp", "ReactorUI.TestApp\ReactorUI.TestApp.csproj", "{14865884-A08B-4405-ABBF-0EB1180307D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReactorUI.TestApp", "ReactorUI.TestApp\ReactorUI.TestApp.csproj", "{14865884-A08B-4405-ABBF-0EB1180307D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
