@@ -54,6 +54,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationExtensions.cs" />
     <Compile Include="Controls\ComponentHost.cs" />
     <Compile Include="Controls\FrameworkElement.cs" />
     <Compile Include="Controls\Image.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="ReactorContainer.cs" />
     <Compile Include="ReactorApplication.cs" />
     <Compile Include="Controls\TextBlock.cs" />
+    <Compile Include="ReactorWindow.cs" />
     <Compile Include="WidgetExtensions.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

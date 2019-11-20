@@ -1,6 +1,4 @@
 ﻿using ReactorUI.Widgets;
-using ReactorUI.Contracts;
-using ReactorUI.WPF.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,21 +7,66 @@ using System.Threading.Tasks;
 
 namespace ReactorUI.WPF
 {
-    public static class ReactorApplication
+    public class ReactorApplication : IApplication
     {
-        public static void Initialize()
+        static ReactorApplication()
         {
-            //WidgetRegistry.Instance.Register<IComponentHost>(() => new Controls.ComponentHost());
+        }
 
-            //WidgetRegistry.Instance.Register<ITextBlock>(()=> new Controls.TextBlock());
-            //WidgetRegistry.Instance.Register<IBorder>(() => new Controls.Border());
-            //WidgetRegistry.Instance.Register<IButton>(() => new Controls.Button());
-            //WidgetRegistry.Instance.Register<ITreeView>(() => new Controls.TreeView());
-            //WidgetRegistry.Instance.Register<ITreeViewNode>(() => new Controls.TreeViewNode());
-            //WidgetRegistry.Instance.Register<IImage>(() => new Controls.Image());
+        protected ReactorApplication()
+        { }
 
-            //WidgetRegistry.Instance.Register<IStackPanel>(() => new Controls.Panels.StackPanel());
-            //WidgetRegistry.Instance.Register<IDockPanel>(() => new Controls.Panels.DockPanel());
+        public ComponentHost RootHost { get; private set; }
+
+        //public Component Root => RootHost.Compoent;
+
+        public System.Windows.Window Window { get; private set; }
+
+        public WidgetRegistry WidgetRegistry { get; } = new WidgetRegistry();
+
+        public static IApplication Create(Component root, System.Windows.Window window = null)
+        {
+            if (root == null)
+            {
+                throw new ArgumentNullException(nameof(root));
+            }
+
+            return Application
+                .Register(new ReactorApplication()
+                {
+                    RootHost = Component.Host(root),
+                    Window = window
+                })
+                .DefaultTheme();
+        }
+
+        public static IApplication Create<T>(ComponentHost rootHost) where T : System.Windows.Window, new()
+        {
+            if (rootHost == null)
+            {
+                throw new ArgumentNullException(nameof(rootHost));
+            }
+
+            return Application.Register(new ReactorApplication()
+            {
+                RootHost = rootHost,
+                Window = new T()
+            });
+        }
+
+        public void Run()
+        {
+            Run(Window ?? new System.Windows.Window());
+        }
+
+        public void Run(System.Windows.Window window)
+        {
+            var reactorWindow = new ReactorWindow(RootHost, window);
+
+            reactorWindow.Run();
+
+            window.Show();
         }
     }
+
 }

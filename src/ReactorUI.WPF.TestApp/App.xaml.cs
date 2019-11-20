@@ -15,14 +15,20 @@ namespace ReactorUI.WPF.TestApp
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            ReactorApplication.Initialize();
+            //ReactorApplication.Initialize();
 
-            var mainWindow = new Window();
-            var mainWindowComponent = 
-                new MainWindowComponent(mainWindow)
+            //var mainWindow = new Window();
+            //var mainWindowComponent = 
+            //    new MainWindowComponent(mainWindow)
+            //    .Run();
+
+            WPF.ReactorApplication
+                .Create(new MainWindowComponent())
+                
                 .Run();
 
-            mainWindow.Show();
+
+            //mainWindow.Show();
 
             base.OnStartup(e);
         }

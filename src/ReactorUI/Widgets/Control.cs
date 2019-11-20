@@ -25,8 +25,8 @@ namespace ReactorUI.Widgets
 
         public Thickness Padding { get; set; }
 
-        public HorizontalAlignment HorizontalContentAlignment { get; set; } = HorizontalAlignment.Stretch;
-        public VerticalAlignment VerticalContentAlignment { get; set; } = VerticalAlignment.Stretch;
+        public HorizontalAlignment HorizontalContentAlignment { get; set; } = HorizontalAlignment.Center;
+        public VerticalAlignment VerticalContentAlignment { get; set; } = VerticalAlignment.Center;
 
         protected override void OnApplyStyle()
         {
