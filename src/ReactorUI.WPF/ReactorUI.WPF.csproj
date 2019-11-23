@@ -5,7 +5,6 @@
     <Version Condition=" '$(APPVEYOR_BUILD_VERSION)' != '' ">$(APPVEYOR_BUILD_VERSION)-beta</Version>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>0.0.1.0</Version>
     <Authors>adospace</Authors>
     <Description>ReactorUI is .NET UI framework for building cross-platform desktop application heavily inspired to Reactjs. This package contains the WPF bindings to ReactorUI.</Description>
     <Copyright>Adolfo Marinucci</Copyright>
