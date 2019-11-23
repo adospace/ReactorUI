@@ -11,10 +11,18 @@ namespace ReactorUI.Widgets
         public Button(VisualNode content = null)
             :base(content)
         {
+            HorizontalAlignment = Primitives.HorizontalAlignment.Center;
+            VerticalAlignment = Primitives.VerticalAlignment.Center;
+
+            Height = 32;
         }
 
         public Button(string text)
         {
+            HorizontalAlignment = Primitives.HorizontalAlignment.Center;
+            VerticalAlignment = Primitives.VerticalAlignment.Center;
+
+            Height = 32;
             Text = text;
         }
 

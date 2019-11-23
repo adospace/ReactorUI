@@ -25,7 +25,7 @@ namespace ReactorUI.WPF.Controls
         public void DidMount(IWidget widget)
         {
             _widget = (I)widget;
-            _nativeControl = _nativeControl ?? new T();
+            _nativeControl ??= new T();
 
             widget.ParentAsNativeControlContainer().AddChild(widget, _nativeControl);
 
