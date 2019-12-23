@@ -188,6 +188,10 @@ namespace ReactorUI.Skia.Framework
         }
         #endregion
 
+        #region Private Properties
+        SKRect _textMeasure;
+        #endregion
+
         #region Measure Pass
         protected override Size MeasureOverride(Size availableSize)
         {
@@ -198,10 +202,10 @@ namespace ReactorUI.Skia.Framework
 
             paint.ApplyFont(FontFamily, FontSize, FontStyle, FontStretch, FontWeight);
 
-            var bounds = new SKRect();
-            paint.MeasureText(Text, ref bounds);
+            _textMeasure = new SKRect();
+            paint.MeasureText(Text, ref _textMeasure);
 
-            return new Size(bounds.Width, bounds.Height);
+            return new Size(_textMeasure.Width, _textMeasure.Height);
         }
         #endregion
 
@@ -221,10 +225,13 @@ namespace ReactorUI.Skia.Framework
                 var finalWidth = this.RenderSize.Width - (Padding.Left + Padding.Right);
                 var finalHeight = this.RenderSize.Height - (Padding.Top + Padding.Bottom);
 
-                float x = (float)Padding.Left;
-                float y = (float)Padding.Top + (float)finalHeight;
+                float x = (float)Padding.Left + _textMeasure.Left;
+                float y = (float)Padding.Top + (float)finalHeight - _textMeasure.Bottom;
 
-                var paint = new SKPaint();
+                var paint = new SKPaint()
+                {
+                    IsAntialias = true
+                };
 
                 paint.ApplyBrush(Foreground, Opacity);
                 paint.ApplyFont(FontFamily, FontSize, FontStyle, FontStretch, FontWeight);

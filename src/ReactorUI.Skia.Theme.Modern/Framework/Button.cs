@@ -8,6 +8,9 @@ namespace ReactorUI.Skia.Theme.Modern.Framework
 {
     internal class Button : ReactorUI.Skia.Framework.Button
     {
+        public Button()
+        { 
+        }
 
         #region Render Pass
         protected override void RenderOverride(RenderContext context)
@@ -34,7 +37,7 @@ namespace ReactorUI.Skia.Theme.Modern.Framework
 
                 paint.ApplyBrush(BorderBrush ?? Brushes.NeutralGray110, Opacity);
 
-                context.Canvas.DrawRoundRect(new SKRect(0, 0, (float)RenderSize.Width, (float)RenderSize.Height), 2.0f, 2.0f, paint);
+                context.Canvas.DrawRoundRect(new SKRect((float)BorderThickness.UniformLength, (float)BorderThickness.UniformLength, (float)(RenderSize.Width - BorderThickness.UniformLength), (float)(RenderSize.Height - BorderThickness.UniformLength)), 2.0f, 2.0f, paint);
             }
         }
         #endregion

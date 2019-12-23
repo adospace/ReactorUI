@@ -95,8 +95,9 @@ namespace ReactorUI.Skia.Xamarin
                 var context = new Framework.Input.MouseEventsContext((Framework.Input.MouseButtons)e.MouseButton, 1, e.WheelDelta);
                 _root.HandleMouseMove(location.X, location.Y, context);
                 _root.HandleMouseDown(location.X, location.Y, context);
-                _root.HandleMouseUp(location.X, location.Y, context);
+                //_root.HandleMouseUp(location.X, location.Y, context);
                 _capturedMouseEvents = context.CaptureTo;
+                e.Handled = true;
             }
             else if (e.ActionType == SKTouchAction.Moved)
             {
@@ -115,6 +116,7 @@ namespace ReactorUI.Skia.Xamarin
                 }
 
                 _capturedMouseEvents = context.CaptureTo;
+                e.Handled = true;
             }
             else if (e.ActionType == SKTouchAction.Released)
             {
@@ -132,6 +134,7 @@ namespace ReactorUI.Skia.Xamarin
                 {
                     _root.HandleMouseUp(location.X, location.Y, new Framework.Input.MouseEventsContext((Framework.Input.MouseButtons)e.MouseButton, 1, e.WheelDelta));
                 }
+                e.Handled = true;
             }
         }
 
