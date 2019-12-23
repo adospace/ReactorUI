@@ -168,7 +168,7 @@ namespace ReactorUI.Skia.Framework
         #endregion
 
         #region Mouse
-        protected override void OnHitTest(int x, int y, Input.MouseEventsContext context)
+        protected override void OnHitTest(double x, double y, Input.MouseEventsContext context)
         {
             if (Background != null)
                 base.OnHitTest(x, y, context);
@@ -177,7 +177,7 @@ namespace ReactorUI.Skia.Framework
                 Child.HandleMouseMove(x, y, context);
         }
 
-        protected override void OnMouseDown(int x, int y, Input.MouseEventsContext context)
+        protected override void OnMouseDown(double x, double y, Input.MouseEventsContext context)
         {
             if (Child != null)
                 Child.HandleMouseDown(x, y, context);
@@ -185,7 +185,7 @@ namespace ReactorUI.Skia.Framework
             base.OnMouseDown(x, y, context);
         }
 
-        protected override void OnMouseUp(int x, int y, Input.MouseEventsContext context)
+        protected override void OnMouseUp(double x, double y, Input.MouseEventsContext context)
         {
             if (Child != null)
                 Child.HandleMouseUp(x, y, context);

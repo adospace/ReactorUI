@@ -19,11 +19,13 @@ namespace ReactorUI.Widgets
 
         public Button(string text)
         {
+            Text = text;
+            
+            IsHitTestVisible = text != null;
             HorizontalAlignment = Primitives.HorizontalAlignment.Center;
             VerticalAlignment = Primitives.VerticalAlignment.Center;
 
             Height = 32;
-            Text = text;
         }
 
         public string Text { get; set; }
@@ -56,11 +58,11 @@ namespace ReactorUI.Widgets
             return button;
         }
 
-        public static Button OnClick(this Button button, Action<Button> onClick)
-        {
-            button.OnClickAction = (Action<IButton>)onClick;
-            return button;
-        }
+        //public static Button OnClick(this Button button, Action<Button> onClick)
+        //{
+        //    button.OnClickAction = (Action<IButton>)onClick;
+        //    return button;
+        //}
 
         public static Button Style(this Button button, ButtonStyle style)
         {

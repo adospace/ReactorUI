@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ReactorUI.Contracts
+namespace ReactorUI.Contracts.Panels
 {
     public interface IStackPanel : IPanel
     {

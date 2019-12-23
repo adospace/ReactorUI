@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using ReactorUI.Styles;
 using ReactorUI.Skia.Framework;
+using ReactorUI.Contracts.Panels;
+using ReactorUI.Styles.Panels;
 
 namespace ReactorUI.Skia.Controls.Panels
 {

@@ -18,6 +18,7 @@ namespace ReactorUI.Widgets
                 {
                     var oldComponent = _component;
                     _component = value;
+                    IsHitTestVisible = value != null;
                     _component.SetOwner(this);
                     if (oldComponent != null)
                         _component.MigrateStateFrom(oldComponent);
@@ -31,6 +32,7 @@ namespace ReactorUI.Widgets
         public ComponentHost(Component component)
         {
             Component = component ?? throw new ArgumentNullException(nameof(component));
+            IsHitTestVisible = true;
         }
 
         internal override void MergeWith(VisualNode newNode)

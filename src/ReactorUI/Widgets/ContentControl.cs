@@ -14,6 +14,7 @@ namespace ReactorUI.Widgets
         public ContentControl(VisualNode content = null)
         {
             _content = content;
+            IsHitTestVisible = content != null;
         }
 
         protected override IEnumerable<VisualNode> RenderChildren()

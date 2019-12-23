@@ -24,12 +24,14 @@ namespace ReactorUI.Skia.Controls
         public void DidMount(IWidget widget)
         {
             _widget = (I)widget;
-            _nativeControl = _nativeControl ?? new T();
+            _nativeControl = _nativeControl ?? CreateNativeControl();
 
             widget.ParentAsNativeControlContainer().AddChild(widget, _nativeControl);
 
             OnDidMount();
         }
+
+        protected virtual T CreateNativeControl() => new T();
 
         protected virtual void OnDidMount()
         {

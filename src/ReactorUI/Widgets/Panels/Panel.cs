@@ -1,5 +1,7 @@
 ﻿using ReactorUI.Contracts;
+using ReactorUI.Contracts.Panels;
 using ReactorUI.Styles;
+using ReactorUI.Styles.Panels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +11,29 @@ namespace ReactorUI.Widgets.Panels
 {
     public abstract class Panel<T, TS> : FrameworkElement<T, TS>, IWidgetContainer where T : class, IPanel where TS : PanelStyle<T>
     {
-        internal List<VisualNode> InternalChildren { get; } = new List<VisualNode>();
+        protected Panel(params VisualNode[] children)
+        {
+            _internalChildren.AddRange(children);
+            IsHitTestVisible = _internalChildren.Any();
+        }
+
+        private readonly List<VisualNode> _internalChildren = new List<VisualNode>();
+
+        protected void AddChild(VisualNode node)
+        {
+            _internalChildren.Add(node);
+            IsHitTestVisible = _internalChildren.Any();
+        }
+
+        protected void RemoveChild(VisualNode node)
+        {
+            _internalChildren.Remove(node);
+            IsHitTestVisible = _internalChildren.Any();
+        }
 
         protected override IEnumerable<VisualNode> RenderChildren()
         {
-            return InternalChildren.Where(_ => _ != null);
+            return _internalChildren.Where(_ => _ != null);
         }
     }
 

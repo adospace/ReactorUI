@@ -1,6 +1,8 @@
 ﻿using ReactorUI.Contracts;
+using ReactorUI.Contracts.Panels;
 using ReactorUI.Primitives;
 using ReactorUI.Styles;
+using ReactorUI.Styles.Panels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

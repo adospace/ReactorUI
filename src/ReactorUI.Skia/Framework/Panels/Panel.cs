@@ -83,7 +83,7 @@ namespace ReactorUI.Skia.Framework.Panels
         #endregion
 
         #region Mouse
-        protected override void OnHitTest(int x, int y, MouseEventsContext context)
+        protected override void OnHitTest(double x, double y, MouseEventsContext context)
         {
             foreach (var child in GetChildren())
                 child.HandleMouseMove(x, y, context);
@@ -91,14 +91,14 @@ namespace ReactorUI.Skia.Framework.Panels
             base.OnHitTest(x, y, context);
         }
 
-        protected override void OnMouseDown(int x, int y, MouseEventsContext context)
+        protected override void OnMouseDown(double x, double y, MouseEventsContext context)
         {
             foreach (var child in GetChildren())
                 child.HandleMouseDown(x, y, context);
             base.OnMouseDown(x, y, context);
         }
 
-        protected override void OnMouseUp(int x, int y, MouseEventsContext context)
+        protected override void OnMouseUp(double x, double y, MouseEventsContext context)
         {
             foreach (var child in GetChildren())
                 child.HandleMouseUp(x, y, context);

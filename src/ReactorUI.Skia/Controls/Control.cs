@@ -34,8 +34,8 @@ namespace ReactorUI.Skia.Controls
 
                 _nativeControl.Padding = Style.Padding;
 
-                _nativeControl.HorizontalContentAlignment = Style.HorizontalContentAlignment;
-                _nativeControl.VerticalContentAlignment = Style.VerticalContentAlignment;
+                //_nativeControl.HorizontalContentAlignment = Style.HorizontalContentAlignment;
+                //_nativeControl.VerticalContentAlignment = Style.VerticalContentAlignment;
             }
 
             _nativeControl.FontFamily = _widget.FontFamily;
@@ -55,8 +55,8 @@ namespace ReactorUI.Skia.Controls
 
             _nativeControl.Padding = _widget.Padding;
 
-            _nativeControl.HorizontalContentAlignment = _widget.HorizontalContentAlignment;
-            _nativeControl.VerticalContentAlignment = _widget.VerticalContentAlignment;
+            //_nativeControl.HorizontalContentAlignment = _widget.HorizontalContentAlignment;
+            //_nativeControl.VerticalContentAlignment = _widget.VerticalContentAlignment;
 
             base.OnUpdate();
         }

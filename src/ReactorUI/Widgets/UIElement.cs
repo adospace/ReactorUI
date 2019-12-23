@@ -10,8 +10,8 @@ namespace ReactorUI.Widgets
 {
     public class UIElement<T, TS> : Widget<T>, IUIElement, IStyledWidget<TS> where T : class, IUIElement where TS : UIElementStyle<T>
     {
-        public bool IsEnabled { get; set; } = true;
-        public bool IsHitTestVisible { get; set; } = true;
+        public bool IsEnabled { get; set; } = false;
+        public bool IsHitTestVisible { get; set; } = false;
         public bool IsVisible { get; set; } = true;
         public double Opacity { get; set; } = 1.0;
         public Transform Transform { get; set; } = new Transform();

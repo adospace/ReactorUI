@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ReactorUI.Skia.Framework.Panels
 {
-    internal class UniformStackPanel : Panel, ISupportOffset
+    public class UniformStackPanel : Panel, ISupportOffset
     {
         #region Public Properties
         private ChildrenList _children;

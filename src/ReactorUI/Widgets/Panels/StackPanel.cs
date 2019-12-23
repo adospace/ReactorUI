@@ -4,14 +4,16 @@ using ReactorUI.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ReactorUI.Contracts.Panels;
+using ReactorUI.Styles.Panels;
 
 namespace ReactorUI.Widgets.Panels
 {
     public class StackPanel : Panel<IStackPanel, StackPanelStyle>, IStackPanel
     {
         public StackPanel(params VisualNode[] children)
+            : base(children)
         {
-            InternalChildren.AddRange(children);
         }
 
         public Orientation Orientation { get; set; }

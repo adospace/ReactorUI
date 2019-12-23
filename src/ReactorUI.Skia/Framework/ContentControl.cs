@@ -30,6 +30,10 @@ namespace ReactorUI.Skia.Framework
         }
         #endregion
 
+        #region Private Properties
+        private SKSize _textContentSize;
+        #endregion
+
         #region Measure Pass
         protected override Size MeasureOverride(Size availableSize)
         {
@@ -68,6 +72,8 @@ namespace ReactorUI.Skia.Framework
 
                 var bounds = new SKRect();
                 paint.MeasureText(text, ref bounds);
+
+                _textContentSize = bounds.Size;
 
                 return new Size(bounds.Width + paddingSize.Width, bounds.Height + paddingSize.Height);
             }
@@ -120,9 +126,9 @@ namespace ReactorUI.Skia.Framework
                 var text = Content.ToString();
                 var finalWidth = this.RenderSize.Width - (Padding.Left + Padding.Right);
                 var finalHeight = this.RenderSize.Height - (Padding.Top + Padding.Bottom);
-
-                float x = (float)Padding.Left;
-                float y = (float)Padding.Top + (float)finalHeight;
+                
+                float x = (float)Padding.Left + ((float)finalWidth - _textContentSize.Width) / 2;
+                float y = (float)Padding.Top + (float)finalHeight - ((float)finalHeight - _textContentSize.Height) / 2;
 
                 var paint = new SKPaint();
 
@@ -136,9 +142,9 @@ namespace ReactorUI.Skia.Framework
         #endregion
 
         #region Mouse
-        protected override void OnHitTest(int x, int y, MouseEventsContext context)
+        protected override void OnHitTest(double x, double y, MouseEventsContext context)
         {
-            if (Background != null)
+            //if (Background != null)
                 base.OnHitTest(x, y, context);
 
             if (Content is UIElement child)
@@ -147,14 +153,14 @@ namespace ReactorUI.Skia.Framework
             base.OnHitTest(x, y, context);
         }
 
-        protected override void OnMouseDown(int x, int y, MouseEventsContext context)
+        protected override void OnMouseDown(double x, double y, MouseEventsContext context)
         {
             if (Content is UIElement child)
                 child.HandleMouseDown(x, y, context);
             base.OnMouseDown(x, y, context);
         }
 
-        protected override void OnMouseUp(int x, int y, MouseEventsContext context)
+        protected override void OnMouseUp(double x, double y, MouseEventsContext context)
         {
             if (Content is UIElement child)
                 child.HandleMouseUp(x, y, context);

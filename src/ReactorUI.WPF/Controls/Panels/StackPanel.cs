@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ReactorUI.Styles;
+using ReactorUI.Contracts.Panels;
+using ReactorUI.Styles.Panels;
 
 namespace ReactorUI.WPF.Controls.Panels
 {

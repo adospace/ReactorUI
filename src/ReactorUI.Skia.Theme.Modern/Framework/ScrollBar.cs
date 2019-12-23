@@ -141,7 +141,7 @@ namespace ReactorUI.Skia.Framework
         #region Mouse
         bool _mouseDown;
         Point _pointMouseDown;
-        protected override void OnMouseDown(int x, int y, Framework.Input.MouseEventsContext context)
+        protected override void OnMouseDown(double x, double y, Framework.Input.MouseEventsContext context)
         {
             _pointMouseDown = new Point(x, y);
             if (Orientation == Orientation.Vertical)
@@ -170,7 +170,7 @@ namespace ReactorUI.Skia.Framework
             base.OnMouseDown(x, y, context);
         }
 
-        protected override void OnMouseMove(int x, int y, Framework.Input.MouseEventsContext context)
+        protected override void OnMouseMove(double x, double y, Framework.Input.MouseEventsContext context)
         {
             if (_mouseDown)
             {
@@ -214,7 +214,7 @@ namespace ReactorUI.Skia.Framework
             base.OnMouseMove(x, y, context);
         }
 
-        protected override void OnMouseUp(int x, int y, Framework.Input.MouseEventsContext context)
+        protected override void OnMouseUp(double x, double y, Framework.Input.MouseEventsContext context)
         {
             _mouseDown = false;
             base.OnMouseUp(x, y, context);

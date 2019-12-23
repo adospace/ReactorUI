@@ -129,30 +129,30 @@ namespace ReactorUI.Skia.Framework
                 }
             }
         }
-        HorizontalAlignment _horizontalContentAlignment;
-        public HorizontalAlignment HorizontalContentAlignment
-        {
-            get => _horizontalContentAlignment;
-            set
-            {
-                if (_horizontalContentAlignment != value)
-                {
-                    _horizontalContentAlignment = value;
-                }
-            }
-        }
-        VerticalAlignment _verticalContentAlignment;
-        public VerticalAlignment VerticalContentAlignment
-        {
-            get => _verticalContentAlignment;
-            set
-            {
-                if (_verticalContentAlignment != value)
-                {
-                    _verticalContentAlignment = value;
-                }
-            }
-        }
+        //HorizontalAlignment _horizontalContentAlignment;
+        //public HorizontalAlignment HorizontalContentAlignment
+        //{
+        //    get => _horizontalContentAlignment;
+        //    set
+        //    {
+        //        if (_horizontalContentAlignment != value)
+        //        {
+        //            _horizontalContentAlignment = value;
+        //        }
+        //    }
+        //}
+        //VerticalAlignment _verticalContentAlignment;
+        //public VerticalAlignment VerticalContentAlignment
+        //{
+        //    get => _verticalContentAlignment;
+        //    set
+        //    {
+        //        if (_verticalContentAlignment != value)
+        //        {
+        //            _verticalContentAlignment = value;
+        //        }
+        //    }
+        //}
         bool _isTabStop;
         public bool IsTabStop
         {

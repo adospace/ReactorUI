@@ -406,7 +406,7 @@ namespace ReactorUI.Skia.Framework
 
         #region Hit Test
         bool _mouseEntered = false;
-        protected override void HitTestCore(int x, int y, Input.MouseEventsContext context)
+        protected override void HitTestCore(double x, double y, Input.MouseEventsContext context)
         {
             OnHitTest(
                 x - (int)_visualOffset.X,
@@ -417,7 +417,7 @@ namespace ReactorUI.Skia.Framework
             base.HitTestCore(x, y, context);
         }
 
-        protected override void OnHitTest(int x, int y, Input.MouseEventsContext context)
+        protected override void OnHitTest(double x, double y, Input.MouseEventsContext context)
         {
             if (RenderSize.Contains(x, y) || context.CaptureTo == this)
             {
@@ -450,7 +450,7 @@ namespace ReactorUI.Skia.Framework
             base.OnIsHitTestVisibleChanged();
         }
 
-        protected override void MouseDownCore(int x, int y, Input.MouseEventsContext mouseEventsContext)
+        protected override void MouseDownCore(double x, double y, Input.MouseEventsContext mouseEventsContext)
         {
             OnMouseDown(
                 x - (int)_visualOffset.X, 
@@ -461,7 +461,7 @@ namespace ReactorUI.Skia.Framework
         }
 
 
-        protected override void MouseUpCore(int x, int y, Input.MouseEventsContext mouseEventsContext)
+        protected override void MouseUpCore(double x, double y, Input.MouseEventsContext mouseEventsContext)
         {
             OnMouseUp(
                 x - (int)_visualOffset.X, 

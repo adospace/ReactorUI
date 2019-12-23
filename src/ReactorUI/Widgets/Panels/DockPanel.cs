@@ -1,6 +1,8 @@
 ﻿using ReactorUI.Contracts;
+using ReactorUI.Contracts.Panels;
 using ReactorUI.Primitives;
 using ReactorUI.Styles;
+using ReactorUI.Styles.Panels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,7 +26,7 @@ namespace ReactorUI.Widgets.Panels
                 throw new ArgumentException();
 
             ((IMetadataProvider)child).SetMetadata(DockMetadataKey, Dock.Left);
-            InternalChildren.Add(child);
+            AddChild(child);
             Orientation = Orientation.Horizontal;
             return this;
         }
@@ -35,7 +37,7 @@ namespace ReactorUI.Widgets.Panels
                 throw new ArgumentException();
 
             ((IMetadataProvider)child).SetMetadata(DockMetadataKey, Dock.Top);
-            InternalChildren.Add(child);
+            RemoveChild(child);
             Orientation = Orientation.Vertical;
             return this;
         }
@@ -46,7 +48,7 @@ namespace ReactorUI.Widgets.Panels
                 throw new ArgumentException();
 
             ((IMetadataProvider)child).SetMetadata(DockMetadataKey, Dock.Bottom);
-            InternalChildren.Add(child);
+            AddChild(child);
             Orientation = Orientation.Vertical;
             return this;
         }
@@ -57,7 +59,7 @@ namespace ReactorUI.Widgets.Panels
                 throw new ArgumentException();
 
             ((IMetadataProvider)child).SetMetadata(DockMetadataKey, Dock.Right);
-            InternalChildren.Add(child);
+            RemoveChild(child);
             Orientation = Orientation.Horizontal;
             return this;
         }
@@ -69,7 +71,7 @@ namespace ReactorUI.Widgets.Panels
                 throw new InvalidOperationException("Only one child can fill remaining space");
 
             _fillChild = child;
-            InternalChildren.Add(child);
+            AddChild(child);
             return this;
         }
     }
