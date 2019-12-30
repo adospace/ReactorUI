@@ -10,21 +10,18 @@ using ReactorUI.Styles;
 
 namespace ReactorUI.Skia.Controls
 {
-    public class UIElement<T, I, TS> : INativeControl
+    public class UIElement<T, I> : INativeControl
         where T : Framework.UIElement, new()
         where I : IUIElement
-        where TS : UIElementStyle<I>
     {
         protected T _nativeControl;
 
         protected I _widget;
 
-        protected TS Style => ((IStyledWidget<TS>)_widget)?.Style;
-
         public void DidMount(IWidget widget)
         {
             _widget = (I)widget;
-            _nativeControl = _nativeControl ?? CreateNativeControl();
+            _nativeControl ??= CreateNativeControl();
 
             widget.ParentAsNativeControlContainer().AddChild(widget, _nativeControl);
 
@@ -51,6 +48,10 @@ namespace ReactorUI.Skia.Controls
                 _nativeControl.MouseEnter -= _nativeControl_MouseEnter;
             if (_fireOnMouseLeave)
                 _nativeControl.MouseLeave -= _nativeControl_MouseLeave;
+            if (_fireOnMouseDown)
+                _nativeControl.MouseDown -= _nativeControl_MouseDown;
+            if (_fireOnMouseUp)
+                _nativeControl.MouseUp -= _nativeControl_MouseUp;
         }
 
         public void Update(IWidget widget)
@@ -61,6 +62,8 @@ namespace ReactorUI.Skia.Controls
 
         private bool _fireOnMouseEnter;
         private bool _fireOnMouseLeave;
+        private bool _fireOnMouseDown;
+        private bool _fireOnMouseUp;
 
         protected virtual void OnUpdate()
         {
@@ -71,8 +74,10 @@ namespace ReactorUI.Skia.Controls
 
             _nativeControl.Opacity = _widget.Opacity;
 
-            bool shouldFireOnMouseEnter = (_widget.OnMouseEnterAction != null || Style?.OnMouseEnterAction != null);
-            bool shouldFireOnMouseLeave = (_widget.OnMouseLeaveAction != null || Style?.OnMouseLeaveAction != null);
+            bool shouldFireOnMouseEnter = (_widget.OnMouseEnterAction != null);
+            bool shouldFireOnMouseLeave = (_widget.OnMouseLeaveAction != null);
+            bool shouldFireOnMouseDown = (_widget.OnMouseDownAction != null);
+            bool shouldFireOnMouseUp = (_widget.OnMouseUpAction != null);
 
             if (!_fireOnMouseEnter && shouldFireOnMouseEnter)
                 _nativeControl.MouseEnter += _nativeControl_MouseEnter;
@@ -87,11 +92,25 @@ namespace ReactorUI.Skia.Controls
                 _nativeControl.MouseLeave -= _nativeControl_MouseLeave;
 
             _fireOnMouseLeave = shouldFireOnMouseLeave;
+
+            if (!_fireOnMouseDown && shouldFireOnMouseDown)
+                _nativeControl.MouseDown += _nativeControl_MouseDown;
+            if (_fireOnMouseDown && !shouldFireOnMouseDown)
+                _nativeControl.MouseDown -= _nativeControl_MouseDown;
+
+            _fireOnMouseDown = shouldFireOnMouseDown;
+
+
+            if (!_fireOnMouseUp && shouldFireOnMouseUp)
+                _nativeControl.MouseUp += _nativeControl_MouseUp;
+            if (_fireOnMouseUp && !shouldFireOnMouseUp)
+                _nativeControl.MouseUp -= _nativeControl_MouseUp;
+
+            _fireOnMouseUp = shouldFireOnMouseUp;
         }
 
         private void _nativeControl_MouseEnter(object sender, Framework.Input.MouseEventArgs e)
         {
-            Style?.OnMouseEnterAction?.Invoke(_widget);
             _widget.OnMouseEnterAction?.Invoke(_widget);
 
             OnUpdate();
@@ -99,11 +118,23 @@ namespace ReactorUI.Skia.Controls
 
         private void _nativeControl_MouseLeave(object sender, Framework.Input.MouseEventArgs e)
         {
-            Style?.OnMouseLeaveAction?.Invoke(_widget);
             _widget.OnMouseLeaveAction?.Invoke(_widget);
 
             OnUpdate();
         }
 
+        private void _nativeControl_MouseDown(object sender, Framework.Input.MouseEventArgs e)
+        {
+            _widget.OnMouseDownAction?.Invoke(_widget);
+
+            OnUpdate();
+        }
+
+        private void _nativeControl_MouseUp(object sender, Framework.Input.MouseEventArgs e)
+        {
+            _widget.OnMouseUpAction?.Invoke(_widget);
+
+            OnUpdate();
+        }
     }
 }

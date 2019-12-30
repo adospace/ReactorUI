@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace ReactorUI.Skia.Controls
 {
-    public class FrameworkElement<T, I, TS> : UIElement<T, I, TS>
+    public class FrameworkElement<T, I> : UIElement<T, I>
         where T : Framework.FrameworkElement, new()
         where I : IFrameworkElement
-        where TS : FrameworkElementStyle<I>
     {
         protected override void OnUpdate()
         {

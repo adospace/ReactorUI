@@ -157,9 +157,9 @@ namespace ReactorUI.Skia.Framework
 
             if (Background != null)
             {
-                using (var paint = new SkiaSharp.SKPaint().ApplyBrush(Background, Opacity))
-                    context.Canvas.DrawRect(
-                        0.0f, 0.0f, (float)finalWidth, (float)finalHeight, paint);
+                using var paint = new SkiaSharp.SKPaint().ApplyBrush(Background, Opacity);
+                context.Canvas.DrawRect(
+                    0.0f, 0.0f, (float)finalWidth, (float)finalHeight, paint);
             }
 
             if (Child != null)

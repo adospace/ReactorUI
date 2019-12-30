@@ -13,7 +13,7 @@ using ReactorUI.Styles.Panels;
 
 namespace ReactorUI.Skia.Controls.Panels
 {
-    public class StackPanel : Panel<Framework.Panels.StackPanel, IStackPanel, StackPanelStyle>
+    public class StackPanel : Panel<Framework.Panels.StackPanel, IStackPanel>
     {
         public StackPanel()
         {

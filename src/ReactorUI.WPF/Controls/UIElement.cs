@@ -20,7 +20,7 @@ namespace ReactorUI.WPF.Controls
 
         protected I _widget;
 
-        protected TS Style => ((IStyledWidget<TS>)_widget)?.Style;
+        //protected TS Style => ((IStyledWidget<TS>)_widget)?.Style;
 
         public void DidMount(IWidget widget)
         {
@@ -46,9 +46,9 @@ namespace ReactorUI.WPF.Controls
 
         protected virtual void OnWillUnmount()
         {
-            if (_fireOnMouseEnterAction != null)
+            if (_fireOnMouseEnter)
                 _nativeControl.MouseEnter -= _nativeControl_MouseEnter;
-            if (_fireOnMouseLeaveAction != null)
+            if (_fireOnMouseLeave)
                 _nativeControl.MouseLeave -= _nativeControl_MouseLeave;
         }
 
@@ -58,43 +58,47 @@ namespace ReactorUI.WPF.Controls
             OnUpdate();
         }
 
+        private bool _fireOnMouseEnter;
+        private bool _fireOnMouseLeave;
+
         protected virtual void OnUpdate()
         {
             _nativeControl.IsEnabled = _widget.IsEnabled;
             _nativeControl.IsHitTestVisible = _widget.IsHitTestVisible;
-            _nativeControl.Visibility = _widget.IsVisible ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+
+
             _nativeControl.Opacity = _widget.Opacity;
 
-            if (_fireOnMouseEnterAction == null && Style?.OnMouseEnterAction != null)
+            bool shouldFireOnMouseEnter = (_widget.OnMouseEnterAction != null);
+            bool shouldFireOnMouseLeave = (_widget.OnMouseLeaveAction != null);
+
+            if (!_fireOnMouseEnter && shouldFireOnMouseEnter)
                 _nativeControl.MouseEnter += _nativeControl_MouseEnter;
-            if (_fireOnMouseEnterAction != null && Style?.OnMouseEnterAction == null)
+            if (_fireOnMouseEnter && !shouldFireOnMouseEnter)
                 _nativeControl.MouseEnter -= _nativeControl_MouseEnter;
 
-            _fireOnMouseEnterAction = Style?.OnMouseEnterAction;
+            _fireOnMouseEnter = shouldFireOnMouseEnter;
 
-            if (_fireOnMouseLeaveAction == null && Style?.OnMouseLeaveAction != null)
+            if (!_fireOnMouseLeave && shouldFireOnMouseLeave)
                 _nativeControl.MouseLeave += _nativeControl_MouseLeave;
-            if (_fireOnMouseLeaveAction != null && Style?.OnMouseLeaveAction == null)
+            if (_fireOnMouseLeave && !shouldFireOnMouseLeave)
                 _nativeControl.MouseLeave -= _nativeControl_MouseLeave;
 
-            _fireOnMouseLeaveAction = Style?.OnMouseLeaveAction;
-
-
+            _fireOnMouseLeave = shouldFireOnMouseLeave;
         }
 
         private void _nativeControl_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            _fireOnMouseEnterAction(_widget);
+            _widget.OnMouseEnterAction?.Invoke(_widget);
+
             OnUpdate();
         }
 
         private void _nativeControl_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            _fireOnMouseLeaveAction(_widget);
+            _widget.OnMouseLeaveAction?.Invoke(_widget);
+
             OnUpdate();
         }
-
-        private Action<I> _fireOnMouseEnterAction = null;
-        private Action<I> _fireOnMouseLeaveAction = null;
     }
 }

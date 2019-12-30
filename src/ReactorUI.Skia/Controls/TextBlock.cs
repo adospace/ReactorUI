@@ -9,7 +9,7 @@ using ReactorUI.Styles;
 
 namespace ReactorUI.Skia.Controls
 {
-    public class TextBlock : FrameworkElement<Framework.TextBlock, ITextBlock, TextBlockStyle>
+    public class TextBlock : FrameworkElement<Framework.TextBlock, ITextBlock>
     {
         protected override void OnUpdate()
         {

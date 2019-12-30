@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ReactorUI.Widgets;
 
 namespace ReactorUI.WPF.TestApp
 {
@@ -18,10 +19,10 @@ namespace ReactorUI.WPF.TestApp
     public static class Styles
     {
         public static ButtonStyle CustomButtonStyle { get; } = new ButtonStyle()
-            .Padding(4.0)
-            .Background(Colors.ButtonBackground)
-            .OnMouseEnter(_ => _.Background = Colors.Hover)
-            .OnMouseLeave(_ => _.Background = Colors.ButtonBackground)
+            .Padding<ButtonStyle, IButton>(4.0)
+            .Background<ButtonStyle, IButton>(Colors.ButtonBackground)
+            .OnMouseEnter<ButtonStyle, IButton>(_ => _.Background = Colors.Hover)
+            .OnMouseLeave<ButtonStyle, IButton>(_ => _.Background = Colors.ButtonBackground)
             ;
     }
 }

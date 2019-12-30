@@ -1,4 +1,5 @@
 ﻿using ReactorUI.Primitives;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -188,36 +189,41 @@ namespace ReactorUI.Skia.Framework
         #region Render Pass
         protected override void RenderOverride(RenderContext context)
         {
-            base.RenderOverride(context);
+            using SKPaint paint = new SKPaint();
 
-            var finalWidth = RenderSize.Width - (BorderThickness.Left + BorderThickness.Right);
-            var finalHeight = RenderSize.Height - (BorderThickness.Top + BorderThickness.Bottom);
+            var borderRect = new SKRect(
+                    (float)0.0,
+                    (float)0.0,
+                    (float)(RenderSize.Width),
+                    (float)(RenderSize.Height));
+            borderRect.Inflate(
+                -(float)BorderThickness.UniformLength / 2,
+                -(float)BorderThickness.UniformLength / 2);
 
             if (Background != null)
             {
-                context.Canvas.DrawRect(
-                    0.0f, 0.0f, (float)finalWidth, (float)finalHeight,
-                    new SkiaSharp.SKPaint()
-                    {
-                    }.ApplyBrush(Background, Opacity));
+                paint.IsFill();
+
+                paint.ApplyBrush(Background, Opacity);
+
+                context.Canvas.DrawRoundRect(borderRect, 2.0f, 2.0f, paint);
             }
 
-            if (BorderBrush != null)
+            base.RenderOverride(context);
+
+            if (BorderBrush != null && BorderThickness.Any())
             {
-                if (BorderThickness.IsUniformLength)
-                {
-                    if (BorderThickness.UniformLength > 0.0)
-                    {
-                        context.Canvas.DrawRect(
-                            0.0f, 0.0f, (float)finalWidth, (float)finalHeight,
-                            new SkiaSharp.SKPaint()
-                            {
-                                IsStroke = true
-                            }.ApplyBrush(BorderBrush, Opacity));
-                    }
-                }
-            }
+                paint.IsStroke = true;
+                paint.StrokeWidth = (float)BorderThickness.UniformLength;
 
+                paint.ApplyBrush(BorderBrush, Opacity);
+
+                context.Canvas.DrawRoundRect(
+                    borderRect,
+                    2.0f,
+                    2.0f,
+                    paint);
+            }
         }
         #endregion
     }

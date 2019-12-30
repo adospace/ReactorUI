@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace ReactorUI.Skia.Controls
 {
-    public class ContentControl<T, I, TS> : Control<T, I, TS>, INativeControlContainer 
+    public class ContentControl<T, I> : Control<T, I>, INativeControlContainer 
         where T : Framework.ContentControl, new() 
         where I : IContentControl 
-        where TS : ContentControlStyle<I>
     {
         public ContentControl()
         {

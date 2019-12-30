@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ReactorUI.Skia.Controls
 {
-    internal class ScrollBar : FrameworkElement<Framework.ScrollBar, IScrollBar, ScrollBarStyle>
+    internal class ScrollBar : FrameworkElement<Framework.ScrollBar, IScrollBar>
     {
         protected override void OnUpdate()
         {

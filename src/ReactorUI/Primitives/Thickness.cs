@@ -19,13 +19,13 @@ namespace ReactorUI.Primitives
             Bottom = bottom;
         }
 
-        public double Left { get; set; }
+        public double Left { get; private set; }
 
-        public double Top { get; set; }
+        public double Top { get; private set; }
 
-        public double Right { get; set; }
+        public double Right { get; private set; }
 
-        public double Bottom { get; set; }
+        public double Bottom { get; private set; }
 
         public bool IsCloseTo(Thickness other) =>
             Math.Abs(Left - other.Left) < 1e-10 &&
@@ -38,5 +38,7 @@ namespace ReactorUI.Primitives
         public bool IsUniformLength => (Left == Right && Left == Top && Left == Bottom);
 
         public double UniformLength => IsUniformLength ? Left : throw new InvalidOperationException();
+
+        public bool Any() => Left > 0.0 || Right > 0.0 || Top > 0.0 || Bottom > 0.0;
     }
 }

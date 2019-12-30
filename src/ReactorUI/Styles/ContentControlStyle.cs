@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ReactorUI.Styles
 {
-    public class ContentControlStyle<T> : ControlStyle<T> where T : IContentControl
+    public class ContentControlStyle<T> : ControlStyle<T>, IContentControlStyle<T> where T : IContentControl
     {
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ReactorUI.Primitives
 {
-    public struct Color
+    public struct Color : IEquatable<Color>
     {
         public byte A;
 
@@ -38,6 +38,39 @@ namespace ReactorUI.Primitives
         public static Color FromARGB(byte a, byte r, byte g, byte b)
         {
             return new Color() { A = a, R = r, G = g, B = b };
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Color color && Equals(color);
+        }
+
+        public bool Equals(Color other)
+        {
+            return A == other.A &&
+                   R == other.R &&
+                   G == other.G &&
+                   B == other.B;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -1749689076;
+            hashCode = hashCode * -1521134295 + A.GetHashCode();
+            hashCode = hashCode * -1521134295 + R.GetHashCode();
+            hashCode = hashCode * -1521134295 + G.GetHashCode();
+            hashCode = hashCode * -1521134295 + B.GetHashCode();
+            return hashCode;
+        }
+
+        public static bool operator ==(Color left, Color right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Color left, Color right)
+        {
+            return !(left == right);
         }
     }
 }

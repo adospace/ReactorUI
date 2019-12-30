@@ -32,6 +32,11 @@ namespace ReactorUI.Widgets
 
         public Action<IButton> OnClickAction { get; set; }
 
+        protected override void OnStyleApplied(ButtonStyle styleToApply)
+        {
+            base.OnStyleApplied(styleToApply);
+        }
+
     }
 
     public static class ButtonExtensions
@@ -66,7 +71,7 @@ namespace ReactorUI.Widgets
 
         public static Button Style(this Button button, ButtonStyle style)
         {
-            button.Style = style;
+            button.SetStyle(style);
             return button;
         }
     }

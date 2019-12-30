@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ReactorUI.Skia.Controls
 {
-    public class Button : ContentControl<Framework.Button, IButton, ButtonStyle>
+    public class Button : ContentControl<Framework.Button, IButton>
     {
         public Button()
         {

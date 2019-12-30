@@ -16,6 +16,10 @@ namespace ReactorUI.Contracts
         Action<IUIElement> OnMouseEnterAction { get; set; }
         Action<IUIElement> OnMouseLeaveAction { get; set; }
 
+        Action<IUIElement> OnMouseDownAction { get; set; }
+        Action<IUIElement> OnMouseUpAction { get; set; }
+
+
         void Animate(IAnimationActuator animationActuator);
 
     }

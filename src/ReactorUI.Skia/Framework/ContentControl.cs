@@ -112,32 +112,56 @@ namespace ReactorUI.Skia.Framework
         #region Render Pass
         protected override void RenderOverride(RenderContext context)
         {
+
+            //if (Background != null)
+            //{
+            //using var paint = new SKPaint();
+            //    paint.IsFill();
+
+            //    paint.ApplyBrush(Background, Opacity);
+            //    context.Canvas.DrawRoundRect(borderRect, 2.0f, 2.0f, paint);
+            //}
+
             base.RenderOverride(context);
 
-            if (Content == null)
-                return;
-
-            if (Content is UIElement child)
+            if (Content != null)
             {
-                child.Render(context.Canvas);
+                if (Content is UIElement child)
+                {
+                    child.Render(context.Canvas);
+                }
+                else
+                {
+                    using var paint = new SKPaint();
+                    var text = Content.ToString();
+                    var finalWidth = this.RenderSize.Width - (Padding.Left + Padding.Right);
+                    var finalHeight = this.RenderSize.Height - (Padding.Top + Padding.Bottom);
+
+                    float x = (float)Padding.Left + ((float)finalWidth - _textContentSize.Width) / 2;
+                    float y = (float)Padding.Top + (float)finalHeight - ((float)finalHeight - _textContentSize.Height) / 2;
+
+                    paint.ApplyBrush(Foreground, Opacity);
+                    paint.ApplyFont(FontFamily, FontSize, FontStyle, FontStretch, FontWeight);
+
+                    context.Canvas.DrawText(text, (int)x, (int)y, paint);
+                }
             }
-            else
-            {
-                var text = Content.ToString();
-                var finalWidth = this.RenderSize.Width - (Padding.Left + Padding.Right);
-                var finalHeight = this.RenderSize.Height - (Padding.Top + Padding.Bottom);
-                
-                float x = (float)Padding.Left + ((float)finalWidth - _textContentSize.Width) / 2;
-                float y = (float)Padding.Top + (float)finalHeight - ((float)finalHeight - _textContentSize.Height) / 2;
 
-                var paint = new SKPaint();
+            //if (BorderBrush != null && BorderThickness.Any())
+            //{
+            //    using var paint = new SKPaint();
+            //    paint.IsStroke = true;
+            //    paint.StrokeWidth = (float)BorderThickness.UniformLength;
 
-                paint.ApplyBrush(Foreground, Opacity);
-                paint.ApplyFont(FontFamily, FontSize, FontStyle, FontStretch, FontWeight);
+            //    paint.ApplyBrush(BorderBrush, Opacity);
 
-                context.Canvas.DrawText(text, x, y, paint);
-            }
 
+            //    context.Canvas.DrawRoundRect(
+            //        borderRect,
+            //        2.0f, 
+            //        2.0f, 
+            //        paint);
+            //}
         }
         #endregion
 

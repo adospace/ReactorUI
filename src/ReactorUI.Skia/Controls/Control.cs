@@ -11,32 +11,29 @@ using ReactorUI.Styles;
 
 namespace ReactorUI.Skia.Controls
 {
-    public class Control<T, I, TS> : FrameworkElement<T, I, TS> 
+    public class Control<T, I> : FrameworkElement<T, I> 
         where T : Framework.Control, new() 
         where I : IControl
-        where TS : ControlStyle<I>
+        //where TS : ControlStyle<I>
     {
         protected override void OnUpdate()
         {
-            if (Style != null)
-            {
-                _nativeControl.FontFamily = _widget.FontFamily;
+            //if (Style != null)
+            //{
+            //    _nativeControl.FontFamily = Style.FontFamily;
 
-                _nativeControl.FontStyle = Style.FontStyle;
-                _nativeControl.FontStretch = Style.FontStretch;
-                _nativeControl.FontWeight = Style.FontWeight;
-                _nativeControl.FontSize = Style.FontSize;
+            //    _nativeControl.FontStyle = Style.FontStyle;
+            //    _nativeControl.FontStretch = Style.FontStretch;
+            //    _nativeControl.FontWeight = Style.FontWeight;
+            //    _nativeControl.FontSize = Style.FontSize;
 
-                _nativeControl.Foreground = Style.Foreground;
-                _nativeControl.Background = Style.Background;
-                _nativeControl.BorderBrush = Style.BorderBrush;
-                _nativeControl.BorderThickness = Style.BorderThickness;
+            //    _nativeControl.Foreground = Style.Foreground;
+            //    _nativeControl.Background = Style.Background;
+            //    _nativeControl.BorderBrush = Style.BorderBrush;
+            //    _nativeControl.BorderThickness = Style.BorderThickness;
 
-                _nativeControl.Padding = Style.Padding;
-
-                //_nativeControl.HorizontalContentAlignment = Style.HorizontalContentAlignment;
-                //_nativeControl.VerticalContentAlignment = Style.VerticalContentAlignment;
-            }
+            //    _nativeControl.Padding = Style.Padding;
+            //}
 
             _nativeControl.FontFamily = _widget.FontFamily;
 
@@ -54,9 +51,6 @@ namespace ReactorUI.Skia.Controls
             _nativeControl.TabIndex = _widget.TabIndex;
 
             _nativeControl.Padding = _widget.Padding;
-
-            //_nativeControl.HorizontalContentAlignment = _widget.HorizontalContentAlignment;
-            //_nativeControl.VerticalContentAlignment = _widget.VerticalContentAlignment;
 
             base.OnUpdate();
         }

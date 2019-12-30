@@ -12,6 +12,7 @@ namespace ReactorUI.Widgets
         public Border(VisualNode child = null)
         {
             _child = child;
+            IsHitTestVisible = child != null;
         }
 
         public Thickness BorderThickness { get; set; }

@@ -25,7 +25,8 @@ namespace ReactorUI.Skia
 
             application.WidgetRegistry.Register<ITextBlock>(() => new Controls.TextBlock());
             application.WidgetRegistry.Register<IBorder>(() => new Controls.Border());
-            application.WidgetRegistry.Register<IButton>(() => new Theme.Modern.Controls.Button());
+            application.WidgetRegistry.Register<IButton>(() => new Controls.Button());
+            application.WidgetRegistry.RegisterDefaultStyle<IButton, IButtonStyle>(Theme.Modern.Controls.Styles.ButtonStyle);
 
             application.WidgetRegistry.Register<IDockPanel>(() => new Controls.Panels.DockPanel());
             application.WidgetRegistry.Register<IStackPanel>(() => new Controls.Panels.StackPanel());

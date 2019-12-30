@@ -189,7 +189,7 @@ namespace ReactorUI.Skia.Framework
         #endregion
 
         #region Private Properties
-        SKRect _textMeasure;
+        private SKRect _textMeasure;
         #endregion
 
         #region Measure Pass
@@ -198,12 +198,14 @@ namespace ReactorUI.Skia.Framework
             if (Text == null)
                 return new Size();
 
-            var paint = new SKPaint();
+            using var paint = new SKPaint();
 
             paint.ApplyFont(FontFamily, FontSize, FontStyle, FontStretch, FontWeight);
 
             _textMeasure = new SKRect();
             paint.MeasureText(Text, ref _textMeasure);
+
+            System.Diagnostics.Debug.WriteLine(_textMeasure);
 
             return new Size(_textMeasure.Width, _textMeasure.Height);
         }
@@ -228,7 +230,7 @@ namespace ReactorUI.Skia.Framework
                 float x = (float)Padding.Left + _textMeasure.Left;
                 float y = (float)Padding.Top + (float)finalHeight - _textMeasure.Bottom;
 
-                var paint = new SKPaint()
+                using var paint = new SKPaint()
                 {
                     IsAntialias = true
                 };
@@ -236,6 +238,7 @@ namespace ReactorUI.Skia.Framework
                 paint.ApplyBrush(Foreground, Opacity);
                 paint.ApplyFont(FontFamily, FontSize, FontStyle, FontStretch, FontWeight);
 
+                //Console.WriteLine($"{x} {y}");
                 context.Canvas.DrawText(Text, x, y, paint);
             }
 

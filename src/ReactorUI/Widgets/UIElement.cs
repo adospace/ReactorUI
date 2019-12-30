@@ -16,7 +16,30 @@ namespace ReactorUI.Widgets
         public double Opacity { get; set; } = 1.0;
         public Transform Transform { get; set; } = new Transform();
 
-        public TS Style { get; set; }
+        public UIElement()
+        {
+            Application.Current?.WidgetRegistry.ApplyDefaultStyle<T, TS>(this);
+        }
+
+        public void SetStyle(TS styleToApply)
+        {
+            OnStyleApplied(styleToApply);
+        }
+
+        protected virtual void OnStyleApplied(TS styleToApply)
+        {
+            Opacity = styleToApply.Opacity;
+            Transform = styleToApply.Transform;
+
+            if (styleToApply.OnMouseEnterAction != null)
+                OnMouseEnterAction = new Action<IUIElement>(_ => styleToApply.OnMouseEnterAction?.Invoke((T)_));
+            if (styleToApply.OnMouseLeaveAction != null)
+                OnMouseLeaveAction = new Action<IUIElement>(_ => styleToApply.OnMouseLeaveAction?.Invoke((T)_));
+            if (styleToApply.OnMouseDownAction != null)
+                OnMouseDownAction = new Action<IUIElement>(_ => styleToApply.OnMouseDownAction?.Invoke((T)_));
+            if (styleToApply.OnMouseUpAction != null)
+                OnMouseUpAction = new Action<IUIElement>(_ => styleToApply.OnMouseUpAction?.Invoke((T)_));
+        }
 
         private Dictionary<Type, IAnimationActuator> _animations = new Dictionary<Type, IAnimationActuator>();
         
@@ -37,7 +60,7 @@ namespace ReactorUI.Widgets
             {
                 if (!animationActuator.Value.Tick(this))
                 {
-                    actuatorsToRemove = actuatorsToRemove ?? new List<Type>();
+                    actuatorsToRemove ??= new List<Type>();
                     actuatorsToRemove.Add(animationActuator.Key);
                 }
                 else
@@ -68,32 +91,8 @@ namespace ReactorUI.Widgets
 
         public Action<IUIElement> OnMouseEnterAction { get; set; }
         public Action<IUIElement> OnMouseLeaveAction { get; set; }
-
-        protected override void OnMount()
-        {
-            if (Style != null)
-                OnApplyStyle();
-
-            base.OnMount();
-        }
-
-        protected virtual void OnApplyStyle()
-        {
-
-        }
-
-        protected override void OnUnmount()
-        {
-            if (Style != null)
-                OnCancelStyle();
-
-            base.OnUnmount();
-        }
-
-        protected virtual void OnCancelStyle()
-        {
-
-        }
+        public Action<IUIElement> OnMouseDownAction { get; set; }
+        public Action<IUIElement> OnMouseUpAction { get; set; }
     }
 
     public static class UIElementExtensions
@@ -136,7 +135,7 @@ namespace ReactorUI.Widgets
 
         public static T Style<T, TS>(this T element, TS style) where T : UIElement<T, TS> where TS : UIElementStyle<T>
         {
-            element.Style = style;
+            element.SetStyle(style);
             return element;
         }
 

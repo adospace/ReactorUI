@@ -13,7 +13,7 @@ using ReactorUI.Styles.Panels;
 
 namespace ReactorUI.Skia.Controls.Panels
 {
-    public class ContainerPanel : Panel<Framework.Panels.ContainerPanel, IContainerPanel, ContainerPanelStyle>
+    public class ContainerPanel : Panel<Framework.Panels.ContainerPanel, IContainerPanel>
     {
         public ContainerPanel()
         {

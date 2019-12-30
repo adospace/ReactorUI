@@ -58,7 +58,8 @@ namespace ReactorUI.Skia.Xamarin
         {
             _skiaView = new SKCanvasView()
             {
-                EnableTouchEvents = true
+                EnableTouchEvents = true,
+                //IgnorePixelScaling = true,
             };
             //this._skiaView.Dock = System.Windows.Forms.DockStyle.Fill;
             this._skiaView.PaintSurface += _skiaView_PaintSurface;

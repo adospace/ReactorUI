@@ -6,6 +6,6 @@ namespace ReactorUI.Contracts
 {
     public interface IStyledWidget<TS>
     {
-        TS Style { get; }
+        void SetStyle(TS styleToApply);
     }
 }

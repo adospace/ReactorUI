@@ -115,12 +115,14 @@ namespace ReactorUI.Skia.Framework
         protected virtual void OnMouseDown(double x, double y, Input.MouseEventsContext context)
         {
             MouseDown?.Invoke(this, new Input.MouseEventArgs(context.MouseButtons, context.Clicks, x, y, context.Delta));
+            System.Diagnostics.Debug.WriteLine($"{this} OnMouseDown");
         }
 
         public event EventHandler<Input.MouseEventArgs> MouseUp;
         protected virtual void OnMouseUp(double x, double y, Input.MouseEventsContext context)
         {
             MouseUp?.Invoke(this, new Input.MouseEventArgs(context.MouseButtons, context.Clicks, x, y, context.Delta));
+            System.Diagnostics.Debug.WriteLine($"{this} OnMouseUp");
         }
         #endregion
 

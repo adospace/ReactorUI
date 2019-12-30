@@ -13,10 +13,9 @@ using ReactorUI.Styles.Panels;
 
 namespace ReactorUI.Skia.Controls.Panels
 {
-    public abstract class Panel<T, I, TS> : FrameworkElement<T, I, TS>, INativeControlContainer
+    public abstract class Panel<T, I> : FrameworkElement<T, I>, INativeControlContainer
         where T : Framework.Panels.Panel, new()
         where I : IPanel
-        where TS : PanelStyle<I>
     {
         protected Panel()
         {

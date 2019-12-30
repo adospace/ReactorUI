@@ -18,6 +18,21 @@ namespace ReactorUI.Widgets
         public Thickness Margin { get; set; }
         public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.Stretch;
         public HorizontalAlignment HorizontalAlignment { get; set; } = HorizontalAlignment.Stretch;
+
+        protected override void OnStyleApplied(TS styleToApply)
+        {
+            Width = styleToApply.Width;
+            MinWidth = styleToApply.MinWidth;
+            MaxHeight = styleToApply.MaxHeight;
+            Height = styleToApply.Height;
+            MinHeight = styleToApply.MinHeight;
+            MaxWidth = styleToApply.MaxWidth;
+            Margin = styleToApply.Margin;
+            VerticalAlignment = styleToApply.VerticalAlignment;
+            HorizontalAlignment = styleToApply.HorizontalAlignment;
+
+            base.OnStyleApplied(styleToApply);
+        }
     }
 
 

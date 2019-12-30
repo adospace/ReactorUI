@@ -19,26 +19,26 @@ namespace ReactorUI.WPF.Controls
     {
         protected override void OnUpdate()
         {
-            if (Style != null)
-            {
-                if (Style.FontFamily != null)
-                    _nativeControl.FontFamily = new System.Windows.Media.FontFamily(_widget.FontFamily);
+            //if (Style != null)
+            //{
+            //    if (Style.FontFamily != null)
+            //        _nativeControl.FontFamily = new System.Windows.Media.FontFamily(_widget.FontFamily);
 
-                _nativeControl.FontStyle = Style.FontStyle.ToNativeFontStyle();
-                _nativeControl.FontStretch = Style.FontStretch.ToNativeFontStyle();
-                _nativeControl.FontWeight = Style.FontWeight.ToNativeFontWeight();
-                _nativeControl.FontSize = Style.FontSize;
+            //    _nativeControl.FontStyle = Style.FontStyle.ToNativeFontStyle();
+            //    _nativeControl.FontStretch = Style.FontStretch.ToNativeFontStyle();
+            //    _nativeControl.FontWeight = Style.FontWeight.ToNativeFontWeight();
+            //    _nativeControl.FontSize = Style.FontSize;
 
-                _nativeControl.Foreground = Style.Foreground?.ToNativeBrush();
-                _nativeControl.Background = Style.Background?.ToNativeBrush();
-                _nativeControl.BorderBrush = Style.BorderBrush?.ToNativeBrush();
-                _nativeControl.BorderThickness = Style.BorderThickness.ToNativeThickness();
+            //    _nativeControl.Foreground = Style.Foreground?.ToNativeBrush();
+            //    _nativeControl.Background = Style.Background?.ToNativeBrush();
+            //    _nativeControl.BorderBrush = Style.BorderBrush?.ToNativeBrush();
+            //    _nativeControl.BorderThickness = Style.BorderThickness.ToNativeThickness();
 
-                _nativeControl.Padding = Style.Padding.ToNativeThickness();
+            //    _nativeControl.Padding = Style.Padding.ToNativeThickness();
 
-                _nativeControl.HorizontalContentAlignment = (System.Windows.HorizontalAlignment)Style.HorizontalContentAlignment;
-                _nativeControl.VerticalContentAlignment = (System.Windows.VerticalAlignment)Style.VerticalContentAlignment;
-            }
+            //    _nativeControl.HorizontalContentAlignment = (System.Windows.HorizontalAlignment)Style.HorizontalContentAlignment;
+            //    _nativeControl.VerticalContentAlignment = (System.Windows.VerticalAlignment)Style.VerticalContentAlignment;
+            //}
 
             if (_widget.FontFamily != null)
                 _nativeControl.FontFamily = new System.Windows.Media.FontFamily(_widget.FontFamily);

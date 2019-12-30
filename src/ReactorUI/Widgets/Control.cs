@@ -28,11 +28,22 @@ namespace ReactorUI.Widgets
         public HorizontalAlignment HorizontalContentAlignment { get; set; } = HorizontalAlignment.Center;
         public VerticalAlignment VerticalContentAlignment { get; set; } = VerticalAlignment.Center;
 
-        protected override void OnApplyStyle()
+        protected override void OnStyleApplied(TS styleToApply)
         {
+            base.OnStyleApplied(styleToApply);
 
+            FontFamily = styleToApply.FontFamily;
+            FontStyle = styleToApply.FontStyle;
+            FontStretch = styleToApply.FontStretch;
+            FontSize = styleToApply.FontSize;
+            Foreground = styleToApply.Foreground;
+            Background = styleToApply.Background;
+            BorderBrush = styleToApply.BorderBrush;
+            BorderThickness = styleToApply.BorderThickness;
 
-            base.OnApplyStyle();
+            Padding = styleToApply.Padding;
+            HorizontalContentAlignment = styleToApply.HorizontalContentAlignment;
+            VerticalContentAlignment = styleToApply.VerticalContentAlignment;
         }
     }
 

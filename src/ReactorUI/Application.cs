@@ -10,15 +10,10 @@ namespace ReactorUI
 
         public static IApplication Register(IApplication application)
         {
-            if (application == null)
-            {
-                throw new ArgumentNullException(nameof(application));
-            }
-
             if (Current != null)
                 throw new InvalidOperationException();
 
-            Current = application;
+            Current = application ?? throw new ArgumentNullException(nameof(application));
             return application;
         }
     }

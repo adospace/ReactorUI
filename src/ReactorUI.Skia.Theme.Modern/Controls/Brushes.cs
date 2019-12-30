@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ReactorUI.Skia.Theme.Modern.Framework
+namespace ReactorUI.Skia.Theme.Modern.Controls
 {
     public static class Brushes
     {
