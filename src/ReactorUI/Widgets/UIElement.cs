@@ -68,8 +68,10 @@ namespace ReactorUI.Widgets
             }
 
             if (actuatorsToRemove != null)
+            {
                 foreach (var animationTypeToRemove in actuatorsToRemove)
                     _animations.Remove(animationTypeToRemove);
+            }
 
             base.OnAnimate();
         }

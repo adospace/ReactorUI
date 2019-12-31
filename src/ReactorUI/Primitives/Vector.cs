@@ -28,5 +28,11 @@ namespace ReactorUI.Primitives
         public bool IsCloseTo(Vector other) =>
             Math.Abs(X - other.X) < 1e-10 && Math.Abs(Y - other.Y) < 1e-10;
 
+        public Vector MinMax(Size minSize, Size maxSize)
+        {
+            return new Vector(
+                Math.Max(minSize.Width, Math.Min(maxSize.Width, X)),
+                Math.Max(minSize.Height, Math.Min(maxSize.Height, Y)));
+        }
     }
 }

@@ -13,9 +13,9 @@ using ReactorUI.Styles.Panels;
 
 namespace ReactorUI.Skia.Controls.Panels
 {
-    public class ContainerPanel : Panel<Framework.Panels.ContainerPanel, IContainerPanel>
+    public class UniformStackPanel : Panel<Framework.Panels.UniformStackPanel, IUniformStackPanel>
     {
-        public ContainerPanel()
+        public UniformStackPanel()
         {
 
         }
@@ -32,6 +32,8 @@ namespace ReactorUI.Skia.Controls.Panels
 
         protected override void OnUpdate()
         {
+            _nativeControl.Orientation = _widget.Orientation;
+            _nativeControl.ChildSize = _widget.ChildSize;
             base.OnUpdate();
         }
     }

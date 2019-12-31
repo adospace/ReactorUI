@@ -13,10 +13,11 @@ namespace ReactorUI.Skia.Framework.Panels
         {
             get
             {
-                _children = _children ?? new ChildrenList(this);
+                _children ??= new ChildrenList(this);
                 return _children;
             }
         }
+
         protected override IEnumerable<UIElement> GetChildren()
         {
             return Children;
@@ -35,6 +36,7 @@ namespace ReactorUI.Skia.Framework.Panels
                 }
             }
         }
+        
         private Size _childSize = new Size(19.0, 19.0);
         public Size ChildSize
         {
@@ -48,18 +50,25 @@ namespace ReactorUI.Skia.Framework.Panels
                 }
             }
         }
+
         private Vector _offset;
-        public Vector Offset
+        Vector ISupportOffset.Offset
         {
             get => _offset;
             set
             {
                 if (!_offset.IsCloseTo(value))
                 {
-                    _offset = value;
+                    _offset = value.MinMax(new Size(), this.ViewportSize);
                     Invalidate(InvalidateMode.Measure);
                 }
             }
+        }
+
+        private Size ViewportSize => new Size(_childSize.Width + Children.Count, _childSize.Height * Children.Count);
+        Size ISupportOffset.ViewportSize
+        {
+            get => ViewportSize;
         }
         #endregion
 
@@ -69,12 +78,12 @@ namespace ReactorUI.Skia.Framework.Panels
             if (Orientation == Orientation.Horizontal)
             {
                 double currentX = 0.0;
-                bool offscreen = false;
+                bool offscreen;
                 double maxHeight = 0.0;
                 foreach (var child in Children)
                 {
-                    offscreen = currentX + ChildSize.Width < Offset.X ||
-                        currentX > Offset.X + availableSize.Width;
+                    offscreen = currentX + ChildSize.Width < _offset.X ||
+                        currentX > _offset.X + availableSize.Width;
 
                     if (offscreen)
                     {
@@ -95,12 +104,12 @@ namespace ReactorUI.Skia.Framework.Panels
             else
             {
                 double currentY = 0.0;
-                bool offscreen = false;
+                bool offscreen;
                 double maxWidth = 0.0;
                 foreach (var child in Children)
                 {
-                    offscreen = currentY + ChildSize.Height < Offset.Y ||
-                        currentY > Offset.Y + availableSize.Height;
+                    offscreen = currentY + ChildSize.Height < _offset.Y ||
+                        currentY > _offset.Y + availableSize.Height;
 
                     if (offscreen)
                     {
@@ -127,11 +136,11 @@ namespace ReactorUI.Skia.Framework.Panels
             if (Orientation == Orientation.Horizontal)
             {
                 double currentX = 0.0;
-                bool offscreen = false;
+                bool offscreen;
                 foreach (var child in Children)
                 {
-                    offscreen = currentX + ChildSize.Width < Offset.X ||
-                        currentX > Offset.X + finalSize.Width;
+                    offscreen = currentX + ChildSize.Width < _offset.X ||
+                        currentX > _offset.X + finalSize.Width;
 
                     if (offscreen)
                     {
@@ -140,7 +149,7 @@ namespace ReactorUI.Skia.Framework.Panels
                     else
                     {
                         child.ResumeLayout();
-                        child.Arrange(new Rect(currentX, 0.0, ChildSize.Width, finalSize.Height));
+                        child.Arrange(new Rect(currentX - _offset.X, 0.0, ChildSize.Width, finalSize.Height));
                     }
 
                     currentX += ChildSize.Width;
@@ -149,11 +158,11 @@ namespace ReactorUI.Skia.Framework.Panels
             else
             {
                 double currentY = 0.0;
-                bool offscreen = false;
+                bool offscreen;
                 foreach (var child in Children)
                 {
-                    offscreen = currentY + ChildSize.Height < Offset.Y ||
-                        currentY > Offset.Y + finalSize.Height;
+                    offscreen = currentY + ChildSize.Height < _offset.Y ||
+                        currentY > _offset.Y + finalSize.Height;
 
                     if (offscreen)
                     {
@@ -162,7 +171,7 @@ namespace ReactorUI.Skia.Framework.Panels
                     else
                     {
                         child.ResumeLayout();
-                        child.Arrange(new Rect(0.0, currentY, finalSize.Width, ChildSize.Height));
+                        child.Arrange(new Rect(0.0, currentY - _offset.Y, finalSize.Width, ChildSize.Height));
                     }
 
                     currentY += ChildSize.Height;

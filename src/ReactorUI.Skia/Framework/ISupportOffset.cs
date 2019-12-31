@@ -8,5 +8,7 @@ namespace ReactorUI.Skia.Framework
     internal interface ISupportOffset
     {
         Vector Offset { get; set; }
+
+        Size ViewportSize { get; }
     }
 }

@@ -16,17 +16,18 @@ namespace ReactorUI.Widgets.Panels
         {
         }
 
-        public Orientation Orientation { get; set; }
-        public Size ChildSize { get; set; }
-        public Vector Offset { get; set; }
+        public Orientation Orientation { get; set; } = Orientation.Vertical;
+
+        public Size ChildSize { get; set; } = new Size(100, 100);
+        //public Vector Offset { get; set; }
     }
 
     public static class UniformStackPanelExtensions
     {
-        public static UniformStackPanel StackPanel(this IWidgetContainer parent, params VisualNode[] children)
-        {
-            return new UniformStackPanel(children);
-        }
+        //public static UniformStackPanel StackPanel(this IWidgetContainer parent, params VisualNode[] children)
+        //{
+        //    return new UniformStackPanel(children);
+        //}
 
         public static UniformStackPanel Orientation(this UniformStackPanel panel, Orientation orientation)
         {
@@ -34,15 +35,21 @@ namespace ReactorUI.Widgets.Panels
             return panel;
         }
 
-        public static UniformStackPanel Offset(this UniformStackPanel panel, Vector offset)
-        {
-            panel.Offset = offset;
-            return panel;
-        }
+        //public static UniformStackPanel Offset(this UniformStackPanel panel, Vector offset)
+        //{
+        //    panel.Offset = offset;
+        //    return panel;
+        //}
 
         public static UniformStackPanel ChildSize(this UniformStackPanel panel, Size size)
         {
             panel.ChildSize = size;
+            return panel;
+        }
+
+        public static UniformStackPanel ChildSize(this UniformStackPanel panel, double width, double height)
+        {
+            panel.ChildSize = new Size(width, height);
             return panel;
         }
     }

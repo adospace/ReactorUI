@@ -11,6 +11,6 @@ namespace ReactorUI.Contracts.Panels
 
         Size ChildSize { get; set; }
 
-        Vector Offset { get; set; }
+        //Vector Offset { get; set; }
     }
 }

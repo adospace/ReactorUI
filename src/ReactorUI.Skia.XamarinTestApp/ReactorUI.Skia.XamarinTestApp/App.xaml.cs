@@ -14,7 +14,7 @@ namespace ReactorUI.Skia.XamarinTestApp
             //MainPage = new MainPage();
 
             Xamarin.ReactorApplication
-                .Create(new MainComponent())
+                .Create(new ListComponent())
                 .ModernTheme()
                 .Run();
 

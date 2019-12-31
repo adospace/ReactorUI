@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ReactorUI.Primitives
 {
-    public struct Size
+    public struct Size : IEquatable<Size>
     {
         private double _width;
         public double Width
@@ -47,5 +47,46 @@ namespace ReactorUI.Primitives
 
         public bool Contains(double x, double y) => !IsEmpty && x >= 0 && y >= 0 && x <= Width && y <= Height;
 
+        public override string ToString()
+        {
+            return $"[{Width},{Height}]";
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Size size && Equals(size);
+        }
+
+        public bool Equals(Size other)
+        {
+            return _width == other._width &&
+                   Width == other.Width &&
+                   _height == other._height &&
+                   Height == other.Height &&
+                   IsEmpty == other.IsEmpty &&
+                   ToRect.Equals(other.ToRect);
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 1947661368;
+            hashCode = hashCode * -1521134295 + _width.GetHashCode();
+            hashCode = hashCode * -1521134295 + Width.GetHashCode();
+            hashCode = hashCode * -1521134295 + _height.GetHashCode();
+            hashCode = hashCode * -1521134295 + Height.GetHashCode();
+            hashCode = hashCode * -1521134295 + IsEmpty.GetHashCode();
+            hashCode = hashCode * -1521134295 + ToRect.GetHashCode();
+            return hashCode;
+        }
+
+        public static bool operator ==(Size left, Size right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Size left, Size right)
+        {
+            return !(left == right);
+        }
     }
 }

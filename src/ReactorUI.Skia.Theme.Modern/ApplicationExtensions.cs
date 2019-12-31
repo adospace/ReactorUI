@@ -32,6 +32,7 @@ namespace ReactorUI.Skia
             application.WidgetRegistry.Register<IStackPanel>(() => new Controls.Panels.StackPanel());
             application.WidgetRegistry.Register<IUniformStackPanel>(() => new Controls.Panels.UniformStackPanel());
             application.WidgetRegistry.Register<IContainerPanel>(() => new Controls.Panels.ContainerPanel());
+            application.WidgetRegistry.Register<IScrollViewer>(() => new Controls.ScrollViewer());
 
             return application;
         }

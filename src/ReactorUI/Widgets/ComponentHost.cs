@@ -69,7 +69,7 @@ namespace ReactorUI.Widgets
     {
         protected override void OnMount()
         {
-            Component = Component ?? new T();
+            Component ??= new T();
 
             base.OnMount();
         }
