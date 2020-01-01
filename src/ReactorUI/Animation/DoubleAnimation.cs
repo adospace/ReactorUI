@@ -3,7 +3,7 @@ using System;
 
 namespace ReactorUI.Animation
 {
-    public class DoubleAnimation : Animation//, IAnimation<double>
+    public class DoubleAnimation : Animation
     {
         public double? From { get; }
         public double To { get; }
@@ -20,10 +20,5 @@ namespace ReactorUI.Animation
         {
             To = to;
         }
-
-        //public double GetValueAtOffset(double from, double offset)
-        //{
-        //    return from + (To - from) * EasingFunction(offset);
-        //}
     }
 }

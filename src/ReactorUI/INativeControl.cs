@@ -10,6 +10,7 @@ namespace ReactorUI
         void WillUnmount(IWidget widget);
 
         void Update(IWidget widget);
+        void Animate();
     }
 
 }

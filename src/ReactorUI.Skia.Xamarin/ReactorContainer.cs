@@ -206,5 +206,10 @@ namespace ReactorUI.Skia.Xamarin
         {
 
         }
+
+        public void Animate()
+        {
+
+        }
     }
 }

@@ -58,6 +58,11 @@ namespace ReactorUI.WPF.Controls
             OnUpdate();
         }
 
+        public void Animate()
+        { 
+        
+        }
+
         private bool _fireOnMouseEnter;
         private bool _fireOnMouseLeave;
 

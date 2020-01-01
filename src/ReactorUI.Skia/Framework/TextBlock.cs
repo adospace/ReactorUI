@@ -189,7 +189,7 @@ namespace ReactorUI.Skia.Framework
         #endregion
 
         #region Private Properties
-        private SKRect _textMeasure;
+        private SKRect? _textMeasure;
         #endregion
 
         #region Measure Pass
@@ -198,16 +198,20 @@ namespace ReactorUI.Skia.Framework
             if (Text == null)
                 return new Size();
 
-            using var paint = new SKPaint();
 
-            paint.ApplyFont(FontFamily, FontSize, FontStyle, FontStretch, FontWeight);
+            if (_textMeasure == null)
+            {
+                using var paint = new SKPaint();
 
-            _textMeasure = new SKRect();
-            paint.MeasureText(Text, ref _textMeasure);
+                paint.ApplyFont(FontFamily, FontSize, FontStyle, FontStretch, FontWeight);
+                var tm = new SKRect();
+                paint.MeasureText(Text, ref tm);
+                _textMeasure = tm;
+            }
 
-            System.Diagnostics.Debug.WriteLine(_textMeasure);
+            //System.Diagnostics.Debug.WriteLine(_textMeasure);
 
-            return new Size(_textMeasure.Width, _textMeasure.Height);
+            return new Size(_textMeasure.Value.Width, _textMeasure.Value.Height);
         }
         #endregion
 
@@ -227,8 +231,8 @@ namespace ReactorUI.Skia.Framework
                 var finalWidth = this.RenderSize.Width - (Padding.Left + Padding.Right);
                 var finalHeight = this.RenderSize.Height - (Padding.Top + Padding.Bottom);
 
-                float x = (float)Padding.Left + _textMeasure.Left;
-                float y = (float)Padding.Top + (float)finalHeight - _textMeasure.Bottom;
+                float x = (float)Padding.Left + _textMeasure.Value.Left;
+                float y = (float)Padding.Top + (float)finalHeight - _textMeasure.Value.Bottom;
 
                 using var paint = new SKPaint()
                 {

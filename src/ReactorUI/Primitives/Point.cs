@@ -44,10 +44,8 @@ namespace ReactorUI.Primitives
             return !(left == right);
         }
 
-        public override string ToString()
-        {
-            return $"({X},{Y})";
-        }
+        public override string ToString() => $"({X}:{Y})";
+
 
         public static Vector operator -(Point left, Point right)
         {

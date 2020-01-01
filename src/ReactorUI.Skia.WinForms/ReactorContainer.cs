@@ -90,6 +90,10 @@ namespace ReactorUI.Skia.WinForms
             var context = new Framework.Input.MouseEventsContext((Framework.Input.MouseButtons)e.Button, e.Clicks, e.Delta);
             _root.HandleMouseDown(e.X, e.Y, context);
             _capturedMouseEvents = context.CaptureTo;
+            if (_capturedMouseEvents != null)
+            {
+                _skiaView.Capture = true;
+            }
         }
 
         private void _skiaView_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -127,6 +131,8 @@ namespace ReactorUI.Skia.WinForms
             {
                 _root.HandleMouseUp(e.X, e.Y, new Framework.Input.MouseEventsContext((Framework.Input.MouseButtons)e.Button, e.Clicks, e.Delta));
             }
+
+            _skiaView.Capture = false;
         }
 
         private void _skiaView_PaintSurface(object sender, SKPaintGLSurfaceEventArgs e)
@@ -202,6 +208,11 @@ namespace ReactorUI.Skia.WinForms
         public void ShowTooltip(string tooltip)
         {
             throw new NotImplementedException();
+        }
+
+        public void Animate()
+        {
+
         }
     }
 }

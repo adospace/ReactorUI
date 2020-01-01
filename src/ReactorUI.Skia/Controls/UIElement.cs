@@ -60,6 +60,11 @@ namespace ReactorUI.Skia.Controls
             OnUpdate();
         }
 
+        public void Animate()
+        {
+            OnAnimate();
+        }
+
         private bool _fireOnMouseEnter;
         private bool _fireOnMouseLeave;
         private bool _fireOnMouseDown;
@@ -107,6 +112,11 @@ namespace ReactorUI.Skia.Controls
                 _nativeControl.MouseUp -= _nativeControl_MouseUp;
 
             _fireOnMouseUp = shouldFireOnMouseUp;
+        }
+
+        protected virtual void OnAnimate()
+        { 
+        
         }
 
         private void _nativeControl_MouseEnter(object sender, Framework.Input.MouseEventArgs e)

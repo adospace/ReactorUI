@@ -68,5 +68,10 @@ namespace ReactorUI.WPF
         {
 
         }
+
+        public void Animate()
+        {
+
+        }
     }
 }

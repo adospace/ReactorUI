@@ -42,6 +42,13 @@ namespace ReactorUI.Widgets
             base.OnUpdate();
         }
 
+        protected override void OnAnimate()
+        {
+            NativeControl.Animate();
+
+            base.OnAnimate();
+        }
+
         void IWidget.Invalidate()
         {
             base.Invalidate();

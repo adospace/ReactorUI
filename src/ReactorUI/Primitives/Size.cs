@@ -47,10 +47,7 @@ namespace ReactorUI.Primitives
 
         public bool Contains(double x, double y) => !IsEmpty && x >= 0 && y >= 0 && x <= Width && y <= Height;
 
-        public override string ToString()
-        {
-            return $"[{Width},{Height}]";
-        }
+        public override string ToString() => $"[{Width}:{Height}]";
 
         public override bool Equals(object obj)
         {

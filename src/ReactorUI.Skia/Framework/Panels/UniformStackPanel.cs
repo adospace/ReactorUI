@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ReactorUI.Skia.Framework.Panels
 {
-    public class UniformStackPanel : Panel, ISupportOffset
+    public class UniformStackPanel : Panel, IScrollableUIElement
     {
         #region Public Properties
         private ChildrenList _children;
@@ -52,7 +52,7 @@ namespace ReactorUI.Skia.Framework.Panels
         }
 
         private Vector _offset;
-        Vector ISupportOffset.Offset
+        Vector IScrollableUIElement.Offset
         {
             get => _offset;
             set
@@ -66,7 +66,7 @@ namespace ReactorUI.Skia.Framework.Panels
         }
 
         private Size ViewportSize => new Size(_childSize.Width + Children.Count, _childSize.Height * Children.Count);
-        Size ISupportOffset.ViewportSize
+        Size IScrollableUIElement.ViewportSize
         {
             get => ViewportSize;
         }

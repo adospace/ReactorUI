@@ -24,5 +24,12 @@ namespace ReactorUI.Skia.Controls
 
             base.OnUpdate();
         }
+
+        protected override void OnAnimate()
+        {
+            _nativeControl.Animate();
+
+            base.OnAnimate();
+        }
     }
 }
